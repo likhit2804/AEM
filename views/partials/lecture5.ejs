@@ -1,0 +1,74 @@
+
+    <div id="lecture5" class="lecture-content" ">
+        <h2>Lecture 5: Complementary Functions & Intro to Particular Integrals</h2>
+
+        <h3>Recap: Finding the Complementary Function ($$y_c$$)</h3>
+        <p>The general solution to a non-homogeneous differential equation is the sum of the complementary function and the particular integral: $$y_{general} = y_{cf} + y_{pi}$$. The complementary function, $$y_{cf}$$, is the solution to the corresponding homogeneous equation, $$P(D)y = 0$$.</p>
+        
+        <h4>Cases for Roots of the Auxiliary Equation</h4>
+        <div class="case-box">
+            <div class="case-title">Real and Repeated Roots</div>
+            <p>If a real root $$m$$ is repeated $$n$$ times, the complementary function is:</p>
+            <div class="math-display">$$y_c = (C_1 + C_2x + C_3x^2 + \dots + C_nx^{n-1})e^{mx}$$</div>
+        </div>
+        <div class="case-box">
+            <div class="case-title">Complex Conjugate Roots</div>
+            <p>If the roots are a complex conjugate pair $$m = \alpha \pm i\beta$$:</p>
+            <div class="math-display">$$y_c = e^{\alpha x}(C_1\cos(\beta x) + C_2\sin(\beta x))$$</div>
+        </div>
+        
+        <h3>Examples: Complementary Function</h3>
+        <details>
+            <summary>1. Solve $$(D^2 + 6D + 9)y = 0$$</summary>
+            <div class="solution">
+                <p>Auxiliary Equation: $$m^2 + 6m + 9 = 0 \implies (m+3)^2 = 0$$</p>
+                <p>Roots: $$m = -3, -3$$ (Real and repeated)</p>
+                <p><strong>Solution:</strong> $$y_{cf} = (C_1 + C_2x)e^{-3x}$$</p>
+            </div>
+        </details>
+        <details>
+            <summary>2. Solve $$(D^3 + D^2 + 4D + 4)y = 0$$</summary>
+            <div class="solution">
+                <p>A.E.: $$m^3 + m^2 + 4m + 4 = 0$$</p>
+                <p>Factoring: $$m^2(m+1) + 4(m+1) = 0 \implies (m^2+4)(m+1) = 0$$</p>
+                <p>Roots: $$m = -1$$ and $$m = \pm 2i$$ (complex, with $$\alpha=0, \beta=2$$)</p>
+                <p><strong>Solution:</strong> $$y_{cf} = C_1e^{-x} + C_2\cos(2x) + C_3\sin(2x)$$</p>
+            </div>
+        </details>
+        <details>
+            <summary>3. Solve $$(D^4+4)y = 0$$</summary>
+            <div class="solution">
+                <p>A.E.: $$m^4+4=0$$. We complete the square.</p>
+                <p>$$m^4+4m^2+4 - 4m^2 = 0 \implies (m^2+2)^2 - (2m)^2 = 0$$</p>
+                <p>Factoring: $$(m^2+2m+2)(m^2-2m+2) = 0$$</p>
+                <p>Roots: From $$m^2+2m+2=0$$, $$m=-1 \pm i$$. From $$m^2-2m+2=0$$, $$m=1 \pm i$$.</p>
+                <p><strong>Solution:</strong> $$y_{cf} = e^{-x}(C_1\cos(x) + C_2\sin(x)) + e^x(C_3\cos(x) + C_4\sin(x))$$</p>
+            </div>
+        </details>
+
+        <h3>Finding the Particular Integral ($$y_{pi}$$)</h3>
+        <p>The particular integral is a solution to the non-homogeneous equation $$P(D)y = Q(x)$$. It is represented as:</p>
+        <div class="math-display">$$y_{pi} = \frac{1}{P(D)}Q(x)$$</div>
+
+        <h4>Case 1: When $$Q(x) = e^{ax}$$</h4>
+        <p><strong>Rule:</strong> If $$P(a) \neq 0$$, replace D with a.</p>
+        <div class="math-display">$$y_{pi} = \frac{1}{P(D)}e^{ax} = \frac{e^{ax}}{P(a)}$$</div>
+        <p><strong>Case of Failure:</strong> If $$P(a) = 0$$, but $$P'(a) \neq 0$$, the rule is:</p>
+        <div class="math-display">$$y_{pi} = \frac{xe^{ax}}{P'(a)}$$</div>
+
+        <details>
+            <summary>Example: Solve $$(D^2+5D+6)y = e^x$$</summary>
+            <div class="solution">
+                <p><strong>Complementary Function:</strong></p>
+                <p>A.E.: $$m^2+5m+6=0 \implies (m+2)(m+3)=0 \implies m=-2, -3$$.</p>
+                <p>$$y_{cf} = C_1e^{-2x} + C_2e^{-3x}$$</p>
+                <p><strong>Particular Integral:</strong></p>
+                <p>Here, $$Q(x) = e^x$$, so $$a=1$$. The operator is $$P(D) = D^2+5D+6$$.</p>
+                <p>Check the condition: $$P(1) = 1^2 + 5(1) + 6 = 12 \neq 0$$.</p>
+                <p>$$y_{pi} = \frac{e^x}{P(1)} = \frac{e^x}{12}$$</p>
+                <p><strong>General Solution:</strong></p>
+                <p>$$y = y_{cf} + y_{pi} = C_1e^{-2x} + C_2e^{-3x} + \frac{e^x}{12}$$</p>
+            </div>
+        </details>
+        
+    </div>
