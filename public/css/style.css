@@ -51,13 +51,13 @@
 
     /* Sidebar */
     .sidebar {
-        width: 300px;
+        width: 320px;
         background: #1e1e1e; /* Deep black */
         color: #f5f5f5;
         padding: 15px 0;
         position: fixed;
         height: 100vh;
-        overflow-y: auto;
+        overflow-y: hidden;
         box-shadow: 2px 0 10px rgba(0, 0, 0, 0.6);
         z-index: 100;
     }
@@ -145,7 +145,7 @@
     }
 
     .container {
-        max-width: 900px;
+        max-width: 1200px;
         margin: 0 auto;
         background: #1c1c1c;
         padding: 30px;
@@ -482,7 +482,8 @@ body.light-theme .unit-btn.active {
 
 /* Checked (ON) state */
 .theme-switch input:checked + .slider {
-  background-color: #3498db; }
+  background-color: #3498db; /* Apple green */
+}
 
 .theme-switch input:checked + .slider:before {
   transform: translateX(22px);

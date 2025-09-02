@@ -1,0 +1,1550 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Differential Equations Notes</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+   <style>/* ===================== BASE RESET ===================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ===================== BODY ===================== */
+body {
+    background-color: #121212; /* Dark base */
+    color: #e0e0e0;
+    line-height: 1.6;
+    display: flex;
+    min-height: 100vh;
+    overflow-x:visible; /* Prevent horizontal scroll globally */
+}
+
+/* ===================== SIDEBAR ===================== */
+.sidebar {
+    width: 300px;
+    background: #1e1e1e;
+    color: #f5f5f5;
+    padding: 15px 0;
+    position: fixed;
+    height: 100vh;
+    overflow-y: hidden;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.6);
+    z-index: 100;
+}
+
+/* Sidebar header */
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-header h1 {
+    font-size: 1.4rem;
+    color: #4db8ff;
+}
+
+/* ===================== UNITS & ACCORDION ===================== */
+.unit {
+    margin-bottom: 10px;
+}
+
+.unit-btn {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    background: #1a252f;
+    color: #ecf0f1;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-bottom: 10px;
+}
+
+.unit-btn:hover {
+    background: #34495e;
+}
+
+.unit-btn.active {
+    background: #3498db;
+    color: #fff;
+}
+
+/* Lecture navigation inside units */
+.unit .lecture-nav {
+    list-style: none;
+    max-height: 0;
+    overflow: hidden;
+
+    transition: max-height 0.3s ease;
+    padding-left: 10px;
+}
+
+.unit.open .lecture-nav {
+    max-height: 1000px; /* Enough to expand */
+}
+
+/* ===================== LECTURE BUTTONS ===================== */
+.lecture-btn {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 12px 20px;
+    background: transparent;
+    border: none;
+    color: #dcdcdc;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 1rem;
+    border-radius: 5px;
+}
+
+.lecture-btn:hover {
+    background: #2d2d2d;
+    color: #4db8ff;
+}
+
+.lecture-btn.active {
+    background: #4db8ff;
+    color: #121212;
+    font-weight: 600;
+}
+
+/* ===================== MAIN CONTENT ===================== */
+.main-content {
+    flex: 1;
+    margin-left: 300px;
+    padding: 30px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #1c1c1c;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+.lecture-content {
+    display: none;
+}
+
+.lecture-content:first-of-type {
+    display: block;
+}
+
+/* ===================== HEADINGS & TEXT ===================== */
+h2 {
+    color: #4db8ff;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #333;
+}
+
+h3 {
+    color: #e0e0e0;
+    margin: 25px 0 15px;
+}
+
+h4 {
+    color: #cfcfcf;
+    margin: 20px 0 10px;
+}
+
+p, ul {
+    margin-bottom: 15px;
+}
+
+ul {
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 8px;
+}
+
+/* ===================== MATH / CODE / DETAILS ===================== */
+.math-display, pre {
+    
+    word-wrap: break-word;
+    margin: 15px 0;
+    padding: 10px;
+    background-color: #2a2a2a;
+    border-radius: 5px;
+}
+
+details {
+    background-color: #222;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 15px 0;
+    border-left: 4px solid #4db8ff;
+}
+
+summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: #4db8ff;
+}
+
+/* ===================== HIGHLIGHTS & BOXES ===================== */
+.highlight {
+    background-color: #333;
+    color: #4db8ff;
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+
+.divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, #4db8ff, transparent);
+    margin: 25px 0;
+}
+
+.case-box {
+    background-color: #1f2b38;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 15px 0;
+    border-left: 4px solid #4db8ff;
+}
+
+.steps {
+    background-color: #242424;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 15px 0;
+}
+
+/* ===================== TABLES ===================== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+}
+
+table, th, td {
+    border: 1px solid #333;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #2a2a2a;
+}
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 900px) {
+    body {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding: 15px;
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 20px;
+    }
+
+    .lecture-nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+
+    .lecture-btn {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+
+    .container {
+        padding: 20px;
+    }
+}
+
+/* ===================== LIGHT THEME ===================== */
+body.light-theme {
+    background-color: #f5f5f5;
+    color: #222;
+}
+
+body.light-theme .sidebar {
+    background: #ffffff;
+    color: #222;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+}
+
+body.light-theme .container {
+    background: #ffffff;
+    color: #222;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+body.light-theme h2 { color: #0077cc; border-bottom: 2px solid #ddd; }
+body.light-theme h3, body.light-theme h4 { color: #333; }
+
+body.light-theme .lecture-btn,
+body.light-theme .lecture-link {
+    color: #333;
+    background: transparent;
+}
+
+body.light-theme .lecture-btn:hover,
+body.light-theme .lecture-link:hover {
+    background: #f0f0f0;
+    color: #0077cc;
+}
+
+body.light-theme .lecture-btn.active,
+body.light-theme .lecture-link.active {
+    background: #0077cc;
+    color: #fff;
+}
+
+body.light-theme details {
+    background-color: #f9f9f9;
+    border-left: 4px solid #0077cc;
+}
+
+body.light-theme summary { color: #0077cc; }
+
+body.light-theme .math-display {
+    background-color: #f0f0f0;
+   
+    word-wrap: break-word;
+}
+
+body.light-theme .highlight {
+    background-color: #e6f2ff;
+    color: #0077cc;
+}
+
+body.light-theme .divider {
+    background: linear-gradient(to right, transparent, #0077cc, transparent);
+}
+
+body.light-theme .case-box {
+    background-color: #eef6ff;
+    border-left: 4px solid #0077cc;
+}
+
+body.light-theme .steps {
+    background-color: #f0f0f0;
+}
+
+body.light-theme .unit-btn {
+    background: #f2f2f2;
+    color: #222;
+}
+
+body.light-theme .unit-btn:hover {
+    background: #e0e0e0;
+}
+
+body.light-theme .unit-btn.active {
+    background: #3498db;
+    color: #fff;
+}
+
+/* ===================== THEME SWITCH ===================== */
+.theme-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 28px;
+}
+
+.theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    border-radius: 34px;
+    transition: 0.4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.4s;
+}
+
+.theme-switch input:checked + .slider {
+    background-color: #3498db;
+}
+
+.theme-switch input:checked + .slider:before {
+    transform: translateX(22px);
+}
+</style>
+
+
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+  <div class="sidebar">
+  <div class="sidebar-header">
+    <h1>AEM Notes</h1>
+     <label class="theme-switch">
+      <input type="checkbox" id="theme-toggle" />
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div class="unit">
+    <button class="unit-btn">Unit 1: Differential Equations ▾</button>
+    <ul class="lecture-nav">
+      <li><button class="lecture-btn active" onclick="showLecture('lecture1', this)">Lecture 1: Introduction</button></li>
+      <li><button class="lecture-btn" onclick="showLecture('lecture2', this)">Lecture 2: First Order DEs</button></li>
+      <li><button class="lecture-btn" onclick="showLecture('lecture3', this)">Lecture 3: Homogeneous Equations</button></li>
+      <li><button class="lecture-btn" onclick="showLecture('lecture4', this)">Lecture 4: Higher Order DEs</button></li>
+      <li><button class="lecture-btn" onclick="showLecture('lecture5', this)">Lecture 5: Complementary Functions</button></li>
+      <li><button class="lecture-btn" onclick="showLecture('lecture6', this)">Lecture 6: Particular Integrals</button></li>
+      <li><button class="lecture-btn" onclick="showLecture('lecture7', this)">Lecture 7: Advanced Methods</button></li>
+      <li><button class="lecture-btn" onclick="showLecture('lecture8', this)">Lecture 8: Variable Coefficients</button></li>
+      <li><button class="lecture-btn" onclick="showLecture('lecture9', this)">Lecture 9: PDE</button></li>
+        <li><button class="lecture-btn" onclick="showLecture('lecture10', this)">Final</button></li>
+    
+    </ul>
+  </div>
+
+  
+
+  <!-- Add more Units in the same way -->
+</div>
+
+    <div class="main-content">
+        <div class="container">
+             <!-- LECTURE 1 CONTENT -->
+        <div id="lecture1" class="lecture-content">
+            <h2>Lecture 1: Introduction to Differential Equations</h2>
+            
+            <h3>What is a Differential Equation?</h3>
+            <p>An equation that expresses a relationship between functions, their derivatives, and variables is known as a differential equation. For example, a function \(y\) depends on a variable \(x\).</p>
+            
+            <h3>Classification of Differential Equations</h3>
+            <p>Differential equations (DEs) can be classified into two main types:</p>
+            <ul>
+                <li><strong>Ordinary Differential Equations (ODEs):</strong> An ODE is a DE where the dependent variable (e.g., \(y\)) is dependent on only one independent variable (e.g., \(x\)). The general form is \(F(x,y,y',y'',y'''...) = 0\).
+                    <ul>
+                        <li>Example: \(\frac{dy}{dx} = \sin x + \cos x\).</li>
+                    </ul>
+                </li>
+                <li><strong>Partial Differential Equations (PDEs):</strong> A PDE is a DE where the dependent variable (e.g., \(y\)) is dependent on two or more independent variables (e.g., \(x, t\)). The general form is \(F(x,t,y,\frac{\partial y}{\partial x},\frac{\partial y}{\partial t}, ...) = 0\).
+                    <ul>
+                        <li>Example: \(\frac{\partial y}{\partial x} + t\frac{\partial y}{\partial t} = 2y\).</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>Order and Degree of a Differential Equation</h3>
+            <ul>
+                <li><strong>Order:</strong> The order of a DE is defined as the order of the highest derivative present in the equation.</li>
+                <li><strong>Degree:</strong> The degree of a DE is the power of the highest-order derivative after the equation has been cleared of any radicals and fractions with respect to the derivatives.</li>
+            </ul>
+
+            <details>
+                <summary>Examples: Find the Order and Degree</summary>
+                <div class="solution">
+                    <p>1. \(\frac{d^{2}y}{dx^{2}} = 0\)</p>
+                    <p><strong>Answer:</strong> Order = 2, Degree = 1.</p>
+                    <hr>
+                    <p>2. \(\frac{d^{2}y}{dx^{2}} + m^2y = 0\)</p>
+                    <p><strong>Answer:</strong> Order = 2, Degree = 1.</p>
+                    <hr>
+                    <p>3. \(y=x\frac{dy}{dx}+\frac{a}{\frac{dy}{dx}}\)</p>
+                    <p><strong>Steps:</strong> First, clear the fraction by multiplying by \(\frac{dy}{dx}\). This gives \(y\frac{dy}{dx} = x(\frac{dy}{dx})^2 + a\). The highest derivative is \(\frac{dy}{dx}\) (order 1), and its highest power is 2.<br>
+                    <strong>Answer:</strong> Order = 1, Degree = 2.</p>
+                    <hr>
+                    <p>4. \(y\frac{d^{2}y}{dx^{2}} - (\frac{dy}{dx})^2 = y^2 \log y\)</p>
+                    <p><strong>Answer:</strong> Order = 2, Degree = 1.</p>
+                    <hr>
+                    <p>5. \([1+(\frac{dy}{dx})^{2}]^{3/2}=a\frac{d^{2}y}{dx^{2}}\)</p>
+                    <p><strong>Steps:</strong> Square both sides to remove the radical: \([1+(\frac{dy}{dx})^{2}]^{3}=a^2(\frac{d^{2}y}{dx^{2}})^2\). The highest derivative is \(\frac{d^{2}y}{dx^{2}}\) (order 2), and its power is 2.<br>
+                    <strong>Answer:</strong> Order = 2, Degree = 2.</p>
+                </div>
+            </details>
+
+            <h3>Formation and Solution of DEs</h3>
+            <p>DEs are formed to eliminate arbitrary constants from an equation. A key principle is that the <strong>order of the resulting DE is equal to the number of constants</strong> to be eliminated.</p>
+            
+            <details>
+                <summary>Example: Form a DE from \(y = ax^2 + bx\)</summary>
+                <div class="solution">
+                    <p>The equation has two constants, \(a\) and \(b\). So we need a 2nd order DE.</p>
+                    <p>1. Differentiate once: \(\frac{dy}{dx} = 2ax + b\).</p>
+                    <p>2. Differentiate again: \(\frac{d^2y}{dx^2} = 2a\).</p>
+                    <p>3. From step 2, we get \(a = \frac{1}{2} \frac{d^2y}{dx^2}\).</p>
+                    <p>4. Substitute \(a\) back into the first derivative to find \(b\): \(b = \frac{dy}{dx} - 2ax = \frac{dy}{dx} - x\frac{d^2y}{dx^2}\).</p>
+                    <p>5. Substitute \(a\) and \(b\) back into the original equation: \(y = (\frac{1}{2}\frac{d^2y}{dx^2})x^2 + (\frac{dy}{dx} - x\frac{d^2y}{dx^2})x\).</p>
+                    <p>6. Simplifying gives the final DE: \(y = x\frac{dy}{dx} - \frac{1}{2}x^2\frac{d^2y}{dx^2}\), which has order 2 and degree 1.</p>
+                </div>
+            </details>
+            
+            <h3>Types of Solutions</h3>
+            <p>A solution is a relation between variables that satisfies the DE.</p>
+            <ul>
+                <li><strong>General Solution:</strong> A solution where the number of arbitrary constants equals the order of the DE. Ex: For \(\frac{dy}{dx}-2y=0\), the general solution is \(y=ce^{2x}\).</li>
+                <li><strong>Particular Solution:</strong> Obtained from the general solution by assigning specific values to the constants. Ex: \(y=2e^{2x}\) is a particular solution.</li>
+                <li><strong>Singular Solution:</strong> A solution that is neither general nor particular. Only some equations have them. Ex: For \((\frac{dy}{dx})^2 - 4y = 0\), \(y=0\) is a singular solution.</li>
+            </ul>
+
+            <h3>First Order, First Degree DEs</h3>
+            <p>These equations are of the form \(F(x, y(x), \frac{dy}{dx}) = 0\). They are classified into several types, including:</p>
+            <ul>
+                <li>Variable Separable Equations</li>
+                <li>Homogeneous Equations</li>
+                <li>Linear DEs</li>
+                <li>Exact Equations</li>
+                <li>And equations reducible to these forms.</li>
+            </ul>
+            
+            <h4>1. Variable Separable Equations</h4>
+            <p>If a DE can be rearranged so that all functions of \(x\) and \(dx\) are on one side, and all functions of \(y\) and \(dy\) are on the other, the variables are separable. The general form is \(f(x)dx = g(y)dy\). The solution is found by integrating both sides: \(\int f(x)dx = \int g(y)dy + c\).</p>
+            
+            <details>
+                <summary>Example: Solve \((1-x)dy + (1-y)dx = 0\)</summary>
+                <div class="solution">
+                    <p>1. Rearrange the equation: \((1-x)dy = -(1-y)dx = (y-1)dx\).</p>
+                    <p>2. Separate the variables: \(\frac{1}{y-1}dy = \frac{1}{1-x}dx\).</p>
+                    <p>3. Integrate both sides: \(\int \frac{1}{y-1}dy = \int \frac{1}{1-x}dx\).</p>
+                    <p>4. Result of integration: \(\log(y-1) = -\log(1-x) - c\).</p>
+                    <p>5. Combine log terms: \(\log(y-1) + \log(1-x) = -c\), which gives \(\log((y-1)(1-x)) = -c\).</p>
+                    <p>6. Exponentiate to get the general solution: \((y-1)(1-x) = e^{-c}\). Let \(A = e^{-c}\), so \((y-1)(1-x) = A\).</p>
+                </div>
+            </details>
+        </div>
+
+        <!-- LECTURE 2 CONTENT -->
+        <div id="lecture2" class="lecture-content" style="display:none;">
+            <h2>Lecture 2: Methods for Solving First Order DEs</h2>
+
+            <h3>2. Equations Reducible to Variable Separable</h3>
+            <p>Some first-order, first-degree DEs can be simplified into a variable separable form by using a suitable substitution.</p>
+            
+            <details>
+                <summary>Example: Solve \(\frac{dy}{dx} = (4x+y+1)^2\) given \(y(0)=1\)</summary>
+                <div class="solution">
+                    <p>1. <strong>Substitution:</strong> Let \(t = 4x+y+1\).</p>
+                    <p>2. <strong>Differentiate the substitution w.r.t x:</strong> \(\frac{dt}{dx} = 4 + \frac{dy}{dx}\), so \(\frac{dy}{dx} = \frac{dt}{dx} - 4\).</p>
+                    <p>3. <strong>Substitute back into the DE:</strong> \(\frac{dt}{dx} - 4 = t^2\), which simplifies to \(\frac{dt}{dx} = t^2 + 4\).</p>
+                    <p>4. <strong>Separate variables:</strong> \(\frac{dt}{t^2+4} = dx\). This is now a variable separable equation.</p>
+                    <p>5. <strong>Integrate both sides:</strong> \(\int \frac{dt}{t^2+2^2} = \int dx\).</p>
+                    <p>6. <strong>General Solution:</strong> This gives \(\frac{1}{2}\tan^{-1}(\frac{t}{2}) = x+c\). Substituting back for \(t\), we get \(\frac{1}{2}\tan^{-1}(\frac{4x+y+1}{2}) = x+c\).</p>
+                    <p>7. <strong>Find Particular Solution:</strong> Use the condition \(y(0)=1\), so when \(x=0\), \(y=1\).<br>\(\frac{1}{2}\tan^{-1}(\frac{4(0)+1+1}{2}) = 0+c \implies \frac{1}{2}\tan^{-1}(1) = c\).<br>This gives \(c = \frac{1}{2}(\frac{\pi}{4}) = \frac{\pi}{8}\).</p>
+                    <p>8. <strong>Final Answer:</strong> The particular solution is \(\frac{1}{2}\tan^{-1}(\frac{4x+y+1}{2}) = x + \frac{\pi}{8}\).</p>
+                </div>
+            </details>
+            
+            <h3>3. Homogeneous Differential Equations</h3>
+            <p>A DE of the form \(\frac{dy}{dx} = \frac{f(x,y)}{g(x,y)}\) is homogeneous if \(f(x,y)\) and \(g(x,y)\) are homogeneous functions of the same degree. A function \(F(x,y)\) is homogeneous of degree \(n\) if \(F(tx, ty) = t^n F(x,y)\).</p>
+            <p>To solve, use the substitution \(y=vx\). This leads to \(\frac{dy}{dx} = v + x\frac{dv}{dx}\). The equation is then transformed into a variable separable form in terms of \(v\) and \(x\).</p>
+
+            <details>
+                <summary>Example: Solve \((x^2-y^2)dx = xydy\)</summary>
+                <div class="solution">
+                    <p>1. <strong>Rearrange and Check for Homogeneity:</strong> \(\frac{dy}{dx} = \frac{x^2-y^2}{xy}\). The numerator \(x^2-y^2\) and denominator \(xy\) are both homogeneous functions of degree 2.</p>
+                    <p>2. <strong>Substitute:</strong> Let \(y=vx\), so \(\frac{dy}{dx} = v+x\frac{dv}{dx}\).</p>
+                    <p>3. The equation becomes: \(v+x\frac{dv}{dx} = \frac{x^2-(vx)^2}{x(vx)} = \frac{x^2(1-v^2)}{vx^2} = \frac{1-v^2}{v}\).</p>
+                    <p>4. <strong>Separate variables:</strong> \(x\frac{dv}{dx} = \frac{1-v^2}{v} - v = \frac{1-v^2-v^2}{v} = \frac{1-2v^2}{v}\).</p>
+                    <p>5. Rearranging gives \(\frac{v}{1-2v^2}dv = \frac{1}{x}dx\).</p>
+                    <p>6. <strong>Integrate:</strong> \(\int \frac{v}{1-2v^2}dv = \int \frac{1}{x}dx\). To solve the left integral, we can write it as \(-\frac{1}{4}\int \frac{-4v}{1-2v^2}dv\).</p>
+                    <p>7. This yields \(-\frac{1}{4}\ln|1-2v^2| = \ln|x| + C\).</p>
+                    <p>8. <strong>Substitute back:</strong> Since \(v=y/x\), the final solution is \((1-2\frac{y^2}{x^2})x^4=A\) for some constant A.</p>
+                </div>
+            </details>
+            
+            <h3>4. Non-Homogeneous Equations (Reducible to Homogeneous)</h3>
+            <p>These are of the form \(\frac{dy}{dx} = \frac{ax+by+c}{a'x+b'y+c'}\).</p>
+            <ul>
+                <li><strong>Case I: \(\frac{a}{a'} \neq \frac{b}{b'}\)</strong>
+                    <p>Use the substitution \(x = X+h\) and \(y=Y+k\). Choose constants \(h\) and \(k\) such that the constant terms in the numerator and denominator become zero. This transforms the equation into a homogeneous DE in variables \(X\) and \(Y\).</p>
+                </li>
+                <li><strong>Case II: \(\frac{a}{a'} = \frac{b}{b'}\)</strong>
+                    <p>Use the substitution \(t=ax+by\). This reduces the equation to a variable separable form.</p>
+                </li>
+            </ul>
+
+            <details>
+                <summary>Example (Case I): Solve \(\frac{dy}{dx} = \frac{x+y-2}{-x+y-4}\)</summary>
+                <div class="solution">
+                    <p>1. <strong>Check the condition:</strong> Here \(a=1, b=1, a'=-1, b'=1\). Since \(\frac{1}{-1} \neq \frac{1}{1}\), this is Case I.</p>
+                    <p>2. <strong>Substitution:</strong> Let \(x=X+h\) and \(y=Y+k\). Then \(\frac{dY}{dX} = \frac{dy}{dx}\).</p>
+                    <p>3. The DE becomes \(\frac{dY}{dX} = \frac{(X+h)+(Y+k)-2}{-(X+h)+(Y+k)-4} = \frac{X+Y+(h+k-2)}{-X+Y+(-h+k-4)}\).</p>
+                    <p>4. <strong>Find h and k:</strong> Set the constant parts to zero:
+                        <br>\(h+k-2=0\)
+                        <br>\(-h+k-4=0\)
+                        <br>Solving this system gives \(2k-6=0 \implies k=3\), and \(h+3-2=0 \implies h=-1\).
+                    </p>
+                    <p>5. <strong>New Homogeneous DE:</strong> With \(h=-1, k=3\), the equation is \(\frac{dY}{dX} = \frac{X+Y}{-X+Y}\).</p>
+                    <p>6. <strong>Solve the homogeneous DE:</strong> Let \(Y=vX\), so \(\frac{dY}{dX}=v+X\frac{dv}{dX}\).
+                        <br>\(v+X\frac{dv}{dX} = \frac{X+vX}{-X+vX} = \frac{1+v}{v-1}\).
+                        <br>\(X\frac{dv}{dX} = \frac{1+v}{v-1} - v = \frac{1+v-v^2+v}{v-1} = \frac{-v^2+2v+1}{v-1}\).
+                    </p>
+                    <p>7. <strong>Separate and Integrate:</strong> \(\int\frac{v-1}{-v^2+2v+1}dv = \int\frac{dX}{X}\). This results in \(-\frac{1}{2}\ln|-v^2+2v+1| = \ln|X| + C\).</p>
+                    <p>8. <strong>Back-substitute:</strong> Replace \(v\) with \(Y/X\): \((1+2\frac{Y}{X}-\frac{Y^2}{X^2})X^2 = A\).</p>
+                    <p>9. <strong>Final Substitution:</strong> Replace \(X=x-h=x+1\) and \(Y=y-k=y-3\) to get the final solution in terms of \(x\) and \(y\): \((1 + \frac{2(y-3)}{x+1} - \frac{(y-3)^2}{(x+1)^2})(x+1)^2 = A\).</p>
+                </div>
+            </details>
+        </div>
+
+
+        
+        <!-- LECTURE 3 CONTENT -->
+        <div id="lecture3" class="lecture-content" style="display:none;">
+            <h2>Lecture 3: First-Order Differential Equations</h2>
+            
+            <h3>Reducible to Homogeneous Equations</h3>
+            <p>For equations of the form:</p>
+            <div class="math-display">
+                $$\frac{dy}{dx} = \frac{ax+by+c}{a'x+b'y+c'}$$
+            </div>
+            
+            <div class="case-box">
+                <div class="case-title">Case 1: $$\frac{a}{a'} \neq \frac{b}{b'}$$</div>
+                <p>Substitute $$x = X+h$$ and $$y = Y+k$$. The equation becomes homogeneous:</p>
+                <div class="math-display">
+                    $$\frac{dY}{dX} = \frac{aX+bY}{a'X+b'Y}$$
+                </div>
+                <p>Then substitute $$Y=vX$$.</p>
+            </div>
+            
+            <div class="case-box">
+                <div class="case-title">Case 2: $$\frac{a}{a'} = \frac{b}{b'}$$</div>
+                <p>Use substitution, for example, $$t = ax+by$$.</p>
+            </div>
+            
+            <details>
+                <summary>Example Problem: $$\frac{dy}{dx} = \frac{2x+3y+4}{4x+6y+5}$$</summary>
+                <div class="solution">
+                    <p>Given: $$(2y+2x+4)dx - (4x+6y+5)dy = 0$$</p>
+                    <div class="math-display">
+                        $$\frac{dy}{dx} = \frac{2x+3y+4}{4x+6y+5}$$
+                    </div>
+                    <p>Here, $$a=2, a'=4, b=3, b'=6$$.</p>
+                    <div class="math-display">
+                        $$\frac{a}{a'} = \frac{2}{4} = \frac{1}{2} \quad \text{and} \quad \frac{b}{b'} = \frac{3}{6} = \frac{1}{2}$$
+                    </div>
+                    <p>Since $$\frac{a}{a'} = \frac{b}{b'}$$, this is Case 2.</p>
+                    
+                    <p><strong>Solution:</strong></p>
+                    <p>Let $$t = 2x+3y$$. Differentiating:</p>
+                    <div class="math-display">
+                        $$\frac{dt}{dx} = 2 + 3\frac{dy}{dx} \implies \frac{dy}{dx} = \frac{1}{3}\left(\frac{dt}{dx} - 2\right)$$
+                    </div>
+                    <p>Substituting into the original equation:</p>
+                    <div class="math-display">
+                        $$\frac{1}{3}\left(\frac{dt}{dx} - 2\right) = \frac{t+4}{2t+5}$$
+                    </div>
+                    <p>After simplification:</p>
+                    <div class="math-display">
+                        $$\frac{dt}{dx} = \frac{7t+22}{2t+5}$$
+                    </div>
+                    <p>Separating variables and integrating leads to the solution.</p>
+                </div>
+            </details>
+            
+            <div class="divider"></div>
+            
+            <h3>First Order Linear Differential Equations</h3>
+            <h4>Leibnitz Equation</h4>
+            
+            <p>The standard form is:</p>
+            <div class="math-display">
+                $$\frac{dy}{dx} + P(x)y = Q(x)$$
+            </div>
+            <p>where $$P(x)$$ and $$Q(x)$$ are functions of $$x$$.</p>
+            
+            <div class="example">
+                <h5>Solution Method</h5>
+                <p>We use an <span class="highlight">Integrating Factor (I.F.)</span>:</p>
+                <div class="math-display">
+                    $$\text{I.F.} = e^{\int P(x)dx}$$
+                </div>
+                <p>The general solution is:</p>
+                <div class="math-display">
+                    $$y \cdot (\text{I.F.}) = \int Q(x) \cdot (\text{I.F.}) dx + C$$
+                </div>
+            </div>
+            
+            <details>
+                <summary>Example: $$x\frac{dy}{dx} - (y-3x^2) = 0$$</summary>
+                <div class="solution">
+                    <p>Rearranging: $$x\frac{dy}{dx} - y = -3x^2$$</p>
+                    <p>Dividing by $$x$$:</p>
+                    <div class="math-display">
+                        $$\frac{dy}{dx} - \frac{1}{x}y = -3x$$
+                    </div>
+                    <p>This is a first-order linear DE with $$P(x) = -\frac{1}{x}$$ and $$Q(x) = -3x$$.</p>
+                    
+                    <div class="steps">
+                        <p><strong>Step 1:</strong> Find the Integrating Factor</p>
+                        <div class="math-display">
+                            $$\text{I.F.} = e^{\int -\frac{1}{x}dx} = e^{-\ln(x)} = \frac{1}{x}$$
+                        </div>
+                        
+                        <p><strong>Step 2:</strong> Apply the solution formula</p>
+                        <div class="math-display">
+                            $$y \cdot \frac{1}{x} = \int (-3x) \cdot \frac{1}{x} dx + C = \int -3 dx + C = -3x + C$$
+                        </div>
+                        
+                        <p><strong>General Solution:</strong> $$\frac{y}{x} + 3x = C$$</p>
+                    </div>
+                </div>
+            </details>
+            
+            <div class="divider"></div>
+            
+            <h3>Bernoulli's Equation</h3>
+            <h4>Non-Linear Equations Reducible to Linear Form</h4>
+            
+            <p>The standard form is:</p>
+            <div class="math-display">
+                $$\frac{dy}{dx} + P(x)y = Q(x)y^n$$
+            </div>
+            
+            <div class="steps">
+                <p><strong>Solution Steps:</strong></p>
+                <ol>
+                    <li>Divide by $$y^n$$: $$y^{-n}\frac{dy}{dx} + P(x)y^{1-n} = Q(x)$$</li>
+                    <li>Substitute $$z = y^{1-n}$$</li>
+                    <li>Then $$\frac{dz}{dx} = (1-n)y^{-n}\frac{dy}{dx}$$</li>
+                    <li>The equation becomes linear in $$z$$:
+                        <div class="math-display">
+                            $$\frac{dz}{dx} + (1-n)P(x)z = (1-n)Q(x)$$
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- LECTURE 4 CONTENT -->
+        <div id="lecture4" class="lecture-content" style="display:none;">
+            <h2>Lecture 4: Higher-Order Linear Differential Equations</h2>
+            
+            <h3>Higher Order Linear DE</h3>
+            
+            <p>The general form of an $$n^{th}$$ order linear DE is:</p>
+            <div class="math-display">
+                $$\frac{d^ny}{dx^n} + P_1(x)\frac{d^{n-1}y}{dx^{n-1}} + P_2(x)\frac{d^{n-2}y}{dx^{n-2}} + \dots + P_n(x)y = Q(x)$$
+            </div>
+            
+            <h4>Linear DE with Constant Coefficients</h4>
+            <p>If $$P_1(x), P_2(x), \dots, P_n(x)$$ are constants ($$k_1, k_2, \dots, k_n$$):</p>
+            <div class="math-display">
+                $$\frac{d^ny}{dx^n} + k_1\frac{d^{n-1}y}{dx^{n-1}} + k_2\frac{d^{n-2}y}{dx^{n-2}} + \dots + k_ny = Q(x)$$
+            </div>
+            
+            <div class="example">
+                <h5>Classification</h5>
+                <ul>
+                    <li>If $$Q(x) = 0$$, the equation is <span class="highlight">Homogeneous</span></li>
+                    <li>If $$Q(x) \neq 0$$, the equation is <span class="highlight">Non-homogeneous</span></li>
+                </ul>
+            </div>
+            
+            <h4>Solution Structure</h4>
+            <p>The general solution is $$y = y_c + y_p$$ where:</p>
+            <ul>
+                <li>$$y_c$$ is the <span class="highlight">Complementary Function (C.F.)</span> - solution to the homogeneous equation</li>
+                <li>$$y_p$$ is the <span class="highlight">Particular Integral (P.I.)</span> - particular solution to the non-homogeneous equation</li>
+            </ul>
+            
+            <h3>The D-Operator Method</h3>
+            
+            <p>Let $$D = \frac{d}{dx}$$, $$D^2 = \frac{d^2}{dx^2}$$, etc. The DE can be written as:</p>
+            <div class="math-display">
+                $$(D^n + k_1D^{n-1} + \dots + k_n)y = Q(x)$$
+            </div>
+            <p>Or simply $$f(D)y = Q(x)$$.</p>
+            
+            <h4>Finding the Complementary Function ($$y_c$$)</h4>
+            <p>To find $$y_c$$, we solve the homogeneous equation $$f(D)y=0$$.</p>
+            <p>We form the <span class="highlight">Auxiliary Equation (A.E.)</span> by replacing D with m:</p>
+            <div class="math-display">
+                $$m^n + k_1m^{n-1} + \dots + k_n = 0$$
+            </div>
+            
+            <h3>Cases for Roots of the Auxiliary Equation</h3>
+            
+            <div class="case-box">
+                <div class="case-title">Case 1: Real and Distinct Roots</div>
+                <p>If the roots $$m_1, m_2, \dots, m_n$$ are all real and different:</p>
+                <div class="math-display">
+                    $$y_c = C_1e^{m_1x} + C_2e^{m_2x} + \dots + C_ne^{m_nx}$$
+                </div>
+                
+                <details>
+                    <summary>Example: $$(D^2+5D+6)y=0$$</summary>
+                    <div class="solution">
+                        <p>A.E.: $$m^2 + 5m + 6 = 0$$</p>
+                        <p>Factoring: $$(m+3)(m+2) = 0$$</p>
+                        <p>Roots: $$m_1 = -3$$, $$m_2 = -2$$ (real and distinct)</p>
+                        <div class="math-display">
+                            $$y_c = C_1e^{-3x} + C_2e^{-2x}$$
+                        </div>
+                    </div>
+                </details>
+            </div>
+            
+            <div class="case-box">
+                <div class="case-title">Case 2: Real and Repeated Roots</div>
+                <p>If a root $$m$$ is repeated $$n$$ times:</p>
+                <div class="math-display">
+                    $$y_c = (C_1 + C_2x + C_3x^2 + \dots + C_nx^{n-1})e^{mx}$$
+                </div>
+                
+                <details>
+                    <summary>Example: $$\frac{d^2y}{dx^2} + 4\frac{dy}{dx} + 4y = 0$$</summary>
+                    <div class="solution">
+                        <p>A.E.: $$m^2 + 4m + 4 = 0$$</p>
+                        <p>Factoring: $$(m+2)^2 = 0$$</p>
+                        <p>Roots: $$m = -2, -2$$ (repeated root)</p>
+                        <div class="math-display">
+                            $$y_c = (C_1 + C_2x)e^{-2x}$$
+                        </div>
+                    </div>
+                </details>
+            </div>
+            
+            <div class="case-box">
+                <div class="case-title">Case 3: Complex Conjugate Roots</div>
+                <p>If the roots are a complex conjugate pair $$m = \alpha \pm i\beta$$:</p>
+                <div class="math-display">
+                    $$y_c = e^{\alpha x}(C_1\cos(\beta x) + C_2\sin(\beta x))$$
+                </div>
+                
+                <details>
+                    <summary>Example: $$\frac{d^2y}{dx^2} + y = 0$$</summary>
+                    <div class="solution">
+                        <p>A.E.: $$m^2 + 1 = 0$$</p>
+                        <p>Roots: $$m = \pm i$$ (complex conjugate pair with $$\alpha=0, \beta=1$$)</p>
+                        <div class="math-display">
+                            $$y_c = C_1\cos(x) + C_2\sin(x)$$
+                        </div>
+                    </div>
+                </details>
+            </div>
+            
+            <h3>Practice Problems</h3>
+            
+            <details>
+                <summary>1. Solve $$\frac{d^2y}{dx^2} + 6\frac{dy}{dx} + 9y = 0$$</summary>
+                <div class="solution">
+                    <p>A.E.: $$m^2 + 6m + 9 = 0 \implies (m+3)^2 = 0$$</p>
+                    <p>Roots: $$m = -3, -3$$ (Real and repeated)</p>
+                    <p><strong>Solution:</strong> $$y = (C_1 + C_2x)e^{-3x}$$</p>
+                </div>
+            </details>
+            
+            <details>
+                <summary>2. Solve $$(D^3 + D^2 + 4D + 4)y = 0$$</summary>
+                <div class="solution">
+                    <p>A.E.: $$m^3 + m^2 + 4m + 4 = 0$$</p>
+                    <p>Factoring: $$(m^2+4)(m+1) = 0$$</p>
+                    <p>Roots: $$m = -1$$ (real), $$m = \pm 2i$$ (complex, $$\alpha=0, \beta=2$$)</p>
+                    <p><strong>Solution:</strong> $$y = C_1e^{-x} + C_2\cos(2x) + C_3\sin(2x)$$</p>
+                </div>
+            </details>
+            
+            <details>
+                <summary>3. Solve $$(D^2+4)y = 0$$</summary>
+                <div class="solution">
+                    <p>A.E.: $$m^2+4 = 0$$</p>
+                    <p>Roots: $$m = \pm 2i$$ (complex, $$\alpha=0, \beta=2$$)</p>
+                    <p><strong>Solution:</strong> $$y = C_1\cos(2x) + C_2\sin(2x)$$</p>
+                </div>
+            </details>
+        </div>
+   
+
+
+
+    <div id="lecture5" class="lecture-content" style="display:none;">
+        <h2>Lecture 5: Complementary Functions & Intro to Particular Integrals</h2>
+
+        <h3>Recap: Finding the Complementary Function ($$y_c$$)</h3>
+        <p>The general solution to a non-homogeneous differential equation is the sum of the complementary function and the particular integral: $$y_{general} = y_{cf} + y_{pi}$$. The complementary function, $$y_{cf}$$, is the solution to the corresponding homogeneous equation, $$P(D)y = 0$$.</p>
+        
+        <h4>Cases for Roots of the Auxiliary Equation</h4>
+        <div class="case-box">
+            <div class="case-title">Real and Repeated Roots</div>
+            <p>If a real root $$m$$ is repeated $$n$$ times, the complementary function is:</p>
+            <div class="math-display">$$y_c = (C_1 + C_2x + C_3x^2 + \dots + C_nx^{n-1})e^{mx}$$</div>
+        </div>
+        <div class="case-box">
+            <div class="case-title">Complex Conjugate Roots</div>
+            <p>If the roots are a complex conjugate pair $$m = \alpha \pm i\beta$$:</p>
+            <div class="math-display">$$y_c = e^{\alpha x}(C_1\cos(\beta x) + C_2\sin(\beta x))$$</div>
+        </div>
+        
+        <h3>Examples: Complementary Function</h3>
+        <details>
+            <summary>1. Solve $$(D^2 + 6D + 9)y = 0$$</summary>
+            <div class="solution">
+                <p>Auxiliary Equation: $$m^2 + 6m + 9 = 0 \implies (m+3)^2 = 0$$</p>
+                <p>Roots: $$m = -3, -3$$ (Real and repeated)</p>
+                <p><strong>Solution:</strong> $$y_{cf} = (C_1 + C_2x)e^{-3x}$$</p>
+            </div>
+        </details>
+        <details>
+            <summary>2. Solve $$(D^3 + D^2 + 4D + 4)y = 0$$</summary>
+            <div class="solution">
+                <p>A.E.: $$m^3 + m^2 + 4m + 4 = 0$$</p>
+                <p>Factoring: $$m^2(m+1) + 4(m+1) = 0 \implies (m^2+4)(m+1) = 0$$</p>
+                <p>Roots: $$m = -1$$ and $$m = \pm 2i$$ (complex, with $$\alpha=0, \beta=2$$)</p>
+                <p><strong>Solution:</strong> $$y_{cf} = C_1e^{-x} + C_2\cos(2x) + C_3\sin(2x)$$</p>
+            </div>
+        </details>
+        <details>
+            <summary>3. Solve $$(D^4+4)y = 0$$</summary>
+            <div class="solution">
+                <p>A.E.: $$m^4+4=0$$. We complete the square.</p>
+                <p>$$m^4+4m^2+4 - 4m^2 = 0 \implies (m^2+2)^2 - (2m)^2 = 0$$</p>
+                <p>Factoring: $$(m^2+2m+2)(m^2-2m+2) = 0$$</p>
+                <p>Roots: From $$m^2+2m+2=0$$, $$m=-1 \pm i$$. From $$m^2-2m+2=0$$, $$m=1 \pm i$$.</p>
+                <p><strong>Solution:</strong> $$y_{cf} = e^{-x}(C_1\cos(x) + C_2\sin(x)) + e^x(C_3\cos(x) + C_4\sin(x))$$</p>
+            </div>
+        </details>
+
+        <h3>Finding the Particular Integral ($$y_{pi}$$)</h3>
+        <p>The particular integral is a solution to the non-homogeneous equation $$P(D)y = Q(x)$$. It is represented as:</p>
+        <div class="math-display">$$y_{pi} = \frac{1}{P(D)}Q(x)$$</div>
+
+        <h4>Case 1: When $$Q(x) = e^{ax}$$</h4>
+        <p><strong>Rule:</strong> If $$P(a) \neq 0$$, replace D with a.</p>
+        <div class="math-display">$$y_{pi} = \frac{1}{P(D)}e^{ax} = \frac{e^{ax}}{P(a)}$$</div>
+        <p><strong>Case of Failure:</strong> If $$P(a) = 0$$, but $$P'(a) \neq 0$$, the rule is:</p>
+        <div class="math-display">$$y_{pi} = \frac{xe^{ax}}{P'(a)}$$</div>
+
+        <details>
+            <summary>Example: Solve $$(D^2+5D+6)y = e^x$$</summary>
+            <div class="solution">
+                <p><strong>Complementary Function:</strong></p>
+                <p>A.E.: $$m^2+5m+6=0 \implies (m+2)(m+3)=0 \implies m=-2, -3$$.</p>
+                <p>$$y_{cf} = C_1e^{-2x} + C_2e^{-3x}$$</p>
+                <p><strong>Particular Integral:</strong></p>
+                <p>Here, $$Q(x) = e^x$$, so $$a=1$$. The operator is $$P(D) = D^2+5D+6$$.</p>
+                <p>Check the condition: $$P(1) = 1^2 + 5(1) + 6 = 12 \neq 0$$.</p>
+                <p>$$y_{pi} = \frac{e^x}{P(1)} = \frac{e^x}{12}$$</p>
+                <p><strong>General Solution:</strong></p>
+                <p>$$y = y_{cf} + y_{pi} = C_1e^{-2x} + C_2e^{-3x} + \frac{e^x}{12}$$</p>
+            </div>
+        </details>
+        
+    </div>
+
+<div id="lecture6" class="lecture-content" style="display:none;">
+    <h2>Lecture 6: Methods for Finding the Particular Integral</h2>
+    <hr>
+    <h3>Case I: $$Q(x) = e^{ax}$$</h3>
+    <p>This section covers the rules for finding the particular integral when the non-homogeneous term is an exponential function.</p>
+    
+    <h4>Summary of Rules</h4>
+    <ul>
+        <li>If $$P(a) \neq 0$$, the particular integral is $$y_{pi} = \frac{e^{ax}}{P(a)}$$.</li>
+        <li>If $$P(a) = 0$$ but $$P'(a) \neq 0$$ (single root failure), then $$y_{pi} = \frac{xe^{ax}}{P'(a)}$$.</li>
+        <li>If $$P(a) = 0$$ and $$P'(a) = 0$$ but $$P''(a) \neq 0$$ (double root failure), then $$y_{pi} = \frac{x^2e^{ax}}{P''(a)}$$.</li>
+    </ul>
+    
+    <details>
+        <summary>Example: Solve $$(D+2)(D-1)^2 y = e^{-2x} + 2\sinh(x)$$</summary>
+        <div class="solution">
+            <p>First, rewrite the equation using the definition $$2\sinh(x) = e^x - e^{-x}$$.</p>
+            <p>The equation becomes $$(D+2)(D-1)^2 y = e^{-2x} + e^x - e^{-x}$$.</p>
+            <p><strong>Complementary Function:</strong> The roots of the auxiliary equation are $$m=-2, 1, 1$$. The CF is $$y_{cf} = C_1e^{-2x} + (C_2+C_3x)e^x$$.</p>
+            <p><strong>Particular Integral:</strong> We find the PI for each term separately.</p>
+            <ul>
+                <li>For $$e^{-2x}$$ ($$a=-2$$): This is a single root failure since $$P(-2)=0$$. We use $$P'(D)=(D-1)^2 + 2(D+2)(D-1)$$, which gives $$P'(-2)=9$$. The PI part is $$\frac{xe^{-2x}}{9}$$.</li>
+                <li>For $$e^x$$ ($$a=1$$): This is a double root failure since $$P(1)=0$$ and $$P'(1)=0$$. We use $$P''(D)=4(D-1)+2(D+2)$$, which gives $$P''(1)=6$$. The PI part is $$\frac{x^2e^x}{6}$$.</li>
+                <li>For $$-e^{-x}$$ ($$a=-1$$): There is no failure since $$P(-1)=(-1+2)(-1-1)^2 = 4 \neq 0$$. The PI part is $$-\frac{e^{-x}}{4}$$.</li>
+            </ul>
+            <p>The total particular integral is $$y_{pi} = \frac{xe^{-2x}}{9} + \frac{x^2e^x}{6} - \frac{e^{-x}}{4}$$.</p>
+        </div>
+    </details>
+    <hr>
+    <h3>Case II: $$Q(x) = \sin(ax+b)$$ or $$\cos(ax+b)$$</h3>
+    <p>For sinusoidal functions, the standard method is to <strong>replace every instance of $$D^2$$ with $$-a^2$$</strong>. This method is valid as long as the denominator does not become zero.</p>
+    
+    <details>
+        <summary>Example: Solve $$(D^3+1)y = \cos(2x+1)$$</summary>
+        <div class="solution">
+            <p><strong>1. Set up the PI:</strong> $$y_{pi} = \frac{1}{D^3+1}\cos(2x+1)$$.</p>
+            <p><strong>2. Apply the rule:</strong> Here $$a=2$$, so we replace $$D^2$$ with $$-a^2 = -4$$. We write $$D^3$$ as $$D \cdot D^2$$.</p>
+            <div class="math-display">
+                $$y_{pi} = \frac{1}{D(D^2)+1}\cos(2x+1) = \frac{1}{D(-4)+1}\cos(2x+1) = \frac{1}{1-4D}\cos(2x+1)$$
+            </div>
+            <p><strong>3. Rationalize the Operator:</strong> To eliminate the $$D$$ in the denominator, multiply the numerator and denominator by the conjugate, $$1+4D$$.</p>
+            <div class="math-display">
+                $$y_{pi} = \frac{1+4D}{(1-4D)(1+4D)}\cos(2x+1) = \frac{1+4D}{1-16D^2}\cos(2x+1)$$
+            </div>
+            <p><strong>4. Apply the rule again:</strong> Replace $$D^2$$ with $$-4$$.</p>
+            <div class="math-display">
+                $$y_{pi} = \frac{1+4D}{1-16(-4)}\cos(2x+1) = \frac{1+4D}{65}\cos(2x+1)$$
+            </div>
+            <p><strong>5. Differentiate:</strong> Now, apply the operator $$1+4D$$ to the function.</p>
+            <div class="math-display">
+                $$y_{pi} = \frac{1}{65}[\cos(2x+1) + 4D(\cos(2x+1))] = \frac{1}{65}[\cos(2x+1) - 8\sin(2x+1)]$$
+            </div>
+        </div>
+    </details>
+    <hr>
+    <h3>Case III: $$Q(x) = x^m$$</h3>
+    <p>When the non-homogeneous term is a polynomial of degree $$m$$, the method is to treat the operator fraction as an inverse operator and expand it as a power series in $$D$$ using the binomial theorem.</p>
+    
+    <details>
+        <summary>Example: Solve $$(D^2+D)y = x^2+2x+4$$</summary>
+        <div class="solution">
+            <p><strong>1. Set up the PI:</strong> $$y_{pi} = \frac{1}{D^2+D}(x^2+2x+4) = \frac{1}{D(1+D)}(x^2+2x+4)$$.</p>
+            <p><strong>2. Expand the Operator:</strong> Use the binomial expansion for $$(1+D)^{-1} = 1 - D + D^2 - \dots$$.</p>
+            <div class="math-display">
+                $$y_{pi} = \frac{1}{D}[1-D+D^2-\dots](x^2+2x+4)$$
+            </div>
+            <p><strong>3. Apply the Operators:</strong> Distribute the operators onto the polynomial. We only need terms up to $$D^2$$, as higher derivatives of $$x^2$$ are zero.</p>
+            <div class="math-display">
+                $$y_{pi} = \frac{1}{D}[(x^2+2x+4) - (2x+2) + (2)] = \frac{1}{D}[x^2+4]$$
+            </div>
+            <p><strong>4. Integrate:</strong> The operator $$\frac{1}{D}$$ represents integration.</p>
+            <div class="math-display">
+                $$y_{pi} = \int (x^2+4)dx = \frac{x^3}{3} + 4x$$
+            </div>
+        </div>
+    </details>
+    <hr>
+    <h3>Case IV: $$Q(x) = e^{ax}V(x)$$</h3>
+    <p>This case uses the <strong>exponential shift rule</strong>. The rule states that you can move the exponential term $$e^{ax}$$ to the left of the operator, provided you replace every $$D$$ in the operator with $$D+a$$.</p>
+    <div class="math-display">
+        $$\frac{1}{P(D)}[e^{ax}V(x)] = e^{ax} \frac{1}{P(D+a)}V(x)$$
+    </div>
+    <hr>
+    <h3>Case V: $$Q(x) = xV(x)$$</h3>
+    <p>When the function is a product of $$x$$ and another function $$V(x)$$, a special formula derived from the Leibniz theorem is used.</p>
+    <div class="math-display">
+        $$\frac{1}{P(D)}[xV(x)] = \left[x - \frac{P'(D)}{P(D)}\right]\frac{1}{P(D)}V(x)$$
+    </div>
+    
+    <details>
+        <summary>Example: Solve $$(D+1)^2y = x\cos(x)$$</summary>
+        <div class="solution">
+            <p>Here, $$V(x)=\cos(x)$$, $$P(D)=(D+1)^2$$, and $$P'(D)=2(D+1)$$.</p>
+            <p><strong>1. Apply the Formula:</strong></p>
+            <div class="math-display">
+                $$y_{pi} = \left[x - \frac{2(D+1)}{(D+1)^2}\right]\frac{1}{(D+1)^2}\cos(x) = \left[x - \frac{2}{D+1}\right]\frac{1}{D^2+2D+1}\cos(x)$$
+            </div>
+            <p><strong>2. Evaluate the Inner Operator:</strong> First, find $$\frac{1}{D^2+2D+1}\cos(x)$$. Using the rule for cosines ($$D^2 \to -1^2=-1$$):</p>
+            <div class="math-display">
+                $$\frac{1}{-1+2D+1}\cos(x) = \frac{1}{2D}\cos(x) = \frac{1}{2}\int \cos(x)dx = \frac{1}{2}\sin(x)$$
+            </div>
+            <p><strong>3. Substitute Back:</strong></p>
+            <div class="math-display">
+                $$y_{pi} = \left[x - \frac{2}{D+1}\right]\left(\frac{1}{2}\sin(x)\right) = \frac{x}{2}\sin(x) - \frac{1}{D+1}\sin(x)$$
+            </div>
+            <p><strong>4. Evaluate the Remaining Part:</strong> Solve $$\frac{1}{D+1}\sin(x)$$ by rationalizing:</p>
+            <div class="math-display">
+                $$\frac{D-1}{(D+1)(D-1)}\sin(x) = \frac{D-1}{D^2-1}\sin(x) = \frac{D-1}{-1-1}\sin(x) = -\frac{1}{2}(\cos(x) - \sin(x))$$
+            </div>
+             <p><strong>5. Final Answer:</strong> Combine the parts.</p>
+             <div class="math-display">
+                $$y_{pi} = \frac{x}{2}\sin(x) - \left(-\frac{1}{2}(\cos(x) - \sin(x))\right) = \frac{x}{2}\sin(x) + \frac{1}{2}\cos(x) - \frac{1}{2}\sin(x)$$
+             </div>
+        </div>
+    </details>
+</div>
+
+
+
+    <div id="lecture7" class="lecture-content" style="display:none;">
+        <h2>Lecture 7: Advanced Methods for Particular Integrals</h2>
+        <hr>
+        <h3>Recap: Methods for Finding Particular Integral ($$y_{pi}$$)</h3>
+        <ul>
+            <li><strong>Case 1: $$Q(x) = e^{ax}$$</strong>: $$y_{pi} = \frac{e^{ax}}{P(a)}$$, with failure cases handled by multiplying by $$x$$ and using derivatives of $$P(D)$$.</li>
+            <li><strong>Case 2: $$Q(x) = \sin(ax+b)$$ or $$\cos(ax+b)$$</strong>: Replace $$D^2$$ with $$-a^2$$.</li>
+            <li><strong>Case 3: $$Q(x) = x^m$$</strong>: Expand $$[P(D)]^{-1}$$ using a binomial series.</li>
+            <li><strong>Case 4: $$Q(x) = e^{ax}V(x)$$</strong>: Use the exponential shift rule $$y_{pi} = e^{ax}\frac{1}{P(D+a)}V(x)$$.</li>
+            <li><strong>Case 5: $$Q(x) = xV(x)$$</strong>: Use the formula $$y_{pi} = \left[x - \frac{P'(D)}{P(D)}\right]\frac{1}{P(D)}V(x)$$.</li>
+        </ul>
+        <hr>
+        <h3>Method of Variation of Parameters</h3>
+        <p>This is a powerful method for finding the particular integral, especially for functions like $$\sec(x), \tan(x), \log(x)$$, or when the DE has variable coefficients. It applies to second-order linear DEs of the form:</p>
+        <div class="math-display">
+            $$\frac{d^2y}{dx^2} + P(x)\frac{dy}{dx} + Q(x)y = \phi(x)$$
+        </div>
+        <p>If the complementary function is $$y_{cf} = C_1y_1(x) + C_2y_2(x)$$, the particular integral is given by:</p>
+        <div class="math-display">
+            $$y_{pi} = -y_1 \int \frac{y_2 \phi(x)}{W} dx + y_2 \int \frac{y_1 \phi(x)}{W} dx$$
+        </div>
+        <p>Where <strong>W</strong> is the <strong>Wronskian</strong> of $$y_1$$ and $$y_2$$, defined as the determinant:</p>
+        <div class="math-display">
+            $$W = \begin{vmatrix} y_1 & y_2 \\ y_1' & y_2' \end{vmatrix} = y_1y_2' - y_2y_1'$$
+        </div>
+
+        <details>
+            <summary>Example: Solve $$\frac{d^2y}{dx^2} + 4y = \tan(2x)$$</summary>
+            <div class="solution">
+                <p><strong>1. Find Complementary Function ($$y_{cf}$$):</strong></p>
+                <p>The auxiliary equation is $$m^2+4=0$$, which gives roots $$m = \pm 2i$$.</p>
+                <p>$$y_{cf} = C_1\cos(2x) + C_2\sin(2x)$$. Thus, we have $$y_1 = \cos(2x)$$ and $$y_2 = \sin(2x)$$.</p>
+                
+                <p><strong>2. Calculate the Wronskian (W):</strong></p>
+                <p>$$y_1' = -2\sin(2x)$$ and $$y_2' = 2\cos(2x)$$.</p>
+                <p>$$W = (\cos(2x))(2\cos(2x)) - (\sin(2x))(-2\sin(2x)) = 2\cos^2(2x) + 2\sin^2(2x) = 2$$.</p>
+                
+                <p><strong>3. Find Particular Integral ($$y_{pi}$$):</strong></p>
+                <p>Here, $$\phi(x) = \tan(2x)$$. Using the formula:</p>
+                <p>$$y_{pi} = -\cos(2x) \int \frac{\sin(2x)\tan(2x)}{2} dx + \sin(2x) \int \frac{\cos(2x)\tan(2x)}{2} dx$$</p>
+                <p>Evaluating the integrals leads to:</p>
+                <p>$$y_{pi} = -\frac{\cos(2x)}{2}\left[\frac{1}{2}\log|\sec(2x)+\tan(2x)| - \frac{\sin(2x)}{2}\right] - \frac{1}{4}\sin(2x)\cos(2x)$$</p>
+            </div>
+        </details>
+        
+        <hr>
+        <h3>Method of Undetermined Coefficients</h3>
+        <p>This method applies to <strong>linear DEs with constant coefficients</strong>. It involves assuming a trial solution for the particular integral based on the form of $$Q(x)$$.</p>
+        
+        <h4>Trial Solutions</h4>
+        <table>
+          <tr>
+            <th>If $$Q(x)$$ is...</th>
+            <th>The Trial Solution $$y_{pi}$$ is...</th>
+          </tr>
+          <tr>
+            <td>$$k e^{ax}$$</td>
+            <td>$$C e^{ax}$$</td>
+          </tr>
+          <tr>
+            <td>$$k x^m$$ (a polynomial of degree m)</td>
+            <td>$$C_m x^m + C_{m-1}x^{m-1} + \dots + C_1 x + C_0$$</td>
+          </tr>
+          <tr>
+            <td>$$k\cos(ax+b)$$ or $$k\sin(ax+b)$$</td>
+            <td>$$C_1\cos(ax+b) + C_2\sin(ax+b)$$</td>
+          </tr>
+        </table>
+
+        <h4>🚨 Modification Rule</h4>
+        <p>If any term in the assumed trial solution is already part of the complementary function ($$y_{cf}$$), you must <strong>multiply the entire trial solution by $$x$$</strong>. If this new solution still duplicates a term (e.g., for a double root), multiply by $$x$$ again (i.e., by $$x^2$$).</p>
+        
+        <details>
+            <summary>Example: Solve $$\frac{d^2y}{dx^2} + 2\frac{dy}{dx} + 4y = 2x^2 + 4e^{-x}$$</summary>
+            <div class="solution">
+                <p><strong>1. Find CF:</strong> The A.E. $$m^2+2m+4=0$$ has roots $$m = -1 \pm i\sqrt{3}$$.</p>
+                <p>$$y_{cf} = e^{-x}[C_1\cos(\sqrt{3}x) + C_2\sin(\sqrt{3}x)]$$.</p>
+                <p><strong>2. Assume Trial PI:</strong> For $$Q(x) = 2x^2 + 4e^{-x}$$, the trial solution is the sum of the individual forms.</p>
+                <p>$$y_{pi} = (C_0 + C_1x + C_2x^2) + C_3e^{-x}$$. No term duplicates the CF.</p>
+                <p><strong>3. Find Coefficients:</strong> Substitute $$y_{pi}$$, $$y_{pi}'$$, and $$y_{pi}''$$ into the DE and compare coefficients of like terms ($$x^2, x, 1, e^{-x}$$).</p>
+                <p>This yields $$C_2 = 1/2, C_1 = -1/2, C_0 = 0, C_3 = 4/3$$.</p>
+                <p>$$y_{pi} = -\frac{1}{2}x + \frac{1}{2}x^2 + \frac{4}{3}e^{-x}$$.</p>
+                <p><strong>4. General Solution:</strong> $$y = y_{cf} + y_{pi}$$.</p>
+            </div>
+        </details>
+        <hr>
+        <h3>Linear DEs with Variable Coefficients</h3>
+        <p>Certain DEs with variable coefficients, such as the Cauchy-Euler and Legendre equations, can be reduced to equations with constant coefficients.</p>
+        <h4>Cauchy's Homogeneous (Euler) Equation</h4>
+        <p>This equation has the form:</p>
+        <div class="math-display">
+            $$x^n \frac{d^ny}{dx^n} + k_1 x^{n-1} \frac{d^{n-1}y}{dx^{n-1}} + \dots + k_n y = \phi(x)$$
+        </div>
+        <p>We solve it using the substitution <strong>$$x = e^t$$</strong>, which implies $$t = \log(x)$$. This transforms the differential operator:</p>
+        <div class="math-display">
+            $$x\frac{dy}{dx} = \frac{dy}{dt} = Dy, \text{ where } D = \frac{d}{dt}$$
+        </div>
+    </div>
+
+    <div id="lecture8" class="lecture-content" style="display:none;">
+        <h2>Lecture 8: Variable Coefficient DEs and Intro to PDEs</h2>
+        <hr>
+        <h3>Cauchy-Euler Equation</h3>
+        <p>This equation is transformed into a constant coefficient DE by using the substitution $$x=e^t$$. The operator transformations are:</p>
+        <ul>
+            <li>$$x\frac{dy}{dx} = Dy$$</li>
+            <li>$$x^2\frac{d^2y}{dx^2} = D(D-1)y$$</li>
+            <li>$$x^3\frac{d^3y}{dx^3} = D(D-1)(D-2)y$$, and so on.</li>
+        </ul>
+        <details>
+            <summary>Example: Solve $$x^2\frac{d^2y}{dx^2} - x\frac{dy}{dx} + y = \log(x)$$</summary>
+            <div class="solution">
+                <p><strong>1. Substitute and Transform:</strong></p>
+                <p>Using $$x=e^t$$, $$t=\log(x)$$, and the operator transformations, the equation becomes:</p>
+                <p>$$[D(D-1)y] - [Dy] + y = t$$</p>
+                <p>Simplifying gives $$(D^2 - 2D + 1)y = t$$, or $$(D-1)^2y = t$$.</p>
+                
+                <p><strong>2. Solve the Constant Coefficient Equation (in t):</strong></p>
+                <p>The A.E. is $$(m-1)^2=0 \implies m=1,1$$. The complementary function is $$y_{cf} = (C_1 + C_2t)e^t$$.</p>
+                <p>For the PI, $$y_{pi} = \frac{1}{(D-1)^2}t = (1-D)^{-2}t = (1+2D+\dots)t = t+2$$.</p>
+                <p>The solution in terms of t is $$y = (C_1 + C_2t)e^t + t + 2$$.</p>
+
+                <p><strong>3. Substitute Back to x:</strong></p>
+                <p>Replace $$t$$ with $$\log(x)$$ and $$e^t$$ with $$x$$:</p>
+                <p>$$y(x) = (C_1 + C_2\log(x))x + \log(x) + 2$$.</p>
+            </div>
+        </details>
+        <hr>
+        <h3>Legendre's Linear Equation</h3>
+        <p>This is a generalization of the Cauchy-Euler equation, with the form:</p>
+        <div class="math-display">
+            $$(ax+b)^n \frac{d^ny}{dx^n} + k_1 (ax+b)^{n-1} \frac{d^{n-1}y}{dx^{n-1}} + \dots + k_n y = Q(x)$$
+        </div>
+        <p>It is solved using the substitution <strong>$$ax+b = e^t$$</strong>. The operators transform as follows:</p>
+        <ul>
+            <li>$$(ax+b)\frac{dy}{dx} = aDy$$</li>
+            <li>$$(ax+b)^2\frac{d^2y}{dx^2} = a^2D(D-1)y$$</li>
+            <li>$$(ax+b)^n\frac{d^ny}{dx^n} = a^nD(D-1)\dots(D-n+1)y$$</li>
+        </ul>
+        <details>
+            <summary>Example: Solve $$(1+x)^2\frac{d^2y}{dx^2} + (1+x)\frac{dy}{dx} + y = 2\sin(\log(1+x))$$</summary>
+            <div class="solution">
+                <p><strong>1. Transform:</strong> This is a Legendre equation with $$a=1, b=1$$. Let $$1+x = e^t$$. The DE becomes:</p>
+                <p>$$[D(D-1)y] + [Dy] + y = 2\sin(t)$$</p>
+                <p>This simplifies to $$(D^2+1)y = 2\sin(t)$$.</p>
+                <p><strong>2. Solve in t:</strong> The A.E. $$m^2+1=0$$ gives $$m=\pm i$$. So, $$y_{cf} = C_1\cos(t) + C_2\sin(t)$$.</p>
+                <p>The PI involves a case of failure since the operator $$D^2+1$$ annihilates $$\sin(t)$$. The PI is $$y_{pi} = -t\cos(t)$$.</p>
+                <p><strong>3. Substitute back to x:</strong> The final solution is:</p>
+                <p>$$y(x) = C_1\cos(\log(1+x)) + C_2\sin(\log(1+x)) - \log(1+x)\cos(\log(1+x))$$</p>
+            </div>
+        </details>
+        <hr>
+        <h3>Introduction to Partial Differential Equations (PDEs)</h3>
+        <p>A Partial Differential Equation (PDE) is an equation that involves partial derivatives of one or more dependent variables with respect to two or more independent variables.</p>
+        
+        <h4>Basic Definitions</h4>
+        <ul>
+            <li><strong>Order:</strong> The order of the highest partial derivative in the equation.</li>
+            <li><strong>Degree:</strong> The power of the highest-order derivative after the equation has been cleared of any radicals or fractions with respect to the derivatives.</li>
+        </ul>
+
+        <h4>Classification of PDEs by Linearity</h4>
+        <dl>
+            <dt><strong>Linear PDE</strong></dt>
+            <dd>The dependent variable and all its derivatives appear only to the first degree and are not multiplied together. <em>Example:</em> $$\frac{\partial u}{\partial x} + \frac{\partial u}{\partial y} = 2$$</dd>
+            
+            <dt><strong>Semilinear PDE</strong></dt>
+            <dd>The highest-order derivatives appear linearly, but lower-order terms can be non-linear. <em>Example:</em> $$\frac{\partial^2 u}{\partial x^2} + (\frac{\partial u}{\partial y})^2 + u = 2$$</dd>
+            
+            <dt><strong>Quasi-linear PDE</strong></dt>
+            <dd>The highest-order derivatives are linear, but their coefficients can be functions of the dependent variable or lower-order derivatives. <em>Example:</em> $$u\frac{\partial u}{\partial y} + u = 0$$</dd>
+            
+            <dt><strong>Non-linear PDE</strong></dt>
+            <dd>A PDE that is not linear in the highest-order derivatives. <em>Example:</em> $$(\frac{\partial y}{\partial x})^2 + \frac{\partial y}{\partial t} = 2$$</dd>
+        </dl>
+    </div>
+       <div id="lecture9" class="lecture-content" style="display:none;">
+    <h2>Lecture 9: Solving Partial Differential Equations</h2>
+    <hr>
+    <h3>Solving PDEs by Direct Integration</h3>
+    <p>For some simple PDEs, a solution can be found by integrating the equation directly. When integrating with respect to one variable, the "constant" of integration is an arbitrary function of the other variable(s).</p>
+    
+    <details>
+        <summary>Example: Solve $$\frac{\partial^2 z}{\partial x^2} = xy^2$$</summary>
+        <div class="solution">
+            <p><strong>1. First Integration:</strong></p>
+            <p>Integrate with respect to $$x$$, treating $$y$$ as a constant.</p>
+            <div class="math-display">
+                $$\frac{\partial z}{\partial x} = \int xy^2 dx = \frac{x^2}{2}y^2 + f(y)$$
+            </div>
+            <p>Here, $$f(y)$$ is an arbitrary function of $$y$$ that acts as the constant of integration.</p>
+            
+            <p><strong>2. Second Integration:</strong></p>
+            <p>Integrate again with respect to $$x$$.</p>
+            <div class="math-display">
+                $$z = \int \left(\frac{x^2}{2}y^2 + f(y)\right) dx = \frac{x^3}{6}y^2 + x f(y) + g(y)$$
+            </div>
+            <p>Here, $$g(y)$$ is another arbitrary function of $$y$$, representing the new constant of integration.</p>
+        </div>
+    </details>
+    
+    <hr>
+    <h3>First-Order Quasi-linear PDEs: Lagrange's Method</h3>
+    <p>A first-order quasi-linear PDE has the general form:</p>
+    <div class="math-display">
+        $$P(x,y,z)\frac{\partial z}{\partial x} + Q(x,y,z)\frac{\partial z}{\partial y} = R(x,y,z)$$
+    </div>
+    <p>This type of equation is solved using Lagrange's method of auxiliary equations. The auxiliary equations are:</p>
+    <div class="math-display">
+        $$\frac{dx}{P} = \frac{dy}{Q} = \frac{dz}{R}$$
+    </div>
+    <p>By solving this system, we find two independent solutions, $$u_1(x,y,z) = c_1$$ and $$u_2(x,y,z) = c_2$$. The general solution is then an arbitrary function relating these two solutions, often written as $$F(u_1, u_2) = 0$$.</p>
+    
+    <details>
+        <summary>Example: Solve $$x\frac{\partial z}{\partial x} + y\frac{\partial z}{\partial y} = 3z$$</summary>
+        <div class="solution">
+            <p><strong>1. Set up Auxiliary Equations:</strong></p>
+            <p>Here, $$P=x, Q=y, R=3z$$. The equations are:</p>
+            <div class="math-display">
+                $$\frac{dx}{x} = \frac{dy}{y} = \frac{dz}{3z}$$
+            </div>
+            <p><strong>2. Find the First Solution ($$u_1$$):</strong></p>
+            <p>Take the first two fractions and integrate:</p>
+            <p>$$\int\frac{dx}{x} = \int\frac{dy}{y} \implies \ln(x) = \ln(y) + \ln(c_1) \implies u_1 = \frac{x}{y} = c_1$$</p>
+            
+            <p><strong>3. Find the Second Solution ($$u_2$$):</strong></p>
+            <p>Take the second and third fractions and integrate:</p>
+            <p>$$\int\frac{dy}{y} = \int\frac{dz}{3z} \implies \ln(y) = \frac{1}{3}\ln(z) + \ln(c_2) \implies 3\ln(y) = \ln(z) + \ln(c_2^3) \implies u_2 = \frac{y^3}{z} = c_2'$$</p>
+            
+            <p><strong>4. Write the General Solution:</strong></p>
+            <p>The general solution is an arbitrary function of $$u_1$$ and $$u_2$$.</p>
+            <div class="math-display">
+                $$F\left(\frac{x}{y}, \frac{y^3}{z}\right) = 0$$
+            </div>
+        </div>
+    </details>
+    
+    <hr>
+    <h3>Lagrange's Method of Multipliers</h3>
+    <p>When the variables in the auxiliary equations cannot be easily separated, we can use the method of multipliers. For any multipliers $$l, m, n$$, the following relation holds:</p>
+    <div class="math-display">
+        $$\frac{dx}{P} = \frac{dy}{Q} = \frac{dz}{R} = \frac{l\;dx + m\;dy + n\;dz}{lP + mQ + nR}$$
+    </div>
+    <p>The strategy is to choose multipliers $$l, m, n$$ such that the denominator becomes zero: $$lP + mQ + nR = 0$$. If the denominator is zero, the numerator must also be zero, which gives us a new integrable equation: $$l\;dx + m\;dy + n\;dz = 0$$.</p>
+    
+    <hr>
+    <h3>Second-Order Linear PDEs</h3>
+    <h4>Classification</h4>
+    <p>A general second-order linear PDE in two variables has the form:</p>
+    <div class="math-display">
+         $$A\frac{\partial^2 u}{\partial x^2} + B\frac{\partial^2 u}{\partial x \partial y} + C\frac{\partial^2 u}{\partial y^2} + D\frac{\partial u}{\partial x} + E\frac{\partial u}{\partial y} + Fu = G(x,y)$$
+    </div>
+    <p>The equation is classified based on the value of the discriminant $$B^2 - 4AC$$:</p>
+    <ul>
+        <li>If $$B^2 - 4AC > 0$$, the PDE is <strong>Hyperbolic</strong> (e.g., wave equation).</li>
+        <li>If $$B^2 - 4AC = 0$$, the PDE is <strong>Parabolic</strong> (e.g., heat equation).</li>
+        <li>If $$B^2 - 4AC < 0$$, the PDE is <strong>Elliptic</strong> (e.g., Laplace's equation).</li>
+    </ul>
+    
+    <h4>Method of Separation of Variables</h4>
+    <p>This method is used to solve homogeneous linear PDEs. It works by assuming the solution can be expressed as a product of functions, each depending on only one of the independent variables. For a function $$z(x,y)$$, we assume a solution of the form $$z(x,y) = X(x)Y(y)$$.</p>
+
+    <details>
+        <summary>Example: Solve $$\frac{\partial^2 z}{\partial x^2} + 4\frac{\partial^2 z}{\partial y^2} = 0$$</summary>
+        <div class="solution">
+            <p><strong>1. Classify the PDE:</strong></p>
+            <p>Here, $$A=1, B=0, C=4$$. The discriminant is $$B^2-4AC = 0 - 4(1)(4) = -16 < 0$$, so the equation is <strong>elliptic</strong>.</p>
+
+            <p><strong>2. Assume and Substitute the Solution:</strong></p>
+            <p>Assume $$z(x,y) = X(x)Y(y)$$. Substituting into the PDE gives:</p>
+            <div class="math-display">
+                $$X''(x)Y(y) + 4X(x)Y''(y) = 0$$
+            </div>
+            
+            <p><strong>3. Separate the Variables:</strong></p>
+            <p>Rearrange the equation to separate the functions of $$x$$ and $$y$$:</p>
+            <div class="math-display">
+                $$\frac{X''}{X} = -4\frac{Y''}{Y}$$
+            </div>
+            <p>Since the left side depends only on $$x$$ and the right side only on $$y$$, both must be equal to a constant, say $$k$$.</p>
+            
+            <p><strong>4. Solve the ODEs:</strong></p>
+            <p>This gives us two ordinary differential equations:</p>
+            <ul>
+                <li>$$\frac{X''}{X} = k \implies X'' - kX = 0$$. The solution is $$X(x) = a_1e^{\sqrt{k}x} + a_2e^{-\sqrt{k}x}$$.</li>
+                <li>$$-4\frac{Y''}{Y} = k \implies 4Y'' + kY = 0$$. The solution is $$Y(y) = b_1\cos\left(\frac{\sqrt{k}}{2}y\right) + b_2\sin\left(\frac{\sqrt{k}}{2}y\right)$$.</li>
+            </ul>
+            <p><strong>5. Form the General Solution:</strong></p>
+            <p>The complete solution is the product $$z(x,y) = X(x)Y(y)$$. More general solutions are formed by taking a superposition (sum) of these solutions for different values of k. The specific values for the constants are found using initial or boundary conditions.</p>
+        </div>
+    </details>
+</div>
+    <div id="lecture10" class="lecture-content" style="display: none;">
+    <h2>Lecture 10: Formation of Partial Differential Equations</h2>
+    
+    <h3>1. By Eliminating Arbitrary Constants</h3>
+    <p>A PDE can be formed by differentiating a relation to eliminate the arbitrary constants present.</p>
+    
+    <h4>Example 1</h4>
+    <p>Form a PDE by eliminating the constants <strong>a</strong> and <strong>b</strong> from the equation:
+        $$2z = \frac{x^2}{a^2} + \frac{y^2}{b^2}$$
+    </p>
+    <ul>
+        <li>
+            <strong>Step 1: Differentiate with respect to x</strong><br>
+            Differentiate the equation partially with respect to \(x\), keeping \(y\) constant.
+            $$2\frac{\partial z}{\partial x} = \frac{2x}{a^2}$$
+            Rearranging gives an expression for \(\frac{1}{a^2}\):
+            $$\frac{1}{a^2} = \frac{1}{x}\frac{\partial z}{\partial x}$$
+        </li>
+        <li>
+            <strong>Step 2: Differentiate with respect to y</strong><br>
+            Differentiate partially with respect to \(y\), treating \(x\) as a constant.
+            $$2\frac{\partial z}{\partial y} = \frac{2y}{b^2}$$
+            Rearranging gives an expression for \(\frac{1}{b^2}\):
+            $$\frac{1}{b^2} = \frac{1}{y}\frac{\partial z}{\partial y}$$
+        </li>
+        <li>
+            <strong>Step 3: Substitute and Simplify</strong><br>
+            Substitute the expressions for \(\frac{1}{a^2}\) and \(\frac{1}{b^2}\) back into the original equation:
+            $$2z = x^2 \left(\frac{1}{x}\frac{\partial z}{\partial x}\right) + y^2 \left(\frac{1}{y}\frac{\partial z}{\partial y}\right)$$
+            This simplifies to the final PDE:
+            <div class="pde-box">
+            $$2z = x\frac{\partial z}{\partial x} + y\frac{\partial z}{\partial y}$$
+            </div>
+        </li>
+    </ul>
+    <hr>
+
+    <h3>2. By Eliminating an Arbitrary Function</h3>
+    <p>A PDE can also be formed by eliminating an arbitrary function from a relation.</p>
+    
+    <h4>Example 2</h4>
+    <p>Form a PDE by eliminating the function <strong>f</strong> from:
+        $$z = f(x^2 + y^2)$$
+    </p>
+    <ul>
+        <li>
+            <strong>Step 1: Differentiate with respect to x</strong>
+            $$\frac{\partial z}{\partial x} = f'(x^2 + y^2) \cdot (2x)$$
+        </li>
+        <li>
+            <strong>Step 2: Differentiate with respect to y</strong>
+            $$\frac{\partial z}{\partial y} = f'(x^2 + y^2) \cdot (2y)$$
+        </li>
+        <li>
+            <strong>Step 3: Eliminate the function f'</strong><br>
+            By dividing the two resulting equations, the arbitrary function \(f'\) is eliminated:
+            $$\frac{\frac{\partial z}{\partial x}}{\frac{\partial z}{\partial y}} = \frac{2x \cdot f'(x^2+y^2)}{2y \cdot f'(x^2+y^2)} = \frac{x}{y}$$
+            Cross-multiplying gives the required PDE:
+            <div class="pde-box">
+            $$y\frac{\partial z}{\partial x} = x\frac{\partial z}{\partial y}$$
+            </div>
+        </li>
+    </ul>
+    <p>The notes indicate that for these examples, the resulting PDE is of the <strong>first order</strong>.</p>
+</div>
+        </div>
+    
+    </div>
+
+
+</div>
+       
+
+</div>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    // Auto-open the unit containing the active lecture
+    const activeLecture = document.querySelector('.lecture-btn.active');
+    if (activeLecture) {
+        const parentUnit = activeLecture.closest('.unit');
+        if (parentUnit) openUnit(parentUnit);
+    } else {
+        const firstUnit = document.querySelector('.unit');
+        if (firstUnit) openUnit(firstUnit);
+    }
+
+    // Accordion toggle for units
+    document.querySelectorAll(".unit-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const unit = btn.parentElement;
+            const isOpen = unit.classList.contains("open");
+
+            // Close all units
+            document.querySelectorAll(".unit").forEach(u => closeUnit(u));
+
+            // Toggle clicked unit
+            if (!isOpen) openUnit(unit);
+        });
+    });
+
+    // Theme toggle
+    const toggleBtn = document.getElementById("theme-toggle");
+    if (toggleBtn) {
+        if (localStorage.getItem("theme") === "light") {
+            document.body.classList.add("light-theme");
+            toggleBtn.textContent = "🌙";
+        } else toggleBtn.textContent = "☀️";
+
+        toggleBtn.addEventListener("click", () => {
+            document.body.classList.toggle("light-theme");
+            if (document.body.classList.contains("light-theme")) {
+                localStorage.setItem("theme", "light");
+                toggleBtn.textContent = "🌙";
+            } else {
+                localStorage.setItem("theme", "dark");
+                toggleBtn.textContent = "☀️";
+            }
+        });
+    }
+});
+
+// Function to open a unit
+function openUnit(unit) {
+    unit.classList.add("open");
+    const btn = unit.querySelector(".unit-btn");
+    if (btn) {
+        btn.classList.add("active");
+        btn.innerHTML = btn.textContent.replace(/▾|▴/g, "▴");
+    }
+}
+
+// Function to close a unit
+function closeUnit(unit) {
+    unit.classList.remove("open");
+    const btn = unit.querySelector(".unit-btn");
+    if (btn) {
+        btn.classList.remove("active");
+        btn.innerHTML = btn.textContent.replace(/▾|▴/g, "▾");
+    }
+}
+
+// Function to switch lecture content
+function showLecture(lectureId, clickedElement) {
+    // Hide all lectures
+    document.querySelectorAll(".lecture-content").forEach(c => c.style.display = "none");
+
+    // Show selected lecture
+    const selectedContent = document.getElementById(lectureId);
+    if (selectedContent) selectedContent.style.display = "block";
+
+    // Highlight active lecture
+    document.querySelectorAll(".lecture-btn").forEach(l => l.classList.remove("active"));
+    clickedElement.classList.add("active");
+
+    // Ensure parent unit is open
+    const parentUnit = clickedElement.closest('.unit');
+    if (parentUnit) openUnit(parentUnit);
+
+    // Refresh MathJax
+    if (typeof MathJax !== 'undefined' && MathJax.typeset) MathJax.typeset();
+}
+</script>
+
+</body>
+</html>

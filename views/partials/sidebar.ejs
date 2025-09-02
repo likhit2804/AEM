@@ -1,7 +1,9 @@
 <!-- Sidebar Navigation -->
 <div class="sidebar">
   <div class="sidebar-header">
-    <h1>AEM Notes</h1>
+    <a href="/" style="text-decoration: none; color: inherit;">
+      <h1>AEM Notes</h1>
+    </a>
 
     <!-- ✅ Apple-like toggle switch -->
     <label class="theme-switch">
@@ -10,6 +12,7 @@
     </label>
   </div>
 
+  <!-- ✅ Unit 1 -->
   <div class="unit">
     <button class="unit-btn">Unit 1: Differential Equations ▾</button>
     <ul class="lecture-nav">
@@ -56,6 +59,53 @@
       <li>
         <a href="/lectures/lecture9" class="lecture-link <%= currentLecture === 'lecture9' ? 'active' : '' %>">
           Lecture 9: PDE
+        </a>
+      </li>
+      <li>
+        <a href="/lectures/lecture10" class="lecture-link <%= currentLecture === 'lecture10' ? 'active' : '' %>">
+          Lecture 10: Final
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="unit">
+    <button class="unit-btn">Unit 2: Numerical Solutions to ODEs ▾</button>
+    <ul class="lecture-nav"><li>
+       Not Uploaded Yet
+      </li></ul>
+  </div>
+  <div class="unit">
+    <button class="unit-btn">Unit 3: Complex Analysis ▾</button>
+    <ul class="lecture-nav"><li>
+       Not Uploaded Yet
+      </li></ul>
+  </div>
+  <div class="unit">
+    <button class="unit-btn">Unit 4: Fourier Series ▾</button>
+    <ul class="lecture-nav"><li>
+       Not Uploaded Yet
+      </li></ul>
+
+  </div>
+  <div class="unit">
+    <button class="unit-btn">Unit 5: Laplace, Fourier and Z Transforms ▾</button>
+    <ul class="lecture-nav"><li>
+       Not Uploaded Yet
+      </li></ul>
+  </div>
+  <div class="unit">
+    <button class="unit-btn">Unit 6: Graphs and Combinatorics ▾</button>
+    <ul class="lecture-nav"><li>
+       Not Uploaded Yet
+      </li></ul>
+  </div>
+  <!-- ✅ Textbooks Section -->
+  <div class="unit">
+    <button class="unit-btn">Textbooks ▾</button>
+    <ul class="lecture-nav">
+      <li>
+        <a href="/pdf" class="lecture-link <%= currentLecture === 'textbook1' ? 'active' : '' %>">
+          Advanced Engineering Mathematics by Erwin Kreyszig, 10th edition.
         </a>
       </li>
     </ul>
