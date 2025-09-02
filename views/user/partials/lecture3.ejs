@@ -1,0 +1,126 @@
+  <div id="lecture3" class="lecture-content" ">
+            <h2>Lecture 3: First-Order Differential Equations</h2>
+            
+            <h3>Reducible to Homogeneous Equations</h3>
+            <p>For equations of the form:</p>
+            <div class="math-display">
+                $$\frac{dy}{dx} = \frac{ax+by+c}{a'x+b'y+c'}$$
+            </div>
+            
+            <div class="case-box">
+                <div class="case-title">Case 1: $$\frac{a}{a'} \neq \frac{b}{b'}$$</div>
+                <p>Substitute $$x = X+h$$ and $$y = Y+k$$. The equation becomes homogeneous:</p>
+                <div class="math-display">
+                    $$\frac{dY}{dX} = \frac{aX+bY}{a'X+b'Y}$$
+                </div>
+                <p>Then substitute $$Y=vX$$.</p>
+            </div>
+            
+            <div class="case-box">
+                <div class="case-title">Case 2: $$\frac{a}{a'} = \frac{b}{b'}$$</div>
+                <p>Use substitution, for example, $$t = ax+by$$.</p>
+            </div>
+            
+            <details>
+                <summary>Example Problem: $$\frac{dy}{dx} = \frac{2x+3y+4}{4x+6y+5}$$</summary>
+                <div class="solution">
+                    <p>Given: $$(2y+2x+4)dx - (4x+6y+5)dy = 0$$</p>
+                    <div class="math-display">
+                        $$\frac{dy}{dx} = \frac{2x+3y+4}{4x+6y+5}$$
+                    </div>
+                    <p>Here, $$a=2, a'=4, b=3, b'=6$$.</p>
+                    <div class="math-display">
+                        $$\frac{a}{a'} = \frac{2}{4} = \frac{1}{2} \quad \text{and} \quad \frac{b}{b'} = \frac{3}{6} = \frac{1}{2}$$
+                    </div>
+                    <p>Since $$\frac{a}{a'} = \frac{b}{b'}$$, this is Case 2.</p>
+                    
+                    <p><strong>Solution:</strong></p>
+                    <p>Let $$t = 2x+3y$$. Differentiating:</p>
+                    <div class="math-display">
+                        $$\frac{dt}{dx} = 2 + 3\frac{dy}{dx} \implies \frac{dy}{dx} = \frac{1}{3}\left(\frac{dt}{dx} - 2\right)$$
+                    </div>
+                    <p>Substituting into the original equation:</p>
+                    <div class="math-display">
+                        $$\frac{1}{3}\left(\frac{dt}{dx} - 2\right) = \frac{t+4}{2t+5}$$
+                    </div>
+                    <p>After simplification:</p>
+                    <div class="math-display">
+                        $$\frac{dt}{dx} = \frac{7t+22}{2t+5}$$
+                    </div>
+                    <p>Separating variables and integrating leads to the solution.</p>
+                </div>
+            </details>
+            
+            <div class="divider"></div>
+            
+            <h3>First Order Linear Differential Equations</h3>
+            <h4>Leibnitz Equation</h4>
+            
+            <p>The standard form is:</p>
+            <div class="math-display">
+                $$\frac{dy}{dx} + P(x)y = Q(x)$$
+            </div>
+            <p>where $$P(x)$$ and $$Q(x)$$ are functions of $$x$$.</p>
+            
+            <div class="example">
+                <h5>Solution Method</h5>
+                <p>We use an <span class="highlight">Integrating Factor (I.F.)</span>:</p>
+                <div class="math-display">
+                    $$\text{I.F.} = e^{\int P(x)dx}$$
+                </div>
+                <p>The general solution is:</p>
+                <div class="math-display">
+                    $$y \cdot (\text{I.F.}) = \int Q(x) \cdot (\text{I.F.}) dx + C$$
+                </div>
+            </div>
+            
+            <details>
+                <summary>Example: $$x\frac{dy}{dx} - (y-3x^2) = 0$$</summary>
+                <div class="solution">
+                    <p>Rearranging: $$x\frac{dy}{dx} - y = -3x^2$$</p>
+                    <p>Dividing by $$x$$:</p>
+                    <div class="math-display">
+                        $$\frac{dy}{dx} - \frac{1}{x}y = -3x$$
+                    </div>
+                    <p>This is a first-order linear DE with $$P(x) = -\frac{1}{x}$$ and $$Q(x) = -3x$$.</p>
+                    
+                    <div class="steps">
+                        <p><strong>Step 1:</strong> Find the Integrating Factor</p>
+                        <div class="math-display">
+                            $$\text{I.F.} = e^{\int -\frac{1}{x}dx} = e^{-\ln(x)} = \frac{1}{x}$$
+                        </div>
+                        
+                        <p><strong>Step 2:</strong> Apply the solution formula</p>
+                        <div class="math-display">
+                            $$y \cdot \frac{1}{x} = \int (-3x) \cdot \frac{1}{x} dx + C = \int -3 dx + C = -3x + C$$
+                        </div>
+                        
+                        <p><strong>General Solution:</strong> $$\frac{y}{x} + 3x = C$$</p>
+                    </div>
+                </div>
+            </details>
+            
+            <div class="divider"></div>
+            
+            <h3>Bernoulli's Equation</h3>
+            <h4>Non-Linear Equations Reducible to Linear Form</h4>
+            
+            <p>The standard form is:</p>
+            <div class="math-display">
+                $$\frac{dy}{dx} + P(x)y = Q(x)y^n$$
+            </div>
+            
+            <div class="steps">
+                <p><strong>Solution Steps:</strong></p>
+                <ol>
+                    <li>Divide by $$y^n$$: $$y^{-n}\frac{dy}{dx} + P(x)y^{1-n} = Q(x)$$</li>
+                    <li>Substitute $$z = y^{1-n}$$</li>
+                    <li>Then $$\frac{dz}{dx} = (1-n)y^{-n}\frac{dy}{dx}$$</li>
+                    <li>The equation becomes linear in $$z$$:
+                        <div class="math-display">
+                            $$\frac{dz}{dx} + (1-n)P(x)z = (1-n)Q(x)$$
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </div>

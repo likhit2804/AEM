@@ -8,12 +8,27 @@
     "dev": "nodemon app.js"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "dotenv": "^17.2.1",
     "ejs": "^3.1.9",
     "express": "^4.21.2",
+    "multer": "^2.0.2",
     "path": "^0.12.7",
-    "pdf": "^0.1.0"
+    "pdf": "^0.1.0",
+    "pdfjs-dist": "^5.4.149"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/likhit2804/AEM.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/likhit2804/AEM/issues"
+  },
+  "homepage": "https://github.com/likhit2804/AEM#readme"
 }

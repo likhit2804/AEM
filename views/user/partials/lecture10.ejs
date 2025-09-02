@@ -1,0 +1,74 @@
+<div id="lecture10" class="lecture-content">
+    <h2>Lecture 10: Formation of Partial Differential Equations</h2>
+    <hr>
+
+    <h3>1. By Eliminating Arbitrary Constants</h3>
+    <p>A PDE can be formed by differentiating a relation to eliminate the arbitrary constants present.</p>
+
+    <details>
+        <summary>Example: Form a PDE by eliminating constants <strong>a</strong> and <strong>b</strong> from<br>
+                 \(2z = \dfrac{x^2}{a^2} + \dfrac{y^2}{b^2}\)</summary>
+        <div class="solution">
+            <p><strong>Step 1 — Differentiate with respect to <em>x</em>:</strong></p>
+            <div class="math-display">
+                $$2\frac{\partial z}{\partial x} = \frac{2x}{a^2}$$
+            </div>
+            <p>So</p>
+            <div class="math-display">
+                $$\frac{1}{a^2} = \frac{1}{x}\frac{\partial z}{\partial x}$$
+            </div>
+
+            <p><strong>Step 2 — Differentiate with respect to <em>y</em>:</strong></p>
+            <div class="math-display">
+                $$2\frac{\partial z}{\partial y} = \frac{2y}{b^2}$$
+            </div>
+            <p>So</p>
+            <div class="math-display">
+                $$\frac{1}{b^2} = \frac{1}{y}\frac{\partial z}{\partial y}$$
+            </div>
+
+            <p><strong>Step 3 — Substitute back into the original equation and simplify:</strong></p>
+            <div class="math-display">
+                $$2z = x^2\left(\frac{1}{x}\frac{\partial z}{\partial x}\right) + y^2\left(\frac{1}{y}\frac{\partial z}{\partial y}\right)$$
+            </div>
+            <p>Therefore the PDE becomes:</p>
+            <div class="pde-box math-display">
+                $$2z = x\frac{\partial z}{\partial x} + y\frac{\partial z}{\partial y}$$
+            </div>
+        </div>
+    </details>
+
+    <hr>
+
+    <h3>2. By Eliminating an Arbitrary Function</h3>
+    <p>A PDE can also be formed by eliminating an arbitrary function from a relation.</p>
+
+    <details>
+        <summary>Example: Form a PDE by eliminating function <strong>f</strong> from<br>
+                 \(z = f(x^2 + y^2)\)</summary>
+        <div class="solution">
+            <p><strong>Step 1 — Differentiate with respect to <em>x</em>:</strong></p>
+            <div class="math-display">
+                $$\frac{\partial z}{\partial x} = f'(x^2 + y^2)\cdot (2x)$$
+            </div>
+
+            <p><strong>Step 2 — Differentiate with respect to <em>y</em>:</strong></p>
+            <div class="math-display">
+                $$\frac{\partial z}{\partial y} = f'(x^2 + y^2)\cdot (2y)$$
+            </div>
+
+            <p><strong>Step 3 — Eliminate \(f'\) by dividing the two partials:</strong></p>
+            <div class="math-display">
+                $$\frac{\frac{\partial z}{\partial x}}{\frac{\partial z}{\partial y}} = \frac{2x f'(x^2+y^2)}{2y f'(x^2+y^2)} = \frac{x}{y}$$
+            </div>
+            <p>Cross-multiplying gives the PDE:</p>
+            <div class="pde-box math-display">
+                $$y\frac{\partial z}{\partial x} = x\frac{\partial z}{\partial y}$$
+            </div>
+        </div>
+    </details>
+
+    <hr>
+
+    <p>Note: In both examples the resulting PDE is of the <strong>first order</strong>.</p>
+</div>

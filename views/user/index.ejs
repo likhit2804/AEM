@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AEM Notes</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <!-- Include Sidebar -->
+    <%- include('partials/sidebar') %>
+    
+    <div class="main-content">
+        <div class="container">
+            <!-- Include Lecture Content -->
+            <% if (currentLecture === 'lecture1') { %>
+                <%- include('partials/lecture1') %>
+            <% } else if (currentLecture === 'lecture2') { %>
+                <%- include('partials/lecture2') %>
+            <% } else if (currentLecture === 'lecture3') { %>
+                <%- include('partials/lecture3') %>
+            <% } else if (currentLecture === 'lecture4') { %>
+                <%- include('partials/lecture4') %>
+            <% } else if (currentLecture === 'lecture5') { %>
+                <%- include('partials/lecture5') %>
+            <% } else if (currentLecture === 'lecture6') { %>
+                <%- include('partials/lecture6') %>
+            <% } else if (currentLecture === 'lecture7') { %>
+                <%- include('partials/lecture7') %>
+            <% } else if (currentLecture === 'lecture8') { %>
+                <%- include('partials/lecture8') %>
+            <% } else if (currentLecture === 'lecture9') { %>
+                <%- include('partials/lecture9') %>
+            <% }else if (currentLecture === 'lecture10') { %>
+                <%- include('partials/lecture10') %>
+            <% } %>
+            
+        </div>
+    </div>
+
+    <script src="/js/script.js"></script>
+</body>
+</html>

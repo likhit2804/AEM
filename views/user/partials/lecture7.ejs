@@ -1,0 +1,98 @@
+   <div id="lecture7" class="lecture-content" ">
+        <h2>Lecture 7: Advanced Methods for Particular Integrals</h2>
+        <hr>
+        <h3>Recap: Methods for Finding Particular Integral ($$y_{pi}$$)</h3>
+        <ul>
+            <li><strong>Case 1: $$Q(x) = e^{ax}$$</strong>: $$y_{pi} = \frac{e^{ax}}{P(a)}$$, with failure cases handled by multiplying by $$x$$ and using derivatives of $$P(D)$$.</li>
+            <li><strong>Case 2: $$Q(x) = \sin(ax+b)$$ or $$\cos(ax+b)$$</strong>: Replace $$D^2$$ with $$-a^2$$.</li>
+            <li><strong>Case 3: $$Q(x) = x^m$$</strong>: Expand $$[P(D)]^{-1}$$ using a binomial series.</li>
+            <li><strong>Case 4: $$Q(x) = e^{ax}V(x)$$</strong>: Use the exponential shift rule $$y_{pi} = e^{ax}\frac{1}{P(D+a)}V(x)$$.</li>
+            <li><strong>Case 5: $$Q(x) = xV(x)$$</strong>: Use the formula $$y_{pi} = \left[x - \frac{P'(D)}{P(D)}\right]\frac{1}{P(D)}V(x)$$.</li>
+        </ul>
+        <hr>
+        <h3>Method of Variation of Parameters</h3>
+        <p>This is a powerful method for finding the particular integral, especially for functions like $$\sec(x), \tan(x), \log(x)$$, or when the DE has variable coefficients. It applies to second-order linear DEs of the form:</p>
+        <div class="math-display">
+            $$\frac{d^2y}{dx^2} + P(x)\frac{dy}{dx} + Q(x)y = \phi(x)$$
+        </div>
+        <p>If the complementary function is $$y_{cf} = C_1y_1(x) + C_2y_2(x)$$, the particular integral is given by:</p>
+        <div class="math-display">
+            $$y_{pi} = -y_1 \int \frac{y_2 \phi(x)}{W} dx + y_2 \int \frac{y_1 \phi(x)}{W} dx$$
+        </div>
+        <p>Where <strong>W</strong> is the <strong>Wronskian</strong> of $$y_1$$ and $$y_2$$, defined as the determinant:</p>
+        <div class="math-display">
+            $$W = \begin{vmatrix} y_1 & y_2 \\ y_1' & y_2' \end{vmatrix} = y_1y_2' - y_2y_1'$$
+        </div>
+
+        <details>
+            <summary>Example: Solve $$\frac{d^2y}{dx^2} + 4y = \tan(2x)$$</summary>
+            <div class="solution">
+                <p><strong>1. Find Complementary Function ($$y_{cf}$$):</strong></p>
+                <p>The auxiliary equation is $$m^2+4=0$$, which gives roots $$m = \pm 2i$$.</p>
+                <p>$$y_{cf} = C_1\cos(2x) + C_2\sin(2x)$$. Thus, we have $$y_1 = \cos(2x)$$ and $$y_2 = \sin(2x)$$.</p>
+                
+                <p><strong>2. Calculate the Wronskian (W):</strong></p>
+                <p>$$y_1' = -2\sin(2x)$$ and $$y_2' = 2\cos(2x)$$.</p>
+                <p>$$W = (\cos(2x))(2\cos(2x)) - (\sin(2x))(-2\sin(2x)) = 2\cos^2(2x) + 2\sin^2(2x) = 2$$.</p>
+                
+                <p><strong>3. Find Particular Integral ($$y_{pi}$$):</strong></p>
+                <p>Here, $$\phi(x) = \tan(2x)$$. Using the formula:</p>
+                <p>$$y_{pi} = -\cos(2x) \int \frac{\sin(2x)\tan(2x)}{2} dx + \sin(2x) \int \frac{\cos(2x)\tan(2x)}{2} dx$$</p>
+                <p>Evaluating the integrals leads to:</p>
+                <p>$$y_{pi} = -\frac{\cos(2x)}{2}\left[\frac{1}{2}\log|\sec(2x)+\tan(2x)| - \frac{\sin(2x)}{2}\right] - \frac{1}{4}\sin(2x)\cos(2x)$$</p>
+            </div>
+        </details>
+        
+        <hr>
+        <h3>Method of Undetermined Coefficients</h3>
+        <p>This method applies to <strong>linear DEs with constant coefficients</strong>. It involves assuming a trial solution for the particular integral based on the form of $$Q(x)$$.</p>
+        
+        <h4>Trial Solutions</h4>
+        <table>
+          <tr>
+            <th>If $$Q(x)$$ is...</th>
+            <th>The Trial Solution $$y_{pi}$$ is...</th>
+          </tr>
+          <tr>
+            <td>$$k e^{ax}$$</td>
+            <td>$$C e^{ax}$$</td>
+          </tr>
+          <tr>
+            <td>$$k x^m$$ (a polynomial of degree m)</td>
+            <td>$$C_m x^m + C_{m-1}x^{m-1} + \dots + C_1 x + C_0$$</td>
+          </tr>
+          <tr>
+            <td>$$k\cos(ax+b)$$ or $$k\sin(ax+b)$$</td>
+            <td>$$C_1\cos(ax+b) + C_2\sin(ax+b)$$</td>
+          </tr>
+        </table>
+
+        <h4>🚨 Modification Rule</h4>
+        <p>If any term in the assumed trial solution is already part of the complementary function ($$y_{cf}$$), you must <strong>multiply the entire trial solution by $$x$$</strong>. If this new solution still duplicates a term (e.g., for a double root), multiply by $$x$$ again (i.e., by $$x^2$$).</p>
+        
+        <details>
+            <summary>Example: Solve $$\frac{d^2y}{dx^2} + 2\frac{dy}{dx} + 4y = 2x^2 + 4e^{-x}$$</summary>
+            <div class="solution">
+                <p><strong>1. Find CF:</strong> The A.E. $$m^2+2m+4=0$$ has roots $$m = -1 \pm i\sqrt{3}$$.</p>
+                <p>$$y_{cf} = e^{-x}[C_1\cos(\sqrt{3}x) + C_2\sin(\sqrt{3}x)]$$.</p>
+                <p><strong>2. Assume Trial PI:</strong> For $$Q(x) = 2x^2 + 4e^{-x}$$, the trial solution is the sum of the individual forms.</p>
+                <p>$$y_{pi} = (C_0 + C_1x + C_2x^2) + C_3e^{-x}$$. No term duplicates the CF.</p>
+                <p><strong>3. Find Coefficients:</strong> Substitute $$y_{pi}$$, $$y_{pi}'$$, and $$y_{pi}''$$ into the DE and compare coefficients of like terms ($$x^2, x, 1, e^{-x}$$).</p>
+                <p>This yields $$C_2 = 1/2, C_1 = -1/2, C_0 = 0, C_3 = 4/3$$.</p>
+                <p>$$y_{pi} = -\frac{1}{2}x + \frac{1}{2}x^2 + \frac{4}{3}e^{-x}$$.</p>
+                <p><strong>4. General Solution:</strong> $$y = y_{cf} + y_{pi}$$.</p>
+            </div>
+        </details>
+        <hr>
+        <h3>Linear DEs with Variable Coefficients</h3>
+        <p>Certain DEs with variable coefficients, such as the Cauchy-Euler and Legendre equations, can be reduced to equations with constant coefficients.</p>
+        <h4>Cauchy's Homogeneous (Euler) Equation</h4>
+        <p>This equation has the form:</p>
+        <div class="math-display">
+            $$x^n \frac{d^ny}{dx^n} + k_1 x^{n-1} \frac{d^{n-1}y}{dx^{n-1}} + \dots + k_n y = \phi(x)$$
+        </div>
+        <p>We solve it using the substitution <strong>$$x = e^t$$</strong>, which implies $$t = \log(x)$$. This transforms the differential operator:</p>
+        <div class="math-display">
+            $$x\frac{dy}{dx} = \frac{dy}{dt} = Dy, \text{ where } D = \frac{d}{dt}$$
+        </div>
+    </div>

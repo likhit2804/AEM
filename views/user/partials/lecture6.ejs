@@ -1,0 +1,116 @@
+<div id="lecture6" class="lecture-content" ">
+    <h2>Lecture 6: Methods for Finding the Particular Integral</h2>
+    <hr>
+    <h3>Case I: $$Q(x) = e^{ax}$$</h3>
+    <p>This section covers the rules for finding the particular integral when the non-homogeneous term is an exponential function.</p>
+    
+    <h4>Summary of Rules</h4>
+    <ul>
+        <li>If $$P(a) \neq 0$$, the particular integral is $$y_{pi} = \frac{e^{ax}}{P(a)}$$.</li>
+        <li>If $$P(a) = 0$$ but $$P'(a) \neq 0$$ (single root failure), then $$y_{pi} = \frac{xe^{ax}}{P'(a)}$$.</li>
+        <li>If $$P(a) = 0$$ and $$P'(a) = 0$$ but $$P''(a) \neq 0$$ (double root failure), then $$y_{pi} = \frac{x^2e^{ax}}{P''(a)}$$.</li>
+    </ul>
+    
+    <details>
+        <summary>Example: Solve $$(D+2)(D-1)^2 y = e^{-2x} + 2\sinh(x)$$</summary>
+        <div class="solution">
+            <p>First, rewrite the equation using the definition $$2\sinh(x) = e^x - e^{-x}$$.</p>
+            <p>The equation becomes $$(D+2)(D-1)^2 y = e^{-2x} + e^x - e^{-x}$$.</p>
+            <p><strong>Complementary Function:</strong> The roots of the auxiliary equation are $$m=-2, 1, 1$$. The CF is $$y_{cf} = C_1e^{-2x} + (C_2+C_3x)e^x$$.</p>
+            <p><strong>Particular Integral:</strong> We find the PI for each term separately.</p>
+            <ul>
+                <li>For $$e^{-2x}$$ ($$a=-2$$): This is a single root failure since $$P(-2)=0$$. We use $$P'(D)=(D-1)^2 + 2(D+2)(D-1)$$, which gives $$P'(-2)=9$$. The PI part is $$\frac{xe^{-2x}}{9}$$.</li>
+                <li>For $$e^x$$ ($$a=1$$): This is a double root failure since $$P(1)=0$$ and $$P'(1)=0$$. We use $$P''(D)=4(D-1)+2(D+2)$$, which gives $$P''(1)=6$$. The PI part is $$\frac{x^2e^x}{6}$$.</li>
+                <li>For $$-e^{-x}$$ ($$a=-1$$): There is no failure since $$P(-1)=(-1+2)(-1-1)^2 = 4 \neq 0$$. The PI part is $$-\frac{e^{-x}}{4}$$.</li>
+            </ul>
+            <p>The total particular integral is $$y_{pi} = \frac{xe^{-2x}}{9} + \frac{x^2e^x}{6} - \frac{e^{-x}}{4}$$.</p>
+        </div>
+    </details>
+    <hr>
+    <h3>Case II: $$Q(x) = \sin(ax+b)$$ or $$\cos(ax+b)$$</h3>
+    <p>For sinusoidal functions, the standard method is to <strong>replace every instance of $$D^2$$ with $$-a^2$$</strong>. This method is valid as long as the denominator does not become zero.</p>
+    
+    <details>
+        <summary>Example: Solve $$(D^3+1)y = \cos(2x+1)$$</summary>
+        <div class="solution">
+            <p><strong>1. Set up the PI:</strong> $$y_{pi} = \frac{1}{D^3+1}\cos(2x+1)$$.</p>
+            <p><strong>2. Apply the rule:</strong> Here $$a=2$$, so we replace $$D^2$$ with $$-a^2 = -4$$. We write $$D^3$$ as $$D \cdot D^2$$.</p>
+            <div class="math-display">
+                $$y_{pi} = \frac{1}{D(D^2)+1}\cos(2x+1) = \frac{1}{D(-4)+1}\cos(2x+1) = \frac{1}{1-4D}\cos(2x+1)$$
+            </div>
+            <p><strong>3. Rationalize the Operator:</strong> To eliminate the $$D$$ in the denominator, multiply the numerator and denominator by the conjugate, $$1+4D$$.</p>
+            <div class="math-display">
+                $$y_{pi} = \frac{1+4D}{(1-4D)(1+4D)}\cos(2x+1) = \frac{1+4D}{1-16D^2}\cos(2x+1)$$
+            </div>
+            <p><strong>4. Apply the rule again:</strong> Replace $$D^2$$ with $$-4$$.</p>
+            <div class="math-display">
+                $$y_{pi} = \frac{1+4D}{1-16(-4)}\cos(2x+1) = \frac{1+4D}{65}\cos(2x+1)$$
+            </div>
+            <p><strong>5. Differentiate:</strong> Now, apply the operator $$1+4D$$ to the function.</p>
+            <div class="math-display">
+                $$y_{pi} = \frac{1}{65}[\cos(2x+1) + 4D(\cos(2x+1))] = \frac{1}{65}[\cos(2x+1) - 8\sin(2x+1)]$$
+            </div>
+        </div>
+    </details>
+    <hr>
+    <h3>Case III: $$Q(x) = x^m$$</h3>
+    <p>When the non-homogeneous term is a polynomial of degree $$m$$, the method is to treat the operator fraction as an inverse operator and expand it as a power series in $$D$$ using the binomial theorem.</p>
+    
+    <details>
+        <summary>Example: Solve $$(D^2+D)y = x^2+2x+4$$</summary>
+        <div class="solution">
+            <p><strong>1. Set up the PI:</strong> $$y_{pi} = \frac{1}{D^2+D}(x^2+2x+4) = \frac{1}{D(1+D)}(x^2+2x+4)$$.</p>
+            <p><strong>2. Expand the Operator:</strong> Use the binomial expansion for $$(1+D)^{-1} = 1 - D + D^2 - \dots$$.</p>
+            <div class="math-display">
+                $$y_{pi} = \frac{1}{D}[1-D+D^2-\dots](x^2+2x+4)$$
+            </div>
+            <p><strong>3. Apply the Operators:</strong> Distribute the operators onto the polynomial. We only need terms up to $$D^2$$, as higher derivatives of $$x^2$$ are zero.</p>
+            <div class="math-display">
+                $$y_{pi} = \frac{1}{D}[(x^2+2x+4) - (2x+2) + (2)] = \frac{1}{D}[x^2+4]$$
+            </div>
+            <p><strong>4. Integrate:</strong> The operator $$\frac{1}{D}$$ represents integration.</p>
+            <div class="math-display">
+                $$y_{pi} = \int (x^2+4)dx = \frac{x^3}{3} + 4x$$
+            </div>
+        </div>
+    </details>
+    <hr>
+    <h3>Case IV: $$Q(x) = e^{ax}V(x)$$</h3>
+    <p>This case uses the <strong>exponential shift rule</strong>. The rule states that you can move the exponential term $$e^{ax}$$ to the left of the operator, provided you replace every $$D$$ in the operator with $$D+a$$.</p>
+    <div class="math-display">
+        $$\frac{1}{P(D)}[e^{ax}V(x)] = e^{ax} \frac{1}{P(D+a)}V(x)$$
+    </div>
+    <hr>
+    <h3>Case V: $$Q(x) = xV(x)$$</h3>
+    <p>When the function is a product of $$x$$ and another function $$V(x)$$, a special formula derived from the Leibniz theorem is used.</p>
+    <div class="math-display">
+        $$\frac{1}{P(D)}[xV(x)] = \left[x - \frac{P'(D)}{P(D)}\right]\frac{1}{P(D)}V(x)$$
+    </div>
+    
+    <details>
+        <summary>Example: Solve $$(D+1)^2y = x\cos(x)$$</summary>
+        <div class="solution">
+            <p>Here, $$V(x)=\cos(x)$$, $$P(D)=(D+1)^2$$, and $$P'(D)=2(D+1)$$.</p>
+            <p><strong>1. Apply the Formula:</strong></p>
+            <div class="math-display">
+                $$y_{pi} = \left[x - \frac{2(D+1)}{(D+1)^2}\right]\frac{1}{(D+1)^2}\cos(x) = \left[x - \frac{2}{D+1}\right]\frac{1}{D^2+2D+1}\cos(x)$$
+            </div>
+            <p><strong>2. Evaluate the Inner Operator:</strong> First, find $$\frac{1}{D^2+2D+1}\cos(x)$$. Using the rule for cosines ($$D^2 \to -1^2=-1$$):</p>
+            <div class="math-display">
+                $$\frac{1}{-1+2D+1}\cos(x) = \frac{1}{2D}\cos(x) = \frac{1}{2}\int \cos(x)dx = \frac{1}{2}\sin(x)$$
+            </div>
+            <p><strong>3. Substitute Back:</strong></p>
+            <div class="math-display">
+                $$y_{pi} = \left[x - \frac{2}{D+1}\right]\left(\frac{1}{2}\sin(x)\right) = \frac{x}{2}\sin(x) - \frac{1}{D+1}\sin(x)$$
+            </div>
+            <p><strong>4. Evaluate the Remaining Part:</strong> Solve $$\frac{1}{D+1}\sin(x)$$ by rationalizing:</p>
+            <div class="math-display">
+                $$\frac{D-1}{(D+1)(D-1)}\sin(x) = \frac{D-1}{D^2-1}\sin(x) = \frac{D-1}{-1-1}\sin(x) = -\frac{1}{2}(\cos(x) - \sin(x))$$
+            </div>
+             <p><strong>5. Final Answer:</strong> Combine the parts.</p>
+             <div class="math-display">
+                $$y_{pi} = \frac{x}{2}\sin(x) - \left(-\frac{1}{2}(\cos(x) - \sin(x))\right) = \frac{x}{2}\sin(x) + \frac{1}{2}\cos(x) - \frac{1}{2}\sin(x)$$
+             </div>
+        </div>
+    </details>
+</div>

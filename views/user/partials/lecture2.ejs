@@ -1,0 +1,71 @@
+  <div id="lecture2" class="lecture-content" ">
+            <h2>Lecture 2: Methods for Solving First Order DEs</h2>
+
+            <h3>2. Equations Reducible to Variable Separable</h3>
+            <p>Some first-order, first-degree DEs can be simplified into a variable separable form by using a suitable substitution.</p>
+            
+            <details>
+                <summary>Example: Solve \(\frac{dy}{dx} = (4x+y+1)^2\) given \(y(0)=1\)</summary>
+                <div class="solution">
+                    <p>1. <strong>Substitution:</strong> Let \(t = 4x+y+1\).</p>
+                    <p>2. <strong>Differentiate the substitution w.r.t x:</strong> \(\frac{dt}{dx} = 4 + \frac{dy}{dx}\), so \(\frac{dy}{dx} = \frac{dt}{dx} - 4\).</p>
+                    <p>3. <strong>Substitute back into the DE:</strong> \(\frac{dt}{dx} - 4 = t^2\), which simplifies to \(\frac{dt}{dx} = t^2 + 4\).</p>
+                    <p>4. <strong>Separate variables:</strong> \(\frac{dt}{t^2+4} = dx\). This is now a variable separable equation.</p>
+                    <p>5. <strong>Integrate both sides:</strong> \(\int \frac{dt}{t^2+2^2} = \int dx\).</p>
+                    <p>6. <strong>General Solution:</strong> This gives \(\frac{1}{2}\tan^{-1}(\frac{t}{2}) = x+c\). Substituting back for \(t\), we get \(\frac{1}{2}\tan^{-1}(\frac{4x+y+1}{2}) = x+c\).</p>
+                    <p>7. <strong>Find Particular Solution:</strong> Use the condition \(y(0)=1\), so when \(x=0\), \(y=1\).<br>\(\frac{1}{2}\tan^{-1}(\frac{4(0)+1+1}{2}) = 0+c \implies \frac{1}{2}\tan^{-1}(1) = c\).<br>This gives \(c = \frac{1}{2}(\frac{\pi}{4}) = \frac{\pi}{8}\).</p>
+                    <p>8. <strong>Final Answer:</strong> The particular solution is \(\frac{1}{2}\tan^{-1}(\frac{4x+y+1}{2}) = x + \frac{\pi}{8}\).</p>
+                </div>
+            </details>
+            
+            <h3>3. Homogeneous Differential Equations</h3>
+            <p>A DE of the form \(\frac{dy}{dx} = \frac{f(x,y)}{g(x,y)}\) is homogeneous if \(f(x,y)\) and \(g(x,y)\) are homogeneous functions of the same degree. A function \(F(x,y)\) is homogeneous of degree \(n\) if \(F(tx, ty) = t^n F(x,y)\).</p>
+            <p>To solve, use the substitution \(y=vx\). This leads to \(\frac{dy}{dx} = v + x\frac{dv}{dx}\). The equation is then transformed into a variable separable form in terms of \(v\) and \(x\).</p>
+
+            <details>
+                <summary>Example: Solve \((x^2-y^2)dx = xydy\)</summary>
+                <div class="solution">
+                    <p>1. <strong>Rearrange and Check for Homogeneity:</strong> \(\frac{dy}{dx} = \frac{x^2-y^2}{xy}\). The numerator \(x^2-y^2\) and denominator \(xy\) are both homogeneous functions of degree 2.</p>
+                    <p>2. <strong>Substitute:</strong> Let \(y=vx\), so \(\frac{dy}{dx} = v+x\frac{dv}{dx}\).</p>
+                    <p>3. The equation becomes: \(v+x\frac{dv}{dx} = \frac{x^2-(vx)^2}{x(vx)} = \frac{x^2(1-v^2)}{vx^2} = \frac{1-v^2}{v}\).</p>
+                    <p>4. <strong>Separate variables:</strong> \(x\frac{dv}{dx} = \frac{1-v^2}{v} - v = \frac{1-v^2-v^2}{v} = \frac{1-2v^2}{v}\).</p>
+                    <p>5. Rearranging gives \(\frac{v}{1-2v^2}dv = \frac{1}{x}dx\).</p>
+                    <p>6. <strong>Integrate:</strong> \(\int \frac{v}{1-2v^2}dv = \int \frac{1}{x}dx\). To solve the left integral, we can write it as \(-\frac{1}{4}\int \frac{-4v}{1-2v^2}dv\).</p>
+                    <p>7. This yields \(-\frac{1}{4}\ln|1-2v^2| = \ln|x| + C\).</p>
+                    <p>8. <strong>Substitute back:</strong> Since \(v=y/x\), the final solution is \((1-2\frac{y^2}{x^2})x^4=A\) for some constant A.</p>
+                </div>
+            </details>
+            
+            <h3>4. Non-Homogeneous Equations (Reducible to Homogeneous)</h3>
+            <p>These are of the form \(\frac{dy}{dx} = \frac{ax+by+c}{a'x+b'y+c'}\).</p>
+            <ul>
+                <li><strong>Case I: \(\frac{a}{a'} \neq \frac{b}{b'}\)</strong>
+                    <p>Use the substitution \(x = X+h\) and \(y=Y+k\). Choose constants \(h\) and \(k\) such that the constant terms in the numerator and denominator become zero. This transforms the equation into a homogeneous DE in variables \(X\) and \(Y\).</p>
+                </li>
+                <li><strong>Case II: \(\frac{a}{a'} = \frac{b}{b'}\)</strong>
+                    <p>Use the substitution \(t=ax+by\). This reduces the equation to a variable separable form.</p>
+                </li>
+            </ul>
+
+            <details>
+                <summary>Example (Case I): Solve \(\frac{dy}{dx} = \frac{x+y-2}{-x+y-4}\)</summary>
+                <div class="solution">
+                    <p>1. <strong>Check the condition:</strong> Here \(a=1, b=1, a'=-1, b'=1\). Since \(\frac{1}{-1} \neq \frac{1}{1}\), this is Case I.</p>
+                    <p>2. <strong>Substitution:</strong> Let \(x=X+h\) and \(y=Y+k\). Then \(\frac{dY}{dX} = \frac{dy}{dx}\).</p>
+                    <p>3. The DE becomes \(\frac{dY}{dX} = \frac{(X+h)+(Y+k)-2}{-(X+h)+(Y+k)-4} = \frac{X+Y+(h+k-2)}{-X+Y+(-h+k-4)}\).</p>
+                    <p>4. <strong>Find h and k:</strong> Set the constant parts to zero:
+                        <br>\(h+k-2=0\)
+                        <br>\(-h+k-4=0\)
+                        <br>Solving this system gives \(2k-6=0 \implies k=3\), and \(h+3-2=0 \implies h=-1\).
+                    </p>
+                    <p>5. <strong>New Homogeneous DE:</strong> With \(h=-1, k=3\), the equation is \(\frac{dY}{dX} = \frac{X+Y}{-X+Y}\).</p>
+                    <p>6. <strong>Solve the homogeneous DE:</strong> Let \(Y=vX\), so \(\frac{dY}{dX}=v+X\frac{dv}{dX}\).
+                        <br>\(v+X\frac{dv}{dX} = \frac{X+vX}{-X+vX} = \frac{1+v}{v-1}\).
+                        <br>\(X\frac{dv}{dX} = \frac{1+v}{v-1} - v = \frac{1+v-v^2+v}{v-1} = \frac{-v^2+2v+1}{v-1}\).
+                    </p>
+                    <p>7. <strong>Separate and Integrate:</strong> \(\int\frac{v-1}{-v^2+2v+1}dv = \int\frac{dX}{X}\). This results in \(-\frac{1}{2}\ln|-v^2+2v+1| = \ln|X| + C\).</p>
+                    <p>8. <strong>Back-substitute:</strong> Replace \(v\) with \(Y/X\): \((1+2\frac{Y}{X}-\frac{Y^2}{X^2})X^2 = A\).</p>
+                    <p>9. <strong>Final Substitution:</strong> Replace \(X=x-h=x+1\) and \(Y=y-k=y-3\) to get the final solution in terms of \(x\) and \(y\): \((1 + \frac{2(y-3)}{x+1} - \frac{(y-3)^2}{(x+1)^2})(x+1)^2 = A\).</p>
+                </div>
+            </details>
+        </div>
