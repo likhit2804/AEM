@@ -3,43 +3,659 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AEM Notes</title>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <title>AEM Notes - Mathematics & Engineering</title>
+    
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)'], ['$', '$']],
+                displayMath: [['\\[', '\\]'], ['$$', '$$']],
+                processEscapes: true,
+                processEnvironments: true,
+                packages: {'[+]': ['ams', 'newcommand', 'configmacros']}
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            },
+            startup: {
+                ready: () => {
+                    console.log('MathJax is loaded and ready');
+                    MathJax.startup.defaultReady();
+                }
+            }
+        };
+    </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <link rel="stylesheet" href="/css/style.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-bg: #0a0e1a;
+            --secondary-bg: #1a1f35;
+            --accent-bg: #2a3452;
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --text-accent: #60a5fa;
+            --border-color: #334155;
+            --hover-bg: #374151;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --math-bg: #1e293b;
+            --code-bg: #111827;
+        }
+
+        .light-theme {
+            --primary-bg: #ffffff;
+            --secondary-bg: #f8fafc;
+            --accent-bg: #e2e8f0;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --text-accent: #3b82f6;
+            --border-color: #cbd5e1;
+            --hover-bg: #f1f5f9;
+            --math-bg: #f8fafc;
+            --code-bg: #f1f5f9;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--primary-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 300px;
+            background: var(--secondary-bg);
+            border-right: 1px solid var(--border-color);
+            height: 100vh;
+            overflow-y: auto;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 100;
+        }
+
+        .sidebar-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--accent-bg);
+        }
+
+        .sidebar-header h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-accent);
+        }
+
+        .theme-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .theme-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--border-color);
+            transition: 0.3s;
+            border-radius: 24px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background: white;
+            transition: 0.3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background: var(--text-accent);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        .sidebar-content {
+            padding: 1rem 0;
+        }
+
+        .unit {
+            margin-bottom: 0.5rem;
+        }
+
+        .unit-btn {
+            width: 100%;
+            padding: 0.75rem 1.5rem;
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .unit-btn:hover {
+            background: var(--hover-bg);
+        }
+
+        .unit-btn.is-open {
+            background: var(--accent-bg);
+            color: var(--text-accent);
+        }
+
+        .unit-btn::after {
+            content: '▶';
+            position: absolute;
+            right: 1.5rem;
+            transition: transform 0.2s;
+            font-size: 0.8rem;
+        }
+
+        .unit-btn.is-open::after {
+            transform: rotate(90deg);
+        }
+
+        .lecture-nav {
+            list-style: none;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: var(--primary-bg);
+        }
+
+        .lecture-nav.is-open {
+            max-height: 500px;
+        }
+
+        .lecture-nav li {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .lecture-nav li:last-child {
+            border-bottom: none;
+        }
+
+        .lecture-link {
+            display: block;
+            padding: 0.6rem 2.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        .lecture-link:hover {
+            background: var(--hover-bg);
+            color: var(--text-primary);
+            border-left-color: var(--text-accent);
+        }
+
+        .lecture-link.active {
+            background: var(--accent-bg);
+            color: var(--text-accent);
+            border-left-color: var(--text-accent);
+            font-weight: 600;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            flex: 1;
+            margin-left: 300px;
+            min-height: 100vh;
+        }
+
+        .content-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .content-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .breadcrumb a {
+            color: var(--text-accent);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .separator {
+            color: var(--border-color);
+        }
+
+        .current {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* Mathematics Content Styles */
+        .lecture-content {
+            line-height: 1.8;
+        }
+
+        .lecture-content h1 {
+            font-size: 2.2rem;
+            color: var(--text-accent);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--text-accent);
+        }
+
+        .lecture-content h2 {
+            font-size: 1.8rem;
+            color: var(--text-primary);
+            margin: 2rem 0 1rem 0;
+            padding: 0.5rem 0;
+            border-left: 4px solid var(--text-accent);
+            padding-left: 1rem;
+        }
+
+        .lecture-content h3 {
+            font-size: 1.4rem;
+            color: var(--text-primary);
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        .lecture-content p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        /* Math Display Improvements */
+        .MathJax_Display {
+            margin: 1.5rem 0 !important;
+            padding: 1rem;
+            background: var(--math-bg);
+            border-radius: 8px;
+            border-left: 4px solid var(--text-accent);
+            overflow-x: auto;
+        }
+
+        .MathJax {
+            color: var(--text-primary) !important;
+        }
+
+        /* Math Cases and Conditions */
+        .math-case {
+            background: var(--math-bg);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            border-left: 4px solid var(--warning);
+        }
+
+        .math-case h4 {
+            color: var(--warning);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* Code and Formula Blocks */
+        .formula-block {
+            background: var(--code-bg);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Navigation */
+        .content-footer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .lecture-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            background: var(--secondary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: all 0.2s;
+            min-width: 200px;
+        }
+
+        .nav-btn:hover {
+            background: var(--accent-bg);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .next-btn {
+            text-align: right;
+            margin-left: auto;
+        }
+
+        .nav-text small {
+            display: block;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+
+        .nav-text strong {
+            display: block;
+            font-size: 0.9rem;
+        }
+
+        .nav-arrow {
+            font-size: 1.2rem;
+            color: var(--text-accent);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 250px;
+            }
+            
+            .main-content {
+                margin-left: 250px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s;
+            }
+            
+            .sidebar.open {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .nav-btn {
+                min-width: auto;
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .lecture-navigation {
+                flex-direction: column;
+            }
+        }
+
+        /* Welcome Page Styles */
+        .welcome-content {
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        .welcome-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--text-accent), var(--success));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .welcome-content p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+    </style>
 </head>
 <body>
-    <!-- Include Sidebar -->
-    <%- include('partials/sidebar') %>
-    
-    <div class="main-content">
-        <div class="container">
-            <!-- Include Lecture Content -->
-            <% if (currentLecture === 'lecture1') { %>
-                <%- include('partials/lecture1') %>
-            <% } else if (currentLecture === 'lecture2') { %>
-                <%- include('partials/lecture2') %>
-            <% } else if (currentLecture === 'lecture3') { %>
-                <%- include('partials/lecture3') %>
-            <% } else if (currentLecture === 'lecture4') { %>
-                <%- include('partials/lecture4') %>
-            <% } else if (currentLecture === 'lecture5') { %>
-                <%- include('partials/lecture5') %>
-            <% } else if (currentLecture === 'lecture6') { %>
-                <%- include('partials/lecture6') %>
-            <% } else if (currentLecture === 'lecture7') { %>
-                <%- include('partials/lecture7') %>
-            <% } else if (currentLecture === 'lecture8') { %>
-                <%- include('partials/lecture8') %>
-            <% } else if (currentLecture === 'lecture9') { %>
-                <%- include('partials/lecture9') %>
-            <% }else if (currentLecture === 'lecture10') { %>
-                <%- include('partials/lecture10') %>
-            <% } %>
-            
-        </div>
-    </div>
+    <!-- Sidebar -->
+  <%- include('partials/sidebar', { units: units, currentLectureId: currentLectureId }) %>
 
-    <script src="/js/script.js"></script>
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content-wrapper">
+            
+            <!-- Dynamic header based on current lecture -->
+            <% if (currentLectureId && currentLectureId !== 'welcome') { %>
+                <% 
+                    const currentUnit = units.find(unit => unit.lectures.some(lec => lec.id === currentLectureId));
+                    const currentLecture = currentUnit ? currentUnit.lectures.find(lec => lec.id === currentLectureId) : null;
+                %>
+                <header class="content-header">
+                    <nav class="breadcrumb">
+                        <a href="/">Home</a>
+                        <% if (currentUnit) { %>
+                            <span class="separator">›</span>
+                            <span><%= currentUnit.title %></span>
+                        <% } %>
+                        <% if (currentLecture) { %>
+                            <span class="separator">›</span>
+                            <span class="current"><%= currentLecture.title %></span>
+                        <% } %>
+                    </nav>
+                </header>
+            <% } %>
+
+            <!-- Dynamic content insertion -->
+            <%- currentLectureHtml %>
+
+            <!-- Dynamic navigation footer -->
+            <% if (currentLectureId && currentLectureId !== 'welcome') { %>
+                <footer class="content-footer">
+                    <% 
+                        const allLectures = units.flatMap(unit => unit.lectures);
+                        const currentIndex = allLectures.findIndex(lecture => lecture.id === currentLectureId);
+                        const prevLecture = currentIndex > 0 ? allLectures[currentIndex - 1] : null;
+                        const nextLecture = currentIndex < allLectures.length - 1 ? allLectures[currentIndex + 1] : null;
+                    %>
+                    <nav class="lecture-navigation">
+                        <% if (prevLecture) { %>
+                            <a href="/lectures/<%= prevLecture.id %>" class="nav-btn prev-btn">
+                                <span class="nav-arrow">←</span>
+                                <span class="nav-text">
+                                    <small>Previous</small>
+                                    <strong><%= prevLecture.title %></strong>
+                                </span>
+                            </a>
+                        <% } else { %>
+                            <div></div>
+                        <% } %>
+                        
+                        <% if (nextLecture) { %>
+                            <a href="/lectures/<%= nextLecture.id %>" class="nav-btn next-btn">
+                                <span class="nav-text">
+                                    <small>Next</small>
+                                    <strong><%= nextLecture.title %></strong>
+                                </span>
+                                <span class="nav-arrow">→</span>
+                            </a>
+                        <% } %>
+                    </nav>
+                </footer>
+            <% } %>
+
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            // --- THEME TOGGLE FUNCTIONALITY ---
+            const themeToggle = document.getElementById('theme-toggle');
+            const body = document.body;
+
+            // Function to apply the theme
+            const applyTheme = (theme) => {
+                if (theme === 'light') {
+                    body.classList.add('light-theme');
+                    themeToggle.checked = false;
+                } else {
+                    body.classList.remove('light-theme');
+                    themeToggle.checked = true;
+                }
+            };
+
+            // Load saved theme from localStorage
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            applyTheme(savedTheme);
+
+            // Handle theme toggle clicks
+            themeToggle.addEventListener('change', () => {
+                const newTheme = themeToggle.checked ? 'dark' : 'light';
+                localStorage.setItem('theme', newTheme);
+                applyTheme(newTheme);
+                
+                // Re-render MathJax with new theme
+                if (window.MathJax) {
+                    MathJax.typesetPromise();
+                }
+            });
+
+            // --- COLLAPSIBLE UNITS LOGIC ---
+            document.querySelectorAll('.unit-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const lectureNav = btn.nextElementSibling;
+                    const isOpen = btn.classList.contains('is-open');
+                    
+                    // Close all other units
+                    document.querySelectorAll('.unit-btn.is-open').forEach(openBtn => {
+                        if (openBtn !== btn) {
+                            openBtn.classList.remove('is-open');
+                            openBtn.nextElementSibling.classList.remove('is-open');
+                        }
+                    });
+                    
+                    // Toggle current unit
+                    btn.classList.toggle('is-open');
+                    lectureNav.classList.toggle('is-open');
+                });
+            });
+
+            // Smooth scrolling for internal links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Mobile menu toggle (for smaller screens)
+            const createMobileMenuToggle = () => {
+                if (window.innerWidth <= 768) {
+                    let menuToggle = document.querySelector('.mobile-menu-toggle');
+                    if (!menuToggle) {
+                        menuToggle = document.createElement('button');
+                        menuToggle.className = 'mobile-menu-toggle';
+                        menuToggle.innerHTML = '☰';
+                        menuToggle.style.cssText = `
+                            position: fixed;
+                            top: 1rem;
+                            left: 1rem;
+                            z-index: 1000;
+                            background: var(--text-accent);
+                            color: white;
+                            border: none;
+                            padding: 0.5rem;
+                            border-radius: 4px;
+                            font-size: 1.2rem;
+                            cursor: pointer;
+                        `;
+                        document.body.appendChild(menuToggle);
+
+                        menuToggle.addEventListener('click', () => {
+                            document.querySelector('.sidebar').classList.toggle('open');
+                        });
+                    }
+                }
+            };
+
+            createMobileMenuToggle();
+            window.addEventListener('resize', createMobileMenuToggle);
+
+            // Auto-hide mobile menu when clicking on content
+            document.addEventListener('click', (e) => {
+                if (window.innerWidth <= 768 && 
+                    !e.target.closest('.sidebar') && 
+                    !e.target.closest('.mobile-menu-toggle')) {
+                    document.querySelector('.sidebar').classList.remove('open');
+                }
+            });
+        });
+
+        // MathJax loading handler
+        window.addEventListener('load', function() {
+            if (window.MathJax) {
+                MathJax.typesetPromise().then(() => {
+                    console.log('MathJax rendering complete');
+                }).catch((err) => {
+                    console.log('MathJax rendering error:', err);
+                });
+            }
+        });
+    </script>
 </body>
 </html>

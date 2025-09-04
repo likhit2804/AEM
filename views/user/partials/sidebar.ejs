@@ -1,113 +1,50 @@
-<!-- Sidebar Navigation -->
-<div class="sidebar">
-  <div class="sidebar-header">
-    <a href="/" style="text-decoration: none; color: inherit;">
-      <h1>AEM Notes</h1>
-    </a>
+<aside class="sidebar">
+    <div class="sidebar-header">
+        <a href="/" style="text-decoration: none; color: inherit;">
+            <h1>AEM Notes</h1>
+        </a>
+        <label class="theme-switch" title="Toggle theme">
+            <input type="checkbox" id="theme-toggle" />
+            <span class="slider"></span>
+        </label>
+    </div>
 
-    <!-- ✅ Apple-like toggle switch -->
-    <label class="theme-switch">
-      <input type="checkbox" id="theme-toggle" />
-      <span class="slider"></span>
-    </label>
-  </div>
+    <div class="sidebar-content">
+        <% units.forEach(unit => { %>
+            <div class="unit">
+                <button class="unit-btn <%= unit.lectures.some(lecture => lecture.id === currentLectureId) ? 'is-open' : '' %>">
+                    <%= unit.title %>
+                </button>
+                <ul class="lecture-nav <%= unit.lectures.some(lecture => lecture.id === currentLectureId) ? 'is-open' : '' %>">
+                    <% if (unit.lectures && unit.lectures.length > 0) { %>
+                        <% unit.lectures.forEach(lecture => { %>
+                            <li>
+                                <a href="/lectures/<%= lecture.id %>" class="lecture-link <%= currentLectureId === lecture.id ? 'active' : '' %>">
+                                    <%= lecture.title %>
+                                </a>
+                            </li>
+                        <% }) %>
+                    <% } else { %>
+                        <li>No lectures uploaded yet</li>
+                    <% } %>
+                </ul>
+            </div>
+        <% }) %>
 
-  <!-- ✅ Unit 1 -->
-  <div class="unit">
-    <button class="unit-btn">Unit 1: Differential Equations ▾</button>
-    <ul class="lecture-nav">
-      <li>
-        <a href="/lectures/lecture1" class="lecture-link <%= currentLecture === 'lecture1' ? 'active' : '' %>">
-          Lecture 1: Introduction
-        </a>
-      </li>
-      <li>
-        <a href="/lectures/lecture2" class="lecture-link <%= currentLecture === 'lecture2' ? 'active' : '' %>">
-          Lecture 2: First Order DEs
-        </a>
-      </li>
-      <li>
-        <a href="/lectures/lecture3" class="lecture-link <%= currentLecture === 'lecture3' ? 'active' : '' %>">
-          Lecture 3: Homogeneous Equations
-        </a>
-      </li>
-      <li>
-        <a href="/lectures/lecture4" class="lecture-link <%= currentLecture === 'lecture4' ? 'active' : '' %>">
-          Lecture 4: Higher Order DEs
-        </a>
-      </li>
-      <li>
-        <a href="/lectures/lecture5" class="lecture-link <%= currentLecture === 'lecture5' ? 'active' : '' %>">
-          Lecture 5: Complementary Functions
-        </a>
-      </li>
-      <li>
-        <a href="/lectures/lecture6" class="lecture-link <%= currentLecture === 'lecture6' ? 'active' : '' %>">
-          Lecture 6: Particular Integrals
-        </a>
-      </li>
-      <li>
-        <a href="/lectures/lecture7" class="lecture-link <%= currentLecture === 'lecture7' ? 'active' : '' %>">
-          Lecture 7: Advanced Methods
-        </a>
-      </li>
-      <li>
-        <a href="/lectures/lecture8" class="lecture-link <%= currentLecture === 'lecture8' ? 'active' : '' %>">
-          Lecture 8: Variable Coefficients
-        </a>
-      </li>
-      <li>
-        <a href="/lectures/lecture9" class="lecture-link <%= currentLecture === 'lecture9' ? 'active' : '' %>">
-          Lecture 9: PDE
-        </a>
-      </li>
-      <li>
-        <a href="/lectures/lecture10" class="lecture-link <%= currentLecture === 'lecture10' ? 'active' : '' %>">
-          Lecture 10: Final
-        </a>
-      </li>
-    </ul>
-  </div>
-  <div class="unit">
-    <button class="unit-btn">Unit 2: Numerical Solutions to ODEs ▾</button>
-    <ul class="lecture-nav"><li>
-       Not Uploaded Yet
-      </li></ul>
-  </div>
-  <div class="unit">
-    <button class="unit-btn">Unit 3: Complex Analysis ▾</button>
-    <ul class="lecture-nav"><li>
-       Not Uploaded Yet
-      </li></ul>
-  </div>
-  <div class="unit">
-    <button class="unit-btn">Unit 4: Fourier Series ▾</button>
-    <ul class="lecture-nav"><li>
-       Not Uploaded Yet
-      </li></ul>
+        <div class="unit">
+            <button class="unit-btn">Textbooks</button>
+            <ul class="lecture-nav">
+                <li><a href="/textbooks/kreyszig" class="lecture-link">Erwin Kreyszig</a></li>
+                <li><a href="/textbooks/additional" class="lecture-link">Additional Resources</a></li>
+            </ul>
+        </div>
 
-  </div>
-  <div class="unit">
-    <button class="unit-btn">Unit 5: Laplace, Fourier and Z Transforms ▾</button>
-    <ul class="lecture-nav"><li>
-       Not Uploaded Yet
-      </li></ul>
-  </div>
-  <div class="unit">
-    <button class="unit-btn">Unit 6: Graphs and Combinatorics ▾</button>
-    <ul class="lecture-nav"><li>
-       Not Uploaded Yet
-      </li></ul>
-  </div>
-  <!-- ✅ Textbooks Section -->
-  <div class="unit">
-    <button class="unit-btn">Textbooks ▾</button>
-    <ul class="lecture-nav">
-      <li>
-        <a href="/pdf" class="lecture-link <%= currentLecture === 'textbook1' ? 'active' : '' %>">
-          Advanced Engineering Mathematics by Erwin Kreyszig, 10th edition.
-        </a>
-      </li>
-    </ul>
-  </div>
-</div>
+        <div class="unit">
+            <button class="unit-btn">Practice</button>
+            <ul class="lecture-nav">
+                <li><a href="/practice/assignments" class="lecture-link">Assignments</a></li>
+                <li><a href="/practice/mock-tests" class="lecture-link">Mock Tests</a></li>
+            </ul>
+        </div>
+    </div>
+</aside>

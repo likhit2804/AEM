@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Admin Dashboard - PDF Converter</title>
+    <style>
+        @keyframes subtle-gradient-pan{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}:root{--bg-color:#0d0d10;--panel-color:#1a1a1e;--text-color:#c5c6c7;--heading-color:#fff;--border-color:#2f2f35;--accent-gradient:linear-gradient(90deg,#3d52e0,#8a3de0,#e03d8a,#3d52e0);--success-color:#10b981;--warning-color:#f59e0b}body{background-color:var(--bg-color);background-image:radial-gradient(circle at top,#1c1c22 0%,var(--bg-color) 60%);color:var(--text-color);font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;margin:0;padding:20px}.dashboard-container{width:100%;max-width:1400px;margin:auto}.dashboard-header{display:flex;justify-content:space-between;align-items:center;padding-bottom:15px;margin-bottom:15px;border-bottom:1px solid var(--border-color)}.dashboard-header h1{color:var(--heading-color);font-size:24px;margin:0}.toggle-container{display:flex;align-items:center;gap:10px}.toggle-switch{position:relative;display:inline-block;width:50px;height:28px}.toggle-switch input{opacity:0;width:0;height:0}.slider{position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;background-color:#333;transition:.4s;border-radius:34px}.slider:before{position:absolute;content:"";height:20px;width:20px;left:4px;bottom:4px;background-color:#fff;transition:.4s;border-radius:50%}input:checked+.slider{background:var(--accent-gradient);background-size:200% 200%;animation:subtle-gradient-pan 4s linear infinite}input:checked+.slider:before{transform:translateX(22px)}.action-bar{display:flex;gap:15px;margin-bottom:20px;flex-wrap:wrap}.btn{background:transparent;border:1px solid var(--border-color);color:var(--text-color);padding:10px 20px;font-size:14px;font-weight:500;cursor:pointer;border-radius:5px;transition:all .3s ease;display:flex;align-items:center;gap:8px}.btn:hover{border-color:var(--heading-color);color:var(--heading-color);background-color:rgba(255,255,255,.05)}.btn:disabled{opacity:0.5;cursor:not-allowed}.btn:disabled:hover{border-color:var(--border-color);color:var(--text-color);background:transparent}.btn-gradient{position:relative;z-index:1;border:none;color:#fff;overflow:hidden;background:var(--panel-color)}.btn-gradient::before{content:'';position:absolute;top:-2px;left:-2px;width:calc(100% + 4px);height:calc(100% + 4px);background:var(--accent-gradient);background-size:400%;z-index:-1;border-radius:7px;animation:subtle-gradient-pan 6s linear infinite;transition:filter .3s ease}.btn-gradient:hover::before{filter:brightness(1.3)}.btn-success{border-color:var(--success-color);color:var(--success-color)}.btn-success:hover{background-color:rgba(16,185,129,0.1)}.btn-warning{border-color:var(--warning-color);color:var(--warning-color)}.btn-warning:hover{background-color:rgba(245,158,11,0.1)}#view-toggle{display:none}#view-toggle~.preview-container{display:none}#view-toggle~.upload-module{display:block}#view-toggle:checked~.upload-module{display:none}#view-toggle:checked~.preview-container{display:flex}.upload-module{border:2px dashed var(--border-color);border-radius:10px;padding:40px 30px;text-align:center;transition:border-color .3s ease,background-color .3s ease}.upload-module:hover{border-color:#555;background-color:rgba(255,255,255,.02)}.upload-module h3{margin:0 0 10px 0;color:var(--heading-color);font-size:20px}.preview-container{gap:20px;width:100%}.preview-panel{flex:1;background-color:var(--panel-color);border:1px solid var(--border-color);border-radius:8px;min-height:60vh;padding:20px;box-shadow:0 4px 15px rgba(0,0,0,.2);transition:border-color .3s ease,transform .3s ease;overflow-y:auto;position:relative}.preview-panel:hover{transform:translateY(-5px);border-color:#444}.preview-panel h2{margin-top:0;color:var(--heading-color);font-size:16px;text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid var(--border-color);padding-bottom:10px;display:flex;justify-content:space-between;align-items:center}.content-placeholder{height:calc(100% - 48px)}.panel-controls{display:flex;gap:8px}.panel-btn{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:var(--text-color);padding:4px 8px;font-size:12px;cursor:pointer;border-radius:4px;transition:all 0.2s ease}.panel-btn:hover{background:rgba(255,255,255,0.2);color:var(--heading-color)}.prompt-textarea{width:80%;background-color:var(--bg-color);border:1px solid var(--border-color);color:var(--text-color);border-radius:5px;padding:10px;font-family:inherit;font-size:14px;margin-top:20px;resize:vertical;min-height:80px}.prompt-label{display:block;margin-top:20px;font-weight:500;color:var(--heading-color)}.notification{position:fixed;top:20px;right:20px;padding:12px 20px;border-radius:8px;color:white;font-weight:500;z-index:1000;transform:translateX(400px);transition:transform 0.3s ease;max-width:300px}.notification.show{transform:translateX(0)}.notification.success{background:var(--success-color)}.notification.error{background:#ef4444}.notification.info{background:#3b82f6}.code-view{background:#1e1e1e;color:#d4d4d4;padding:15px;border-radius:8px;font-family:'Monaco','Menlo','Ubuntu Mono',monospace;font-size:13px;line-height:1.5;white-space:pre-wrap;word-wrap:break-word;max-height:500px;overflow-y:auto;border:1px solid var(--border-color)}.tab-container{display:flex;border-bottom:1px solid var(--border-color);margin-bottom:15px}.tab{padding:8px 16px;cursor:pointer;border:1px solid transparent;border-bottom:none;background:transparent;color:var(--text-color);font-size:13px;transition:all 0.2s ease}.tab.active{background:var(--panel-color);border-color:var(--border-color);color:var(--heading-color)}.tab:hover:not(.active){background:rgba(255,255,255,0.05)}.tab-content{display:none}.tab-content.active{display:block}
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <input type="checkbox" id="view-toggle">
+        
+        <header class="dashboard-header">
+            <h1>📄 PDF to AI-Generated HTML</h1>
+            
+            <div class="toggle-container">
+                <span>Toggle Preview</span>
+                <label for="view-toggle" class="toggle-switch"><span class="slider"></span></label>
+            </div>
+            
+        </header>
+
+        <nav class="action-bar">
+            <button class="btn" onclick="resetUpload()">
+                <span>🔄</span> Upload New
+            </button>
+            <button class="btn btn-success" id="download-btn" onclick="downloadHTML()" disabled>
+                <span>💾</span> Download HTML
+            </button>
+            <button class="btn btn-warning" id="copy-btn" onclick="copyToClipboard()" disabled>
+                <span>📋</span> Copy Code
+            </button>
+            <button class="btn btn-gradient" id="publish-btn" disabled>
+                <span>🚀</span> Publish
+            </button>
+        </nav>
+        
+        <div class="upload-module">
+            <h3>Drag & Drop PDF Here</h3>
+            <p>or</p>
+            <button class="btn">Select File</button>
+
+            <label for="prompt-input" class="prompt-label">Your Custom Prompt (Optional)</label>
+            <textarea id="prompt-input" class="prompt-textarea" placeholder="For example: Convert this PDF into a simple, single-page HTML resume. Use a professional tone."></textarea>
+        </div>
+
+        <main class="preview-container">
+            <section class="preview-panel">
+                <h2>
+                    PDF PREVIEW
+                    <div class="panel-controls">
+                        <button class="panel-btn" onclick="toggleFullscreen(this)">⛶</button>
+                    </div>
+                </h2>
+                <div class="content-placeholder" id="pdf-preview">
+                    <p>Original document will be displayed here.</p>
+                </div>
+            </section>
+            
+            <section class="preview-panel">
+                <h2>
+                    ✨ GEMINI GENERATED HTML
+                    <div class="panel-controls">
+                        <button class="panel-btn" onclick="toggleView('render')">👁️</button>
+                        <button class="panel-btn" onclick="toggleView('code')">💻</button>
+                        <button class="panel-btn" onclick="toggleFullscreen(this)">⛶</button>
+                    </div>
+                </h2>
+                
+                <div class="tab-container">
+                    <button class="tab active" onclick="switchTab('preview-tab')">Preview</button>
+                    <button class="tab" onclick="switchTab('code-tab')">HTML Code</button>
+                </div>
+                
+                <div class="content-placeholder">
+                    <div id="preview-tab" class="tab-content active">
+                        <div id="gemini-html-preview">
+                            <p>AI-generated HTML will appear here.</p>
+                        </div>
+                    </div>
+                    <div id="code-tab" class="tab-content">
+                        <div id="gemini-html-code" class="code-view">
+                            No HTML code generated yet.
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <input type="file" id="file-input" hidden accept=".pdf">
+    
+    <!-- Notification Container -->
+    <div id="notification" class="notification"></div>
+
+    <script>
+        // Global variables
+        let generatedHTML = '';
+        let currentFilename = '';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const uploadModule = document.querySelector('.upload-module');
+            const fileInput = document.getElementById('file-input');
+            const selectFileBtn = uploadModule.querySelector('.btn');
+            const viewToggle = document.getElementById('view-toggle');
+            const uploadModuleH3 = uploadModule.querySelector('h3');
+            const pdfPreviewPanel = document.getElementById('pdf-preview');
+            const geminiHtmlPreviewPanel = document.getElementById('gemini-html-preview');
+            const geminiHtmlCodePanel = document.getElementById('gemini-html-code');
+            const promptInput = document.getElementById('prompt-input');
+
+            // Event Listeners
+            selectFileBtn.addEventListener('click', () => fileInput.click());
+            fileInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) handleFile(file);
+            });
+            
+            // Drag and drop
+            uploadModule.addEventListener('dragover', (e) => { 
+                e.preventDefault(); 
+                uploadModule.style.borderColor = '#8A3DE0'; 
+            });
+            uploadModule.addEventListener('dragleave', () => { 
+                uploadModule.style.borderColor = ''; 
+            });
+            uploadModule.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadModule.style.borderColor = '';
+                const file = e.dataTransfer.files[0];
+                if (file) handleFile(file);
+            });
+
+            // Main file handling function
+            async function handleFile(file) {
+                if (file.type !== 'application/pdf') {
+                    showNotification('Please upload a valid PDF file.', 'error');
+                    return;
+                }
+
+                currentFilename = file.name.replace('.pdf', '');
+                const userPrompt = promptInput.value;
+                const formData = new FormData();
+                formData.append('pdfFile', file);
+                formData.append('prompt', userPrompt);
+
+                setLoadingState(true, 'AI is generating HTML...');
+
+                try {
+                    const response = await fetch('/upload', {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        throw new Error(errorData.error || 'Server responded with an error.');
+                    }
+
+                    const result = await response.json();
+
+                    if (result.success) {
+                        generatedHTML = result.geminiHtml;
+                        updatePreviews(result.pdfUrl, result.geminiHtml);
+                        enableActionButtons();
+                        viewToggle.checked = true;
+                        showNotification('HTML generated successfully!', 'success');
+                    } else {
+                        throw new Error(result.error || 'Failed to process PDF.');
+                    }
+                } catch (error) {
+                    console.error('Upload Error:', error);
+                    showNotification(`Error: ${error.message}`, 'error');
+                } finally {
+                    setLoadingState(false, 'Drag & Drop PDF Here');
+                }
+            }
+
+            function updatePreviews(pdfUrl, geminiHtml) {
+                // Update PDF preview
+                pdfPreviewPanel.innerHTML = '';
+                const pdfEmbed = document.createElement('embed');
+                pdfEmbed.src = pdfUrl;
+                pdfEmbed.type = 'application/pdf';
+                pdfEmbed.style.width = '100%';
+                pdfEmbed.style.height = '100%';
+                pdfPreviewPanel.appendChild(pdfEmbed);
+
+                // Update HTML preview
+                geminiHtmlPreviewPanel.innerHTML = geminiHtml;
+                
+                // Update HTML code view
+                geminiHtmlCodePanel.textContent = geminiHtml;
+            }
+
+            function setLoadingState(isLoading, message) {
+                uploadModuleH3.textContent = message;
+                selectFileBtn.disabled = isLoading;
+                uploadModule.style.cursor = isLoading ? 'wait' : 'pointer';
+            }
+
+            function enableActionButtons() {
+                document.getElementById('download-btn').disabled = false;
+                document.getElementById('copy-btn').disabled = false;
+                document.getElementById('publish-btn').disabled = false;
+            }
+
+            // Expose functions to global scope
+            window.handleFile = handleFile;
+            window.updatePreviews = updatePreviews;
+            window.setLoadingState = setLoadingState;
+            window.enableActionButtons = enableActionButtons;
+        });
+
+        // Utility Functions
+        function showNotification(message, type = 'info') {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = `notification ${type} show`;
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 4000);
+        }
+
+        function resetUpload() {
+            document.getElementById('file-input').value = '';
+            document.getElementById('prompt-input').value = '';
+            document.getElementById('view-toggle').checked = false;
+            document.getElementById('pdf-preview').innerHTML = '<p>Original document will be displayed here.</p>';
+            document.getElementById('gemini-html-preview').innerHTML = '<p>AI-generated HTML will appear here.</p>';
+            document.getElementById('gemini-html-code').textContent = 'No HTML code generated yet.';
+            
+            // Disable action buttons
+            document.getElementById('download-btn').disabled = true;
+            document.getElementById('copy-btn').disabled = true;
+            document.getElementById('publish-btn').disabled = true;
+            
+            generatedHTML = '';
+            currentFilename = '';
+            
+            showNotification('Ready for new upload', 'info');
+        }
+
+        function downloadHTML() {
+            if (!generatedHTML) {
+                showNotification('No HTML code to download', 'error');
+                return;
+            }
+
+            const blob = new Blob([generatedHTML], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${currentFilename || 'generated'}.html`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showNotification('HTML file downloaded!', 'success');
+        }
+
+        function copyToClipboard() {
+            if (!generatedHTML) {
+                showNotification('No HTML code to copy', 'error');
+                return;
+            }
+
+            navigator.clipboard.writeText(generatedHTML).then(() => {
+                showNotification('HTML code copied to clipboard!', 'success');
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+                
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = generatedHTML;
+                textArea.style.position = 'fixed';
+                textArea.style.opacity = '0';
+                document.body.appendChild(textArea);
+                textArea.select();
+                
+                try {
+                    document.execCommand('copy');
+                    showNotification('HTML code copied to clipboard!', 'success');
+                } catch (fallbackErr) {
+                    showNotification('Failed to copy to clipboard', 'error');
+                }
+                
+                document.body.removeChild(textArea);
+            });
+        }
+
+        function switchTab(tabId) {
+            // Remove active class from all tabs and content
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            // Add active class to clicked tab and corresponding content
+            event.target.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        }
+
+        function toggleView(viewType) {
+            if (viewType === 'render') {
+                switchTab('preview-tab');
+                document.querySelector('.tab[onclick="switchTab(\'preview-tab\')"]').classList.add('active');
+                document.querySelector('.tab[onclick="switchTab(\'code-tab\')"]').classList.remove('active');
+            } else {
+                switchTab('code-tab');
+                document.querySelector('.tab[onclick="switchTab(\'code-tab\')"]').classList.add('active');
+                document.querySelector('.tab[onclick="switchTab(\'preview-tab\')"]').classList.remove('active');
+            }
+        }
+
+        function toggleFullscreen(button) {
+            const panel = button.closest('.preview-panel');
+            if (panel.style.position === 'fixed') {
+                // Exit fullscreen
+                panel.style.position = '';
+                panel.style.top = '';
+                panel.style.left = '';
+                panel.style.width = '';
+                panel.style.height = '';
+                panel.style.zIndex = '';
+                panel.style.backgroundColor = '';
+                button.textContent = '⛶';
+            } else {
+                // Enter fullscreen
+                panel.style.position = 'fixed';
+                panel.style.top = '20px';
+                panel.style.left = '20px';
+                panel.style.width = 'calc(100vw - 40px)';
+                panel.style.height = 'calc(100vh - 40px)';
+                panel.style.zIndex = '1000';
+                panel.style.backgroundColor = 'var(--panel-color)';
+                button.textContent = '✕';
+            }
+        }
+    </script>
+</body>
+</html>

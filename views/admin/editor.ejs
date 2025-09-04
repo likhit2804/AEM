@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Lecture Content</title>
+    <style>
+        :root {
+            --bg-color: #0d0d10;
+            --panel-color: #1a1a1e;
+            --text-color: #c5c6c7;
+            --border-color: #2f2f35;
+            --success-color: #10b981;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: var(--panel-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .header h1 { margin: 0; font-size: 20px; }
+        .editor-container {
+            display: flex;
+            flex-grow: 1;
+            overflow: hidden;
+        }
+        .panel { flex: 1; overflow: auto; border-left: 1px solid var(--border-color); }
+        #editor {
+            width: 100%;
+            height: 100%;
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            border: none;
+            outline: none;
+            padding: 15px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            box-sizing: border-box;
+            resize: none;
+        }
+        #preview { width: 100%; height: 100%; border: none; background-color: white; }
+        .btn {
+            background: #3d52e0;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .btn:hover { background: #4a63ff; }
+        .status { color: var(--success-color); font-weight: bold; margin-left: 20px; }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <h1>Lecture Content Editor</h1>
+        <div>
+            <a href="/admin" style="color: var(--text-color); text-decoration: none; margin-right: 20px;">← Back to Dashboard</a>
+            <button class="btn" id="save-btn">Save Changes</button>
+            <span id="save-status" class="status"></span>
+        </div>
+    </header>
+
+    <main class="editor-container">
+        <div class="panel">
+            <textarea id="editor"><%- lectureHtmlContent %></textarea>
+        </div>
+        <div class="panel">
+            <iframe id="preview"></iframe>
+        </div>
+    </main>
+
+    <script>
+        const editor = document.getElementById('editor');
+        const preview = document.getElementById('preview');
+        const saveBtn = document.getElementById('save-btn');
+        const saveStatus = document.getElementById('save-status');
+
+        function updatePreview() {
+            preview.srcdoc = editor.value;
+        }
+
+        async function saveContent() {
+            saveBtn.disabled = true;
+            saveStatus.textContent = 'Saving...';
+            try {
+                const response = await fetch('/admin/save-lectures', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ content: editor.value })
+                });
+                const result = await response.json();
+                if (result.success) {
+                    saveStatus.textContent = '✅ Saved successfully!';
+                } else {
+                    saveStatus.textContent = `❌ Error: ${result.message}`;
+                }
+            } catch (err) {
+                saveStatus.textContent = '❌ Network error.';
+            } finally {
+                setTimeout(() => {
+                    saveStatus.textContent = '';
+                    saveBtn.disabled = false;
+                }, 3000);
+            }
+        }
+
+        editor.addEventListener('input', updatePreview);
+        saveBtn.addEventListener('click', saveContent);
+
+        // Initial load
+        updatePreview();
+    </script>
+
+</body>
+</html>
