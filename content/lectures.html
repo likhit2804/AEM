@@ -385,3 +385,1042 @@
           </ol>
         </div>
       </div>
+
+<!-- =============== NEW LECTURE =============== -->
+
+<div id="lecture_20250905_190537" class="lecture-content" data-unit="unit1">
+  <h1 style="text-align: center; font-size: 2em; color: #336699;">Lecture 4 (1): Solving Linear Differential Equations</h1>
+  <hr class="section-divider">
+
+    <h2 style="border-bottom: 2px solid #ccc; padding-bottom: 10px;">Linear Differential Equations of First Order</h2>
+    <h3>Linear Form</h3>
+
+    <div class="math-display">
+      \[\frac{dy}{dx} + P(x)y = Q(x)\]
+    </div>
+
+    <div class="method">
+      <p><b>Method: Integrating Factor</b></p>
+      <p>If IF = \(e^{\int P(x)dx}\)</p>
+      <p>Then \(y \cdot IF = \int IF \cdot Q(x) dx + c\)</p>
+    </div>
+    <hr class="section-divider">
+
+      <h3>Non-Linear Equation Reduction to Linear Form</h3>
+
+      <div class="math-display">
+        \[\frac{dy}{dx} + P(x)y = y^n Q(x)\]
+      </div>
+      <ol>
+        <li>Divide by \(y^n\):</li>
+      </ol>
+
+      <div class="math-display">
+        \[y^{-n}\frac{dy}{dx} + P(x)y^{1-n} = Q(x)\]
+      </div>
+      <ol start="2">
+        <li>Let \(z = y^{1-n}\)</li>
+        <li>Then \(\frac{dz}{dx} = (1-n)y^{-n}\frac{dy}{dx}\)</li>
+        <li>Substitute and simplify to obtain:</li>
+      </ol>
+
+      <div class="math-display">
+        \[\frac{dz}{dx} + (1-n)P(x)z = (1-n)Q(x)\]
+      </div>
+
+      <div class="method">
+        <p><b>Method: Solving the Reduced Linear Equation</b></p>
+        <p>IF = \(e^{\int (1-n)P(x)dx}\)</p>
+        <p>\[z \cdot IF = \int IF \cdot (1-n)Q(x)dx + c\]</p>
+      </div>
+      <hr class="section-divider">
+
+        <div class="example">
+          <p><b>Example:</b> \(x\frac{dy}{dx} + y = x^3y^2\)</p>
+          <ol>
+            <li>Rewrite in standard form: \(\frac{dy}{dx} + \frac{1}{x}y = xy^2\)</li>
+            <li>Divide by \(y^2\): \(\frac{1}{y^2}\frac{dy}{dx} + \frac{1}{x}\frac{1}{y} = x\)</li>
+            <li>Let \(z = \frac{1}{y}\), then \(\frac{dz}{dx} = -\frac{1}{y^2}\frac{dy}{dx}\)</li>
+            <li>Substitute and simplify: \(\frac{dz}{dx} - \frac{1}{x}z = -x\)</li>
+            <li>Find the integrating factor: IF = \(e^{\int -\frac{1}{x}dx} = e^{-\ln x} = \frac{1}{x}\)</li>
+          </ol>
+
+          <div class="solution">
+            <p><b>Solution:</b></p>
+            <div class="step">
+              \[z \cdot \frac{1}{x} = \int \frac{1}{x}(-x)dx + c\]
+            </div>
+            <div class="step">
+              \[\frac{z}{x} = -x + c\]
+            </div>
+            <div class="step">
+              \[z = -x^2 + cx\]
+            </div>
+            <div class="step">
+              \[\frac{1}{y} = -x^2 + cx\]
+            </div>
+            <div class="step">
+              \[y = \frac{1}{-x^2 + cx}\]
+            </div>
+          </div>
+        </div>
+        <hr class="section-divider">
+
+          <h2 style="border-bottom: 2px solid #ccc; padding-bottom: 10px;">Higher Order Linear ODE</h2>
+
+          <div class="math-display">
+            \[\frac{d^ny}{dx^n} + P_1(x)\frac{d^{n-1}y}{dx^{n-1}} + P_2(x)\frac{d^{n-2}y}{dx^{n-2}} + ... + P_n(x)y = Q(x)\]
+          </div>
+          <p>\(P_i(x)\), \(P_2(x)\) ... are functions of \(x\)</p>
+          <p>\(n^{th}\) order Linear DE with constant coefficient</p>
+
+          <div class="math-display">
+            \[\frac{d^ny}{dx^n} + k_1\frac{d^{n-1}y}{dx^{n-1}} + k_2\frac{d^{n-2}y}{dx^{n-2}} + ... + k_ny = Q(x)\]
+          </div>
+          <h3>Homogenous and Non-Homogenous</h3>
+          <ul>
+            <li>\(Q(x) = 0 \implies\) Homogenous equation</li>
+            <li>\(Q(x) \ne 0 \implies\) Non-homogenous equation</li>
+          </ul>
+          <h3>Solution of Constant coeff. L.O.D.E of order n</h3>
+
+          <div class="math-display">
+            \[\frac{dy}{dx} + P(x)y = Q(x)\]
+          </div>
+          <p>If IF = \(e^{\int P(x)dx}\)</p>
+
+          <div class="math-display">
+            \[y \cdot IF = \int IF \cdot Q(x)dx + c\]
+          </div>
+
+          <div class="math-display">
+            \[y = e^{-\int P(x)dx}\int e^{\int P(x)dx}Q(x)dx + ce^{-\int P(x)dx}\]
+          </div>
+          <img src="higher_order_linear_ode_diagram.png" alt="Diagram showing solution methods for higher order linear ODEs">
+            <h3>D-operator</h3>
+
+            <div class="math-display">
+              \[D = \frac{d}{dx}, \quad D^2 = \frac{d^2}{dx^2}, \quad D^n = \frac{d^n}{dx^n}\]
+            </div>
+
+            <div class="math-display">
+              \[\frac{d^ny}{dx^n} + k_1\frac{d^{n-1}y}{dx^{n-1}} + ... + k_ny = Q(x)\]
+            </div>
+
+            <div class="math-display">
+              \((D^n + k_1D^{n-1} + ... + k_n)y = Q(x)\)
+            </div>
+            <img src="d_operator_diagram.png" alt="Diagram illustrating the use of the D-operator">
+              <p>To find complimentary function</p>
+
+              <div class="math-display">
+                \((D^n + k_1D^{n-1} + ... + k_n)y = 0\)
+              </div>
+
+              <div class="math-display">
+                \(D^n + k_1D^{n-1} + ... + k_n = 0\)
+              </div>
+              <p>(Auxiliary equation or characteristic equation)</p>
+
+              <div class="theorem">
+                <p><b>I. Real and distinct roots</b> \(m_1, m_2, ..., m_n\)</p>
+
+                <div class="math-display">
+                  \[y_{CF} = c_1e^{m_1x} + c_2e^{m_2x} + ... + c_ne^{m_nx}\]
+                </div>
+              </div>
+
+              <div class="theorem">
+                <p><b>II. Real and repeated roots</b> \(m_1 = m_2 = ... = m_r\)</p>
+
+                <div class="math-display">
+                  \[y_{CF} = (c_1 + c_2x + c_3x^2 + ... + c_rx^{r-1})e^{m_1x} + ...\]
+                </div>
+              </div>
+
+              <div class="theorem">
+                <p><b>III. Imaginary roots (pairs)</b> \(x = \alpha \pm i\beta\)</p>
+
+                <div class="math-display">
+                  \[y_{CF} = e^{\alpha x}[c_1 \cos \beta x + c_2 \sin \beta x]\]
+                </div>
+              </div>
+              <img src="summary_of_cf_diagram.png" alt="Summary diagram of complimentary functions">
+                <img src="examples_of_odes.png" alt="Examples of different types of ODEs">
+                </div>
+
+<!-- =============== NEW LECTURE =============== -->
+
+<div id="lecture_20250905_190702" class="lecture-content" data-unit="unit1">
+  <h1 style="text-align: center; font-size: 2em; color: #336699;">Lecture 5 (1): Solving Differential Equations</h1>
+  <hr class="section-divider">
+
+    <h2 style="border-bottom: 2px solid #ccc;">Complementary Function</h2>
+    <h3>Case 1: Distinct Roots</h3>
+
+    <div class="method">
+      <p><strong>Method:</strong> Finding the Complementary Function for Distinct Roots</p>
+      <p>If the roots of the characteristic equation are distinct \(m_1, m_2, \dots, m_n\), then the complementary function is given by:</p>
+
+      <div class="formula">
+        <p>Key Formula: \(Y_{CF} = C_1 e^{m_1x} + C_2 e^{m_2x} + \dots + C_n e^{m_nx}\)</p>
+      </div>
+    </div>
+    <h3>Case 2: Repeated Roots</h3>
+
+    <div class="method">
+      <p><strong>Method:</strong> Finding the Complementary Function for Repeated Roots</p>
+      <p>If the roots of the characteristic equation are repeated \(m, m, \dots, m\), then the complementary function is given by:</p>
+
+      <div class="formula">
+        <p>Key Formula: \(Y_{CF} = (C_1 + C_2x + C_3x^2 + \dots + C_nx^{n-1})e^{mx}\)</p>
+      </div>
+    </div>
+    <hr class="section-divider">
+
+      <h2 style="border-bottom: 2px solid #ccc;">Examples</h2>
+      <h3>Example 1</h3>
+
+      <div class="example">
+        <p><strong>Problem:</strong> \((D^2 + 6D + 9)y = 0\)</p>
+      </div>
+
+      <div class="solution">
+        <p><strong>Solution:</strong></p>
+        <div class="step">
+          <p>\((D + 3)^2 = 0\)</p>
+        </div>
+        <div class="step">
+          <p>\(D = -3, -3\ (real\ and\ repeated)\)</p>
+        </div>
+        <div class="step">
+          <p>\(Y_{CF} = (C_1 + C_2x)e^{-3x}\)</p>
+        </div>
+      </div>
+      <h3>Example 2</h3>
+
+      <div class="example">
+        <p><strong>Problem:</strong> \((D^2 + 4D + 4)y = 0\)</p>
+      </div>
+
+      <div class="solution">
+        <p><strong>Solution:</strong></p>
+        <div class="step"><p>\((D + 2)^2 = 0\)</p></div>
+        <div class="step"><p>\(D = -2, -2\)</p></div>
+        <div class="step"><p>\(Y_{CF} = (C_1 + C_2x)e^{-2x}\)</p></div>
+      </div>
+      <h3>Example 3</h3>
+
+      <div class="example">
+        <p><strong>Problem:</strong> \((D^2 + 4D + 1)y = 0\)</p>
+      </div>
+
+      <div class="solution">
+        <p><strong>Solution:</strong></p>
+        <div class="step"><p>\(D^2 + 4D + 1 = 0\)</p></div>
+        <div class="step"><p>\(D = \frac{-4 \pm \sqrt{16 - 4}}{2} = \frac{-4 \pm \sqrt{12}}{2} = -2 \pm \sqrt{3}\)</p></div>
+        <div class="step"><p>\(Y_{CF} = C_1e^{(-2 + \sqrt{3})x} + C_2e^{(-2 - \sqrt{3})x}\)</p></div>
+      </div>
+      <h3>Example 4</h3>
+
+      <div class="example">
+        <p><strong>Problem:</strong> \((D^3 + 1)y = 0\)</p>
+      </div>
+
+      <div class="solution">
+        <p><strong>Solution:</strong></p>
+        <div class="step"><p>\(D^3 + 1 = 0\)</p></div>
+        <div class="step"><p>\(D = -1, \frac{1 \pm i\sqrt{3}}{2}\)</p></div>
+        <div class="step"><p>\(Y_{CF} = C_1e^{-x} + C_2e^{\frac{x}{2}}cos(\frac{\sqrt{3}}{2}x) + C_3e^{\frac{x}{2}}sin(\frac{\sqrt{3}}{2}x)\)</p></div>
+      </div>
+      <h3>Example 5</h3>
+
+      <div class="example">
+        <p><strong>Problem:</strong> \((D^2 + 4D^2 + 4 - 4D^2)y = 0\)</p>
+      </div>
+
+      <div class="solution">
+        <p><strong>Solution:</strong></p>
+        <div class="step"><p>\((D^2 + 2D + 2)(D^2 - 2D + 2) = 0\)</p></div>
+        <div class="step"><p>\(D = -1 \pm i, 1 \pm i\)</p></div>
+        <div class="step"><p>\(Y_{CF} = e^{-x}[C_1cos(x) + C_2sin(x)] + e^x[C_3cos(x) + C_4sin(x)]\)</p></div>
+      </div>
+      <h3>Example 6</h3>
+
+      <div class="example">
+        <p><strong>Problem:</strong> \((D^4 + 4D^2 + 4)y = 0\)</p>
+      </div>
+
+      <div class="solution">
+        <p><strong>Solution:</strong></p>
+        <div class="step"><p>\((D^2 + 2)^2 = 0\)</p></div>
+        <div class="step"><p>\(D^2 = -2\)</p></div>
+        <div class="step"><p>\(D = \pm i\sqrt{2}, \pm i\sqrt{2}\)</p></div>
+        <div class="step"><p>\(Y_{CF} = (C_1 + C_2x)cos(\sqrt{2}x) + (C_3 + C_4x)sin(\sqrt{2}x)\)</p></div>
+      </div>
+      <hr class="section-divider">
+
+        <h2 style="border-bottom: 2px solid #ccc;">Particular Integral</h2>
+
+        <div class="method">
+          <p><strong>Method:</strong> Finding the Particular Integral</p>
+          <p>To find the particular integral, we use the following methods:</p>
+          <ol>
+            <li>If \(Q(x) = e^{ax}\), then \(Y_{PI} = \frac{e^{ax}}{P(a)}\) if \(P(a) \ne 0\)</li>
+            <li>If \(P(a) = 0\), then find \(Y_{PI} = \frac{xe^{ax}}{P'(a)}\) if \(P'(a) \ne 0\)</li>
+            <li>If \(P'(a) = 0\), then find \(Y_{PI} = \frac{x^2e^{ax}}{P''(a)}\)</li>
+          </ol>
+        </div>
+      </div>
+
+<!-- =============== NEW LECTURE =============== -->
+
+<div id="lecture_20250905_190837" class="lecture-content" data-unit="unit1">
+  <h1 style="text-align: center; font-family:serif; color:#336699;">Lecture 6(21 8 25): Rules for Finding Particular Integrals</h1>
+  <hr class="section-divider">
+
+    <h2>Rules for Finding Particular Integrals</h2>
+    <hr class="section-divider">
+
+      <h3>Case (i): \( \frac{1}{P(D)}e^{ax} \)</h3>
+
+      <div class="method">
+        <p><strong>Method:</strong> If \( P(a) \ne 0 \), then \( \frac{1}{P(D)}e^{ax} = \frac{e^{ax}}{P(a)} \)</p>
+      </div>
+
+      <h3>Case (ii): \( \frac{1}{P(D)}\sin(ax+b) \) or \( \frac{1}{P(D)}\cos(ax+b) \)</h3>
+
+      <div class="method">
+        <p><strong>Method:</strong> Put \( D^2 = -a^2 \) in \( P(D) \)</p>
+        <p>If \( P(-a^2) \ne 0 \), then \( \frac{1}{P(D)} \sin(ax+b) = \frac{\sin(ax+b)}{P(-a^2)} \) and \( \frac{1}{P(D)}\cos(ax+b) = \frac{\cos(ax+b)}{P(-a^2)} \)</p>
+      </div>
+
+      <h3>Case (iii): \( \frac{1}{P(D)}x^m \)</h3>
+
+      <div class="method">
+        <p><strong>Method:</strong> Expand \( \frac{1}{P(D)} \) using binomial expansion</p>
+      </div>
+
+      <h3>Case (iv): \( \frac{1}{P(D)}e^{ax}V(x) \)</h3>
+
+      <div class="method">
+        <p><strong>Method:</strong> \( \frac{1}{P(D)}e^{ax}V(x) = e^{ax}\frac{1}{P(D+a)}V(x) \)</p>
+      </div>
+
+      <h3>Case (v): \( \frac{1}{P(D)} (xU(x) + V(x)) \)</h3>
+
+      <div class="method">
+        <p><strong>Method:</strong> Let \( D^n[u(x)v(x)] = \sum_{r=0}^{n} \binom{n}{r} D^r u(x) D^{n-r}v(x) \)</p>
+        <p>Then \( \frac{1}{P(D)}[xU(x) + V(x)] = x\frac{1}{P(D)}U(x) + \left( \frac{1}{P(D)} - x\frac{P'(D)}{P(D)^2}\right)V(x) \)</p>
+      </div>
+      <hr class="section-divider">
+
+        <h2>Examples</h2>
+        <hr class="section-divider">
+
+          <h3>Example 1</h3>
+
+          <div class="example">
+            <p>Find \( y_{PI} \) for \( (D^2+4D)y = e^{2x} \)</p>
+          </div>
+
+          <div class="solution">
+            <p><strong>Solution:</strong> \( y_{PI} = \frac{e^{2x}}{D^2+4D} = \frac{e^{2x}}{4+8} = \frac{e^{2x}}{12} \)</p>
+          </div>
+
+          <h3>Example 2</h3>
+
+          <div class="example">
+            <p>Find \( y_{PI} \) for \( (D^2+4)y = \sin 2x \)</p>
+          </div>
+
+          <div class="solution">
+            <p><strong>Solution:</strong> \( y_{PI} = \frac{\sin 2x}{D^2+4} = \frac{\sin 2x}{-4+4} \) which is undefined. Hence, we use a different method.</p>
+            <p> \( y_{PI} = \frac{1}{D^2+4}\sin 2x = \frac{x}{2D} \sin 2x = \frac{x}{2}\int \sin 2x dx = -\frac{x}{4}\cos 2x \)</p>
+          </div>
+
+          <h3>Example 3</h3>
+
+          <div class="example">
+            <p>Find \( y_{PI} \) for \( (D^3+4D)y = \sin 2x \)</p>
+          </div>
+
+          <div class="solution">
+            <p><strong>Solution:</strong> \( y_{PI} = \frac{1}{D^3+4D} \sin 2x = \frac{1}{-2D+4D}\sin 2x = \frac{1}{2D}\sin 2x = \frac{1}{2}\int \sin 2x dx = -\frac{1}{4}\cos 2x \)</p>
+          </div>
+
+          <h3>Example 4</h3>
+
+          <div class="example">
+            <p>Find \( y_{PI} \) for \( (D^2-2D+1)y = x^2 \)</p>
+          </div>
+
+          <div class="solution">
+            <p><strong>Solution:</strong> \( y_{PI} = \frac{1}{(D-1)^2}x^2 = (1-D)^{-2}x^2 = (1+2D+3D^2+\dots)x^2 = x^2+4x+6 \)</p>
+          </div>
+
+          <h3>Example 5</h3>
+
+          <div class="example">
+            <p>Find \( y_{PI} \) for \( (D^2-2D+1)y = e^x \cos x \)</p>
+          </div>
+
+          <div class="solution">
+            <p><strong>Solution:</strong> \( y_{PI} = e^x \frac{1}{(D+1)^2-2(D+1)+1}\cos x = e^x \frac{1}{D^2}\cos x = e^x \frac{1}{-1}\cos x = -e^x \cos x \)</p>
+          </div>
+
+          <h3>Example 6</h3>
+
+          <div class="example">
+            <p>Solve \( (D^2+1)y = x \cos x \)</p>
+          </div>
+
+          <div class="solution">
+            <p>...</p>
+          </div>
+
+        </div>
+
+<!-- =============== NEW LECTURE =============== -->
+
+<div id="lecture_20250905_190941" class="lecture-content" data-unit="unit1">
+  <h1 style="text-align: center; font-size: 2em; color: #336699;">Lecture 7(22 8 25): Finding Particular Integrals</h1>
+
+  <hr class="section-divider">
+
+    <h2>Finding Particular Integrals: Different Methods</h2>
+
+    <h3>1. \(Q(x) = e^{ax}\)</h3>
+
+    <div class="method">
+      <p><strong>Method:</strong></p>
+      <p>If \(P(a) \ne 0\): \(Y_{PI} = \frac{e^{ax}}{P(a)}\) \( \implies \) \(\frac{Q(x)}{P(D)} = \frac{e^{ax}}{P(a)}\)</p>
+      <p>If \(P(a) = 0\): \(Y_{PI} = \frac{x e^{ax}}{P'(a)}\)</p>
+      <p>If \(P'(a) = 0\): \(Y_{PI} = \frac{x^2 e^{ax}}{P''(a)}\)</p>
+    </div>
+
+    <hr class="section-divider">
+
+      <h3>2. \(Q(x) = \sin(ax+b)\) or \(\cos(ax+b)\)</h3>
+
+      <div class="method">
+        <p><strong>Method:</strong></p>
+        <p>If \(P(-a^2) \ne 0\): \(Y_{PI} = \frac{\sin(ax+b)}{P(-a^2)}\) \( \implies \) \(Y_{PI} = \frac{Q(x)}{P(D^2)} = \frac{\sin(ax+b)}{P(-a^2)}\)</p>
+        <p>If \(P(-a^2) = 0\): \(Y_{PI} = \frac{x \sin(ax+b)}{P'(-a^2)}\)</p>
+        <p>If \(P'(-a^2) = 0\): \(Y_{PI} = \frac{x^2 \sin(ax+b)}{P''(-a^2)}\)</p>
+      </div>
+
+      <hr class="section-divider">
+
+        <h3>3. \(Q(x) = x^m\)</h3>
+
+        <div class="method">
+          <p><strong>Method:</strong></p>
+          <p>\(Y_{PI} = \frac{1}{P(D)} x^m\)</p>
+          <p>Expand using the binomial theorem.</p>
+        </div>
+
+        <hr class="section-divider">
+
+          <h3>4. \(Q(x) = e^{ax} V(x)\)</h3>
+
+          <div class="method">
+            <p><strong>Method:</strong></p>
+            <p>\(Y_{PI} = \frac{1}{P(D)} e^{ax} V(x) = e^{ax} \frac{1}{P(D+a)} V(x)\)</p>
+          </div>
+
+          <hr class="section-divider">
+
+            <h3>5. \(Q(x) = \sec x, \tan x, \cot x, \text{cosec } x, \log x, x^m\)</h3>
+            <div class="highlight">
+              <p><strong>Note:</strong> These cases often require more specialized techniques.</p>
+            </div>
+
+            <hr class="section-divider">
+
+              <h2>Variation of Parameters Method</h2>
+
+              <div class="method">
+                <p><strong>Method:</strong></p>
+                <p>For equations of the form:</p>
+
+                <div class="math-display">
+                  \[\begin{cases}
+                  y'' + p y' + q y = Q(x) \\
+                  y'' + P(x) y' + Q(x) y = 0
+                  \end{cases}\]
+                </div>
+                <p>\(Y_{CF} = C_1 y_1(x) + C_2 y_2(x)\)</p>
+                <p>\(Y_{PI} = u(x) y_1(x) + v(x) y_2(x)\)</p>
+                <p>where \(u\) and \(v\) are functions of \(x\).</p>
+
+                <div class="formula">
+                  <p><strong>Key Formula:</strong></p>
+                  \[u = - \int \frac{y_2 Q(x)}{W} dx, \quad v = \int \frac{y_1 Q(x)}{W} dx\]
+                </div>
+                <p>\(W = \) Wronskian</p>
+              </div>
+
+              <hr class="section-divider">
+
+                <div class="example">
+                  <p><strong>Example 1:</strong> Solve \((D^2 - 3D + 2) y = \cos x\)</p>
+
+                  <div class="solution">
+                    <ol>
+                      <li>\(Y_{PI} = \frac{\cos x}{D^2 - 3D + 2}\)</li>
+                      <li>\(Y_{PI} = \frac{1}{D^2 - 3D + 2} \cos x\)</li>
+                    </ol>
+                  </div>
+                </div>
+
+                <hr class="section-divider">
+
+                  <div class="example">
+                    <p><strong>Example 2:</strong> Solve \(\frac{d^2 y}{dx^2} + 4y = \tan 2x\)</p>
+
+                    <div class="solution">
+                      <ol>
+                        <li>\((D^2 + 4) y = \tan 2x\)</li>
+                        <li>\(Y_{CF} = C_1 \cos 2x + C_2 \sin 2x\)</li>
+                        <li>\(W = 2\)</li>
+                        <li>\(Y_{PI} = - \cos 2x \int \frac{\sin 2x \tan 2x}{2} dx + \sin 2x \int \frac{\cos 2x \tan 2x}{2} dx\)</li>
+                      </ol>
+                    </div>
+                  </div>
+
+                  <hr class="section-divider">
+
+                    <h2>Method of Undetermined Coefficients</h2>
+
+                    <div class="method">
+                      <p><strong>Method:</strong></p>
+                      <p>\(P(D) y = Q(x)\)</p>
+                      <p>Trial solution depends on \(Q(x)\):</p>
+                      <ul>
+                        <li>1. \(k\)</li>
+                        <li>2. \(\sin(ax+b), \cos(ax+b)\)</li>
+                        <li>3. \(e^{ax} \sin(ax+b), e^{ax} \cos(ax+b)\)</li>
+                        <li>4. \(x^m\)</li>
+                      </ul>
+                    </div>
+
+                    <div class="method">
+                      <p><strong>Rules:</strong></p>
+                      <ol>
+                        <li>\(Q(x) = e^{ax} P(x)\)</li>
+                        <li>Sum of \(Q(x)\) = sum of corresponding trial solutions</li>
+                      </ol>
+                    </div>
+
+                    <hr class="section-divider">
+
+                      <div class="example">
+                        <p><strong>Example 3:</strong> \((D^2 + 4) y = \sin 2x\)</p>
+
+                        <div class="solution">
+                          <p>\(Y_{CF} = C_1 \cos 2x + C_2 \sin 2x\)</p>
+                        </div>
+                      </div>
+
+                      <hr class="section-divider">
+
+                        <h2>Linear Differential Equations with Variable Coefficients</h2>
+
+                        <div class="method">
+                          <p><strong>Method:</strong></p>
+                          <p>\(x^n \frac{d^n y}{dx^n} + k_1 x^{n-1} \frac{d^{n-1} y}{dx^{n-1}} + \dots + k_n y = Q(x)\)</p>
+                          <ul>
+                            <li>1. Cauchy's homogeneous equation</li>
+                            <li>2. Legendre's equation</li>
+                          </ul>
+                        </div>
+
+                        <div class="method">
+                          <p><strong>Transformation:</strong></p>
+                          <p>Let \(x = e^t\), then \(\frac{dy}{dx} = \frac{1}{x} \frac{dy}{dt}\)</p>
+                          <p>\(x \frac{dy}{dx} = Dy\)</p>
+                          <p>\(x^2 \frac{d^2 y}{dx^2} = D(D-1) y\)</p>
+                          <p>\(x^3 \frac{d^3 y}{dx^3} = D(D-1)(D-2) y\)</p>
+                        </div>
+
+                        <hr class="section-divider">
+
+                          <div class="example">
+                            <p><strong>Example 4:</strong> Solve \(x^2 \frac{d^2 y}{dx^2} - 2x \frac{dy}{dx} + 2y = \log x\)</p>
+
+                            <div class="solution">
+                              <ol>
+                                <li>\(D(D-1) y - 2D y + 2y = t\)</li>
+                                <li>\((D^2 - 3D + 2) y = t\)</li>
+                                <li>\(Y_{CF} = (C_1 + C_2 t) e^t\)</li>
+                              </ol>
+                            </div>
+                          </div>
+
+                          <hr class="section-divider">
+
+                            <div class="example">
+                              <p><strong>Example 5:</strong> Solve \(x^2 \frac{d^2 y}{dx^2} + 2x \frac{dy}{dx} + 4y = 2x^2 + 4e^x\)</p>
+
+                              <div class="solution">
+                                <p>\((D^2 + 2D + 4) y = 2x^2 + 4e^x\)</p>
+                                <p>\(Y_{PI} = C_0 + C_1 x + C_2 x^2 + C_3 e^x\)</p>
+                              </div>
+                            </div>
+
+                          </div>
+
+<!-- =============== NEW LECTURE =============== -->
+
+<div id="lecture_20250905_191045" class="lecture-content" data-unit="unit1">
+  <h1 style="text-align: center; font-size: 2em; color: #336699;">Lecture 8: Higher Order ODE with Variable Coefficients</h1>
+  <hr class="section-divider">
+
+    <h2>Cauchy Euler Equation</h2>
+    <hr>
+      <h3>Reducing to Constant Coefficient Equations</h3>
+
+      <div class="method">
+        <p><strong>Method: Substitution</strong></p>
+        <p>Reduce to a constant coefficient equation using the substitution:</p>
+        <p>\(x = e^t\)</p>
+        <p>\(\log x = t\)</p>
+        <p>Then, the derivatives transform as follows:</p>
+        <p>\(\frac{dy}{dx} = \frac{dy}{dt} \frac{dt}{dx} = \frac{1}{x} \frac{dy}{dt}\)</p>
+        <p>\(\frac{d^2y}{dx^2} = \frac{d}{dx} \left( \frac{1}{x} \frac{dy}{dt} \right) = \frac{d}{dt} \left( \frac{1}{x} \frac{dy}{dt} \right) \frac{dt}{dx} = \left( -\frac{1}{x^2} \frac{dy}{dt} + \frac{1}{x} \frac{d^2y}{dt^2} \right) \frac{1}{x} = \frac{1}{x^2} \left( \frac{d^2y}{dt^2} - \frac{dy}{dt} \right)\)</p>
+        <p>Using the operator \(D = \frac{d}{dt}\), we have:</p>
+        <p>\(\frac{d^2y}{dx^2} = \frac{1}{x^2} (D^2 - D)y\)</p>
+      </div>
+
+      <div class="example">
+        <p><strong>Example:</strong></p>
+        <p>\(x^2 \frac{d^2y}{dx^2} - x \frac{dy}{dx} + y = \log x\)</p>
+        <p>Substituting \(x = e^t\), the equation becomes:</p>
+        <p>\((D^2 - 2D + 1)y = t\)</p>
+        <p>\((D - 1)^2 y = t\)</p>
+
+        <div class="solution">
+          <p><strong>Solution:</strong></p>
+          <div class="step">
+            <p><strong>Step 1: Complementary Function (\(y_{cf}\))</strong></p>
+            <p>Solve \((D - 1)^2 y = 0\)</p>
+            <p>\(y_{cf} = (C_1 + C_2 t)e^t\)</p>
+          </div>
+          <div class="step">
+            <p><strong>Step 2: Particular Integral (\(y_{pi}\))</strong></p>
+            <p>Let \(y_{pi} = \frac{1}{(D - 1)^2} t\)</p>
+            <p>\(y_{pi} = (1 - D)^{-2} t = (1 + 2D + ...)t = t + 2\)</p>
+          </div>
+          <div class="step">
+            <p><strong>Step 3: General Solution</strong></p>
+            <p>\(y = y_{cf} + y_{pi} = (C_1 + C_2 t)e^t + t + 2\)</p>
+            <p>Substituting \(t = \log x\), we obtain the final solution:</p>
+            <p>\(y = (C_1 + C_2 \log x)x + \log x + 2\)</p>
+          </div>
+        </div>
+      </div>
+      <hr class="section-divider">
+
+        <h2>Legendre's Equation</h2>
+        <hr>
+          <h3>Solving Legendre's Equation</h3>
+
+          <div class="method">
+            <p><strong>Method: Substitution</strong></p>
+            <p>Let \(ax + b = e^t\)</p>
+            <p>\(\log(ax + b) = t\)</p>
+            <p>Then:</p>
+            <p>\(\frac{dy}{dx} = \frac{dy}{dt} \frac{dt}{dx} = \frac{a}{ax + b} \frac{dy}{dt}\)</p>
+            <p>\(\frac{d^2y}{dx^2} = \frac{a^2}{(ax + b)^2} \left( \frac{d^2y}{dt^2} - \frac{dy}{dt} \right)\)</p>
+          </div>
+
+          <div class="example">
+            <p><strong>Example:</strong></p>
+            <p>\((1 + x)^2 \frac{d^2y}{dx^2} + (1 + x) \frac{dy}{dx} + y = 2 \sin(\log(1 + x))\)</p>
+            <p>Let \(1 + x = e^t\)</p>
+            <p>\((D^2 + 1)y = 2 \sin t\)</p>
+            <p>\(y_{cf} = C_1 \cos t + C_2 \sin t\)</p>
+            <p>\(y_{pi} = \frac{2 \sin t}{D^2 + 1} = -t \cos t\)</p>
+            <p>\(y = C_1 \cos(\log(1 + x)) + C_2 \sin(\log(1 + x)) - \log(1 + x) \cos(\log(1 + x))\)</p>
+          </div>
+          <hr class="section-divider">
+
+            <h2>Partial Differential Equation</h2>
+            <hr>
+              <h3>Classification of Partial Differential Equations</h3>
+              <ul>
+                <li><strong>Order:</strong> Highest-order derivative involved</li>
+                <li><strong>Linearity:</strong> Every term should have the dependent variable or its derivatives with degree 1</li>
+                <li><strong>Homogeneity:</strong> Every term has the same degree</li>
+                <li><strong>Linear PDE:</strong> dependent variables and their derivatives have degree 1</li>
+                <li><strong>Quasi-linear PDE:</strong> highest-order derivatives appear linearly</li>
+                <li><strong>Semi-linear PDE:</strong> highest-order derivatives appear linearly but may contain lower order terms</li>
+                <li><strong>Non-linear PDE:</strong> highest-order derivatives do not appear linearly</li>
+              </ul>
+            </div>
+
+<!-- =============== NEW LECTURE =============== -->
+
+<div id="lecture_20250905_191139" class="lecture-content" data-unit="unit1">
+  <h1 style="text-align: center; font-size: 2em; color: #336699;">Lecture 9: Partial Differential Equations</h1>
+  <hr class="section-divider">
+
+    <h2><span style="border-bottom: 2px solid #666;">Classification of Partial Differential Equations</span></h2>
+    <h3><span style="border-left: 5px solid #007bff;">Types of PDEs</span></h3>
+    <ul>
+      <li>Linear</li>
+      <li>Quasi-Linear</li>
+      <li>Semi-Linear</li>
+      <li>Non-Linear: Every equation in Quasi-Linear</li>
+    </ul>
+    <hr class="section-divider">
+
+      <h2><span style="border-bottom: 2px solid #666;">Solving Partial Differential Equations</span></h2>
+      <h3><span style="border-left: 5px solid #007bff;">Direct Method</span></h3>
+
+      <div class="example">
+        <p><strong>Example:</strong> \( \frac{\partial z}{\partial x} + x \frac{\partial z}{\partial y} = y z \)</p>
+
+        <div class="solution">
+          <p><strong>Solution:</strong></p>
+          <div class="step">
+            <ol>
+              <li>\(\frac{dx}{1} = \frac{dy}{x} = \frac{dz}{yz}\)</li>
+              <li>Integrate \(\frac{dx}{1} = \frac{dy}{x}\) keeping \(z\) as constant: \(\int dx = \int x dy \implies x = \frac{y^2}{2} + c_1(z)\)</li>
+              <li>Integrate \(\frac{dx}{1} = \frac{dz}{yz}\) keeping \(x\) as constant: \(\int yz dx = \int dz\)</li>
+              <li>This step is incomplete in the original content and requires further clarification to complete the solution.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="example">
+        <p><strong>Example:</strong> \( \frac{\partial z}{\partial x} + xy \frac{\partial z}{\partial y} = 0 \)</p>
+
+        <div class="solution">
+          <p><strong>Solution:</strong></p>
+          <div class="step">
+            <ol>
+              <li>\(\frac{dx}{1} = \frac{dy}{xy} = \frac{dz}{0}\)</li>
+              <li>The solution provided is incomplete and requires further steps to be considered complete.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+      <hr class="section-divider">
+
+        <h2><span style="border-bottom: 2px solid #666;">First Order Quasi-linear Equation</span></h2>
+        <p> \(P(x,y) \frac{\partial z}{\partial x} + Q(x,y) \frac{\partial z}{\partial y} = R(x,y,z) \implies \text{ Lagrange equation} \)</p>
+        <h3><span style="border-left: 5px solid #007bff;">Auxiliary Equation</span></h3>
+        <p>\(\frac{dx}{P} = \frac{dy}{Q} = \frac{dz}{R}\)</p>
+        <h3><span style="border-left: 5px solid #007bff;">Solve Simultaneously</span></h3>
+        <p>\(F(u_1, u_2) = c\)</p>
+
+        <div class="example">
+          <p><strong>Example:</strong> \( \frac{\partial z}{\partial x} + \frac{\partial z}{\partial y} = 3z \)</p>
+
+          <div class="solution">
+            <p><strong>Solution:</strong></p>
+            <div class="step">
+              <ol>
+                <li>A.E: \(\frac{dx}{1} = \frac{dy}{1} = \frac{dz}{3z}\)</li>
+                <li>\(\ln x = \ln y + c \implies x = e^c y = yc_1 \implies xy^{-1} = c_1\)</li>
+                <li>\(\frac{dz}{z} = 3dt \implies \ln z = 3t + c_2 \implies z = e^{3t}e^{c_2} = zc_2 \implies zy^{-3} = c_2\)</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+        <div class="example">
+          <p><strong>Example:</strong> \( y + z \frac{\partial z}{\partial x} - x \frac{\partial z}{\partial y} = 0 \)</p>
+
+          <div class="solution">
+            <p><strong>Solution:</strong></p>
+            <p>Multiplying by multipliers: \(x(y+z) + y(x+z) + z(-x-y) = xy + xz + xy + yz - xz - yz = 2xy = 0\)</p>
+          </div>
+        </div>
+
+        <div class="example">
+          <p><strong>Example:</strong> \((x^2) \frac{\partial z}{\partial x} + (y^2) \frac{\partial z}{\partial y} = xy - x^2\)</p>
+
+          <div class="solution">
+            <p><strong>Solution:</strong></p>
+            <div class="step">
+              <ol>
+                <li>\(\frac{dx}{x^2} = \frac{dy}{y^2} = \frac{dz}{xy - x^2}\)</li>
+                <li>\(\int \frac{dx}{x^2} = \int \frac{dy}{y^2} \implies -\frac{1}{x} = -\frac{1}{y} + c \implies \frac{1}{y} - \frac{1}{x} = c_1\)</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+        <hr class="section-divider">
+
+          <h2><span style="border-bottom: 2px solid #666;">Method of Separable Variables</span></h2>
+          <p>\(\frac{\partial^2 z}{\partial x^2} + \frac{\partial^2 z}{\partial y^2} + c^2 z = f(x,y,z)\)</p>
+          <div class="highlight">
+            <ul>
+              <li>\(B^2 - 4AC \ge 0 \implies \text{ Parabolic PDE}\)</li>
+              <li>\(B^2 - 4AC = 0 \implies \text{ Parabolic PDE}\)</li>
+              <li>\(B^2 - 4AC < 0 \implies \text{ Elliptic PDE}\)</li>
+            </ul>
+          </div>
+        </div>
+
+
+
+<!-- =============== NEW LECTURE =============== -->
+
+<div id="lecture_20250905_191542" class="lecture-content" data-unit="unit1">
+  <h1 style="text-align: center; font-size: 2em; color: #336699;">Lecture 10: Formation of Partial Differential Equations</h1>
+  <hr class="section-divider">
+
+    <h2>Derivation of PDE from \(z = f(x^2 + y^2)\)</h2>
+    <h3>Derivation from Implicit Function</h3>
+
+    <div class="formula">
+      <span>Key Formula:</span> \[2z = x^2 + y^2\]
+    </div>
+    <p>Assume \(a\) and \(b\) are constants.</p>
+
+    <div class="method">
+      <span>Method:</span>
+      <ol>
+        <li>Differentiating with respect to \(x\), keeping \(y\) constant:</li>
+        <li>\(\frac{\partial z}{\partial x} = x\)</li>
+        <li>Differentiating with respect to \(y\), keeping \(x\) constant:</li>
+        <li>\(\frac{\partial z}{\partial y} = y\)</li>
+        <li>Then, \(\frac{\partial z}{\partial x} = x \implies \frac{\partial^2 z}{\partial x^2} = 1\)</li>
+        <li>\(\frac{\partial z}{\partial y} = y \implies \frac{\partial^2 z}{\partial y^2} = 1\)</li>
+        <li>Therefore, \(\frac{\partial^2 z}{\partial x^2} + \frac{\partial^2 z}{\partial y^2} = 2\)</li>
+      </ol>
+    </div>
+
+    <h3>Alternative Derivation using Polar Coordinates</h3>
+
+    <div class="method">
+      <span>Method:</span>
+      <ol>
+        <li>Let \(x = r \cos \theta\), \(y = r \sin \theta\)</li>
+        <li>Then \(x^2 + y^2 = r^2\)</li>
+        <li>Substituting into the original equation: \(2z = r^2 \implies z = \frac{r^2}{2}\)</li>
+        <li>Order = 1</li>
+        <li>Degree = 1</li>
+        <li>The equation is homogeneous.</li>
+      </ol>
+    </div>
+    <p>The number of independent variables equals the number of arbitrary constants in the solution. This PDE is of order 1.</p>
+    <hr class="section-divider">
+
+      <h2>General Form of PDE</h2>
+      <h3>Derivation from the Function</h3>
+
+      <div class="formula">
+        <span>Key Formula:</span> \[z = f(x^2 + y^2)\]
+      </div>
+
+      <div class="method">
+        <span>Method:</span>
+        <ol>
+          <li>\(\frac{\partial z}{\partial x} = f'(x^2 + y^2)(2x)\) ①</li>
+          <li>\(\frac{\partial z}{\partial y} = f'(x^2 + y^2)(2y)\) ②</li>
+          <li>From ① and ②, we get:</li>
+          <li>\(\frac{\frac{\partial z}{\partial x}}{x} = \frac{\frac{\partial z}{\partial y}}{y} \implies y \frac{\partial z}{\partial x} = x \frac{\partial z}{\partial y}\)</li>
+        </ol>
+      </div>
+    </div>
+
+<!-- =============== NEW LECTURE =============== -->
+
+<div id="lecture_20250905_191715" class="lecture-content" data-unit="unit2">
+  <h1 style="text-align: center; font-size: 2em; color: #336699;">Unit 2 Lecture 1: Solving Differential Equations</h1>
+  <hr class="section-divider">
+
+    <h2><span style="font-weight:bold; color:#0056b3;">Major Learning Objectives</span></h2>
+    <h3>Understanding Solution Methods</h3>
+    <ul>
+      <li>Closed-form solutions: Analytic solutions expressed as a formula, e.g., \(Y = y_c(t) + y_p(t) = C_1e^t + C_2e^{-t} + y_es\)</li>
+      <li>Numerical methods: Approximating solutions using iterative techniques and discrete points.</li>
+    </ul>
+    <hr class="section-divider">
+
+      <h2><span style="font-weight:bold; color:#0056b3;">Numerical Solution Methods</span></h2>
+      <h3>Approximation Techniques</h3>
+      <ul>
+        <li>Power series methods: Finding solutions as infinite series (e.g., Picard's method, Taylor series method). These are single-step methods.</li>
+        <li>Step-by-step methods: Generating solutions iteratively using discrete steps (e.g., Euler's method, Runge-Kutta method, Adams-Bashforth method).</li>
+      </ul>
+      <hr class="section-divider">
+
+        <h2><span style="font-weight:bold; color:#0056b3;">Problem Types</span></h2>
+        <h3>Initial Value Problems (IVPs)</h3>
+
+        <div class="definition">
+          <p><strong>Definition:</strong> Problems where all initial conditions are specified at a single point, typically \(y(x_0) = y_0\).</p>
+        </div>
+        <h3>Boundary Value Problems (BVPs)</h3>
+
+        <div class="definition">
+          <p><strong>Definition:</strong> Problems involving second-order or higher differential equations with conditions specified at two or more points.</p>
+        </div>
+        <hr class="section-divider">
+
+          <h2><span style="font-weight:bold; color:#0056b3;">Picard's Method of Successive Approximation</span></h2>
+          <h3>Iterative Solution Approach</h3>
+          <ul>
+            <li>Uses iterative approximation to estimate the solution.</li>
+            <li>Approximations resemble Taylor series expansions.</li>
+            <li>Considers first-order differential equations of the form: \[\frac{dy}{dx} = f(x, y), \text{ given } y(x_0) = y_0\]</li>
+          </ul>
+          <p>The goal is to find the solution satisfying \(y(x_0) = y_0\).</p>
+          <p>Integrating the differential equation, we get:</p>
+
+          <div class="math-display">
+            \[ \int_{y_0}^{y} dy = \int_{x_0}^{x} f(x, y) dx \implies y = y_0 + \int_{x_0}^{x} f(x, y) dx \]
+          </div>
+          <p>The iterative approximations are as follows:</p>
+          <ol>
+            <li>1<sup>st</sup> approximation: \(y_1 = y_0 + \int_{x_0}^{x} f(x, y_0) dx\)</li>
+            <li>2<sup>nd</sup> approximation: \(y_2 = y_0 + \int_{x_0}^{x} f(x, y_1) dx\)</li>
+            <li>3<sup>rd</sup> approximation: \(y_3 = y_0 + \int_{x_0}^{x} f(x, y_2) dx\)</li>
+          </ol>
+          <p>This process generates a sequence of functions \(y_1, y_2, y_3, ...\) , with each approximation improving upon the previous one.</p>
+
+          <div class="example">
+            <p><strong>Example:</strong> \(\frac{dy}{dx} = y + x\), \(y(0) = 1\)</p>
+
+            <div class="solution">
+              <div class="step">
+                <p><strong>1<sup>st</sup> approximation:</strong></p>
+
+                <div class="math-display">
+                  \[y_1 = 1 + \int_0^x (1 + x) dx = 1 + x + \frac{x^2}{2}\]
+                </div>
+              </div>
+              <div class="step">
+                <p><strong>2<sup>nd</sup> approximation:</strong></p>
+
+                <div class="math-display">
+                  \[y_2 = 1 + \int_0^x (1 + x + \frac{x^2}{2}) dx = 1 + x + \frac{x^2}{2} + \frac{x^3}{6}\]
+                </div>
+              </div>
+              <div class="step">
+                <p><strong>3<sup>rd</sup> approximation:</strong></p>
+
+                <div class="math-display">
+                  \[y_3 = 1 + \int_0^x (1 + x + \frac{x^2}{2} + \frac{x^3}{6}) dx = 1 + x + \frac{x^2}{2} + \frac{x^3}{6} + \frac{x^4}{24}\]
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+<!-- =============== NEW LECTURE =============== -->
+
+<div id="lecture_20250905_191811" class="lecture-content" data-unit="unit2">
+  <h1 style="text-align: center; font-size: 2em; color: #336699;">Lecture 2 (2 9 25): Numerical Solution of ODEs</h1>
+  <hr class="section-divider">
+
+    <h2 style="font-size: 1.5em; border-bottom: 2px solid #ccc;">Single Step Methods</h2>
+    <ul>
+      <li>Picard Successive Approximation</li>
+      <li>Taylor Series Method</li>
+      <li>Euler's Method</li>
+      <li>Modified Euler Method</li>
+      <li>Adams-Bashforth Method</li>
+    </ul>
+    <hr class="section-divider">
+
+      <h2 style="font-size: 1.5em; border-bottom: 2px solid #ccc;">Picard Method</h2>
+
+      <div class="method">
+        <p>Given the equation \( \frac{dy}{dx} = f(x, y) \) with \( y(x_0) = y_0 \).</p>
+        <p>Integrating, we get:</p>
+
+        <div class="math-display">\[ y = y_0 + \int_{x_0}^{x} f(x, y) dx \]</div>
+        <p>Successive approximations are:</p>
+
+        <div class="math-display">\[ y_1 = y_0 + \int_{x_0}^{x} f(x, y_0) dx \]</div>
+
+        <div class="math-display">\[ y_2 = y_0 + \int_{x_0}^{x} f(x, y_1) dx \]</div>
+
+        <div class="math-display">\[ y_n = y_0 + \int_{x_0}^{x} f(x, y_{n-1}) dx \]</div>
+      </div>
+      <hr class="section-divider">
+
+        <h2 style="font-size: 1.5em; border-bottom: 2px solid #ccc;">Picard Successive Approximation</h2>
+
+        <div class="method">
+
+          <div class="math-display">\[ y_1 = y_0 + \int_{x_0}^{x} f(x, y_0) dx \]</div>
+
+          <div class="math-display">\[ y_2 = y_0 + \int_{x_0}^{x} f(x, y_1) dx \]</div>
+
+          <div class="math-display">\[ y_3 = y_0 + \int_{x_0}^{x} f(x, y_2) dx \]</div>
+        </div>
+        <hr class="section-divider">
+
+          <h2 style="font-size: 1.5em; border-bottom: 2px solid #ccc;">Taylor Series Method</h2>
+
+          <div class="method">
+            <p>Given \( \frac{dy}{dx} = f(x, y) \), \( y(x_0) = y_0 \)</p>
+            <p>Taylor series expansion:</p>
+
+            <div class="math-display">\[ y(x) = y(x_0) + (x - x_0)y'(x_0) + \frac{(x - x_0)^2}{2!}y''(x_0) + \frac{(x - x_0)^3}{3!}y'''(x_0) + ... \]</div>
+
+            <div class="example">
+              <p>Find by Taylor series method the value of y at x = 0.1</p>
+              <p>\( \frac{dy}{dx} = xy \), \( y(0) = 1 \)</p>
+
+              <div class="solution">
+                <p> \(y'(x) = xy\) </p>
+                <p> \(y'(0) = 0\) </p>
+                <p> \(y''(x) = y + xy'\) </p>
+                <p> \(y''(0) = 1\) </p>
+                <p> \(y'''(x) = 2y' + xy''\) </p>
+                <p> \(y'''(0) = 0\) </p>
+                <p>Therefore:</p>
+
+                <div class="math-display">\[ y(x) = 1 + 0x + \frac{x^2}{2} + 0x^3 + ... \]</div>
+                <p>For x = 0.1, y(0.1) ≈ 1.005</p>
+              </div>
+            </div>
+          </div>
+          <hr class="section-divider">
+
+            <h2 style="font-size: 1.5em; border-bottom: 2px solid #ccc;">Euler's Method</h2>
+
+            <div class="method">
+              <p>In Euler's method we approximate the curve of the solution by the tangent in each interval by the sequence of short lines.</p>
+              <p>Consider the first order DE:</p>
+
+              <div class="math-display">\[ \frac{dy}{dx} = f(x, y), \text{ given } y(x_0) = y_0 \]</div>
+              <p>The solution of this equation subject to given conditions represents a curve \(y = g(x)\) whose slope at any point \((x, y)\) is \(f(x, y)\).</p>
+            </div>
+
+            <div class="method">
+              <p>We approximate the curve by the tangent at P.</p>
+              <p>Let us divide LM into \(n\) sub-intervals, each with width \(h\).</p>
+
+              <div class="math-display">\[ y_1 = y_0 + hf(x_0, y_0) \]</div>
+
+              <div class="math-display">\[ y_2 = y_1 + hf(x_0 + h, y_1) \]</div>
+
+              <div class="math-display">\[ y_n = y_{n-1} + hf(x_0 + (n - 1)h, y_{n-1}) \]</div>
+            </div>
+
+            <div class="example">
+              <p>Example: Using Euler's method, find an approximate value of \(y\) corresponding to \(x = 1\) given that</p>
+
+              <div class="math-display">\[ \frac{dy}{dx} = x + y, \quad y(0) = 1 \]</div>
+            </div>
+
+            <div class="method">
+              <p>Here we are taking \(n = 10\) and \(h = 0.1\). The calculations are shown in the below table.</p>
+              <p>The true value of \(y\) from the exact solution when \(x = 1\) is \(y = 3.44\), whereas Euler's method gives \(y = 3.18\).</p>
+            </div>
+            <hr class="section-divider">
+
+              <h2 style="font-size: 1.5em; border-bottom: 2px solid #ccc;">Demerits of Euler's Method</h2>
+              <p>Unless \(h\) is small, the error bound is quite significant. Hence, there is a modification of this method called the modified Euler's method.</p>
+            </div>
