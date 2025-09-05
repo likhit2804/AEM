@@ -255,14 +255,18 @@ const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
 if (!fs.existsSync("uploads")) fs.mkdirSync("uploads");
 const upload = multer({ storage: multer.memoryStorage() });
 
-function cleanGeminiResponse(response) {
-    return response
-        .replace(/^```html\s*\n?/i, "")
-        .replace(/^```\s*\n?/i, "")
-        .replace(/\n?```$/i, "")
-        .replace(/^`+|`+$/g, "")
-        .trim();
-}
+
+
+// Import the utility functions
+const { 
+    cleanGeminiResponse, 
+    validateLectureHTML, 
+    generateLectureId, 
+    extractLectureMetadata, 
+    safeApiCall, 
+    postProcessHTML, 
+    createBackup 
+} = require('./utils/contentProcessing'); // Adjust path as needed
 
 app.post("/upload", adminAuth, upload.single("pdfFile"), async (req, res) => {
     if (!req.file) return res.status(400).json({ error: "No file uploaded." });
@@ -271,26 +275,63 @@ app.post("/upload", adminAuth, upload.single("pdfFile"), async (req, res) => {
         const userPrompt = req.body.prompt;
         const lectureUnit = req.body.unit || "unit1"; 
         const lectureTitle = req.body.lectureTitle || req.file.originalname.replace(".pdf", "");
+        const uniqueId = generateLectureId();
 
         // ----------------------
-        // Stage 1 Prompt: Transcription
+        // Stage 1 Prompt: Enhanced Transcription with Educational Understanding
         // ----------------------
         const defaultPrompt = `
-You are a lecture note converter. Your task is to **transcribe the uploaded PDF content into clean HTML with LaTeX for all mathematical content**. Follow these rules exactly:
+You are an expert educational content transcriber specializing in mathematics and engineering. Your task is to convert PDF lecture content into well-structured HTML while maintaining academic rigor and improving pedagogical flow.
 
-1. Transcribe the **entire PDF faithfully**. Do not skip, shorten, or paraphrase.
-2. Convert all math into LaTeX (inline → \\(...\\), block → \\[...\\]).
-3. Preserve structure: headings, numbering, lists, tables, alignment, examples.
-4. Remove all citations ([cite: X], etc.).
-5. Wrap the lecture in one container:
+**PRIMARY OBJECTIVES:**
+1. **Complete Fidelity**: Transcribe ALL content without omission or paraphrasing
+2. **Mathematical Accuracy**: Convert all mathematical notation to proper LaTeX
+3. **Educational Structure**: Organize content for optimal student comprehension
+4. **Logical Flow**: Ensure concepts build systematically
 
-<div id="lecture_{UNIQUE_ID}" class="lecture-content" data-unit="${lectureUnit}">
-   <h2>${lectureTitle}</h2>
-   [CONTENT HERE]
+**TRANSCRIPTION STANDARDS:**
+• **Mathematical Content**:
+  - Inline math: \\(expression\\) for variables and short formulas
+  - Block equations: \\[expression\\] for major equations and derivations
+  - Number important equations that are referenced later
+  - Preserve exact mathematical notation and symbols
+
+• **Content Organization**:
+  - Main topics → <h2> with clear, descriptive titles
+  - Subtopics → <h3> for major concepts within topics
+  - Definitions → <div class="definition"> with formal mathematical definitions
+  - Theorems → <div class="theorem"> for important mathematical results
+  - Examples → <div class="example"> for worked problems
+  - Solutions → <div class="solution"> for step-by-step workings
+  - Key formulas → <div class="formula"> for important equations to remember
+  - Methods/Procedures → <div class="method"> for systematic approaches
+
+• **Structural Guidelines**:
+  - Group related concepts together logically
+  - Place definitions before their applications
+  - Follow theory with relevant examples
+  - Include step-by-step solution processes
+  - Maintain the instructor's teaching sequence
+
+• **Academic Standards**:
+  - Use precise mathematical language
+  - Maintain formal academic tone
+  - Include all derivation steps
+  - Preserve notation consistency
+  - Keep original problem numbering
+
+**HTML OUTPUT STRUCTURE:**
+<div id="${uniqueId}" class="lecture-content" data-unit="${lectureUnit}">
+   <h1>${lectureTitle}</h1>
+   [SYSTEMATICALLY ORGANIZED CONTENT]
 </div>
 
-- {UNIQUE_ID} must be "lecture_YYYYMMDD_HHMMSS".
-- Output only this HTML block, nothing else.
+**CRITICAL REQUIREMENTS:**
+- Output ONLY the HTML container with content
+- NO explanatory text or commentary
+- Maintain complete mathematical accuracy
+- Ensure logical pedagogical progression
+- Use the exact ID provided: ${uniqueId}
 `;
 
         const finalPrompt = userPrompt?.trim() ? userPrompt : defaultPrompt;
@@ -302,52 +343,135 @@ You are a lecture note converter. Your task is to **transcribe the uploaded PDF 
             },
         };
 
-        // Stage 1: Generate lecture HTML
-        const stage1 = await model.generateContent([finalPrompt, filePart]);
-        const rawStage1Html = stage1.response.text();
+        // Stage 1: Generate initial transcription
+        console.log("Stage 1: Starting transcription...");
+        const stage1Response = await safeApiCall(
+            () => model.generateContent([finalPrompt, filePart]),
+            "Failed to transcribe PDF content"
+        );
+        
+        const rawStage1Html = stage1Response.response.text();
         const geminiHtml = cleanGeminiResponse(rawStage1Html);
 
+        // Validate Stage 1 output
+        const stage1Validation = validateLectureHTML(geminiHtml);
+        if (!stage1Validation.isValid) {
+            console.warn("Stage 1 validation issues:", stage1Validation.issues);
+        }
+
         // ----------------------
-        // Stage 2 Prompt: Notion-style formatting
+        // Stage 2 Prompt: Advanced Educational Enhancement
         // ----------------------
-     const notionPrompt = `
-You are a formatter. Take the following HTML lecture content and improve its **readability in a Notion-style layout**.  
+        const notionPrompt = `
+You are an educational content designer specializing in creating optimal learning materials for STEM subjects. Transform the provided HTML into a pedagogically superior format that enhances student comprehension and retention.
 
-### Rules:
-1. Use clean, minimal HTML structure.  
-2. Keep a proper hierarchy:  
-   - <h1> → lecture title  
-   - <h2>, <h3> → subsections  
-3. Wrap important notes in <blockquote>.  
-4. Use <div class="example"> for examples and <div class="solution"> for solutions.  
-5. Use semantic <ul>/<ol> for bullet points or steps.  
-6. Math:  
-   - Inline math → \\(...\\)  
-   - Block math → \\[...\\] inside <div class="math-display">.  
-7. Do not remove or paraphrase any content. Only restructure and style.  
-8. Wrap the final result in:  
-   <div id="lecture_{UNIQUE_ID}" class="lecture-content" data-unit="${lectureUnit}">  
-      [FORMATTED CONTENT]  
-   </div>  
+**ENHANCEMENT OBJECTIVES:**
+1. **Cognitive Load Optimization**: Structure content to minimize extraneous cognitive load
+2. **Visual Hierarchy**: Create clear information architecture for easy scanning
+3. **Learning Progression**: Ensure smooth knowledge building from basic to complex
+4. **Retention Aids**: Highlight key concepts and create memorable presentations
 
-- {UNIQUE_ID} must be "lecture_YYYYMMDD_HHMMSS".  
-- Output only this HTML block. No explanations or extra text.  
+**FORMATTING SPECIFICATIONS:**
 
-CONTENT TO FORMAT:  
+• **Hierarchical Enhancement**:
+  - <h1>: Lecture title (prominent, centered with thematic styling)
+  - <h2>: Major learning objectives/topics with visual separators
+  - <h3>: Key concepts within topics (with left border accent)
+  - <h4>: Supporting details and sub-concepts
+
+• **Educational Containers** (with auto-generated labels):
+  - <div class="definition">: Formal definitions (blue accent, "Definition" label)
+  - <div class="theorem">: Mathematical theorems (gradient background, "Theorem" label)
+  - <div class="formula">: Key formulas to memorize (bordered, "Key Formula" label)
+  - <div class="example">: Worked examples (amber accent, "Example" label)
+  - <div class="solution">: Step-by-step solutions (nested, "Solution" label)
+  - <div class="method">: Systematic procedures (green accent, "Method" label)
+  - <blockquote>: Important notes and insights
+
+• **Mathematical Enhancement**:
+  - Inline math: \\(expression\\) with subtle background highlighting
+  - Block equations: \\[expression\\] in <div class="math-display">
+  - Important equations: <div class="math-display numbered"> for referencing
+  - Formula summaries: <div class="formula"> for key equations
+
+• **Learning Aids**:
+  - <div class="step">: Individual solution steps for complex problems
+  - <ol>: Sequential procedures and algorithms
+  - <ul>: Lists of properties, rules, or related concepts
+  - <div class="highlight">: Key takeaways and important points
+
+• **Visual Structure**:
+  - <hr class="section-divider">: Between major topic sections
+  - Clear spacing between different content types
+  - Consistent indentation for solution steps
+  - Logical grouping of related materials
+
+**PEDAGOGICAL PRINCIPLES:**
+• **Scaffolding**: Build complexity gradually
+• **Chunking**: Group related information together  
+• **Signaling**: Use visual cues to highlight important content
+• **Coherence**: Maintain logical flow throughout
+• **Worked Examples**: Provide complete solution processes
+
+**CONTENT PRESERVATION RULES:**
+- Maintain ALL mathematical content exactly as transcribed
+- Preserve the instructor's teaching sequence
+- Keep all numerical examples and their solutions
+- Maintain notation consistency throughout
+- Do not alter any mathematical expressions or equations
+
+**OUTPUT REQUIREMENTS:**
+<div id="${uniqueId}" class="lecture-content" data-unit="${lectureUnit}">
+   [PEDAGOGICALLY ENHANCED CONTENT]
+</div>
+
+**CONSTRAINTS:**
+- Use the exact ID provided: ${uniqueId}
+- Output ONLY the enhanced HTML container
+- NO additional explanations or meta-commentary
+- Maintain complete content fidelity while improving structure
+
+CONTENT TO ENHANCE:
 ${geminiHtml}
 `;
 
+        // Stage 2: Educational enhancement
+        console.log("Stage 2: Enhancing educational structure...");
+        const stage2Response = await safeApiCall(
+            () => model.generateContent([notionPrompt]),
+            "Failed to enhance educational structure"
+        );
+        
+        const rawStage2Html = stage2Response.response.text();
+        const enhancedHtml = cleanGeminiResponse(rawStage2Html);
 
-        const stage2 = await model.generateContent([notionPrompt]);
-        const formattedHtml = cleanGeminiResponse(stage2.response.text());
+        // Post-process for consistent formatting
+        const finalHtml = postProcessHTML(enhancedHtml);
+
+        // Final validation
+        const finalValidation = validateLectureHTML(finalHtml);
+        if (!finalValidation.isValid) {
+            console.warn("Final validation issues:", finalValidation.issues);
+        }
+
+        // Extract metadata for response
+        const metadata = extractLectureMetadata(finalHtml);
+        console.log("Extracted metadata:", metadata);
 
         // ----------------------
-        // Save to lectures.html
+        // Save to lectures.html with backup
         // ----------------------
         const contentDir = path.join(__dirname, "content");
         const lecturesFilePath = path.join(contentDir, "lectures.html");
         fs.mkdirSync(contentDir, { recursive: true });
 
+        // Create backup before modification
+        const backupPath = createBackup(lecturesFilePath);
+        if (backupPath) {
+            console.log("Backup created:", backupPath);
+        }
+
+        // Read existing content
         let existingContent = "";
         try {
             existingContent = fs.readFileSync(lecturesFilePath, "utf-8");
@@ -355,30 +479,53 @@ ${geminiHtml}
             existingContent = "";
         }
 
-        const updatedContent = existingContent + "\n" + formattedHtml;
+        // Append new content with proper separation
+        const separator = existingContent ? "\n\n<!-- =============== NEW LECTURE =============== -->\n\n" : "";
+        const updatedContent = existingContent + separator + finalHtml;
         fs.writeFileSync(lecturesFilePath, updatedContent);
 
         // Save original PDF
-        const tempFilename = Date.now() + "-" + req.file.originalname;
-        fs.writeFileSync(path.join("uploads", tempFilename), req.file.buffer);
+        const tempFilename = `${Date.now()}-${req.file.originalname}`;
+        const pdfPath = path.join("uploads", tempFilename);
+        fs.writeFileSync(pdfPath, req.file.buffer);
 
         // ----------------------
-        // Response
+        // Comprehensive Response
         // ----------------------
         res.json({
             success: true,
-            pdfUrl: `/uploads/${tempFilename}`,
-            rawHtml: geminiHtml,       // Stage 1
-            notionHtml: formattedHtml, // Stage 2
-            message: "Lecture added successfully in Notion style!"
+            message: "Lecture processed with advanced educational formatting!",
+            data: {
+                pdfUrl: `/uploads/${tempFilename}`,
+                lectureId: uniqueId,
+                metadata: metadata,
+                processing: {
+                    stage1Validation: stage1Validation,
+                    finalValidation: finalValidation,
+                    backupCreated: !!backupPath
+                }
+            },
+            content: {
+                rawTranscription: geminiHtml,
+                enhancedHtml: finalHtml
+            }
         });
 
     } catch (error) {
-        console.error("Error processing file with Gemini:", error);
-        res.status(500).json({ success: false, error: "Failed to process file with AI." });
+        console.error("Upload processing error:", error);
+        
+        // Detailed error response
+        res.status(500).json({ 
+            success: false, 
+            error: "Failed to process lecture content",
+            details: {
+                message: error.message,
+                stage: error.stage || "unknown",
+                timestamp: new Date().toISOString()
+            }
+        });
     }
 });
-
 // =============================
 // 🚀 START SERVER
 // =============================

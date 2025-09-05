@@ -1,356 +1,387 @@
+<div id="lecture_20250905_185242" class="lecture-content" data-unit="unit1">
+  <h1 style="text-align: center; font-size: 2em; color: #336699;">Lecture 1(6 8 25) (1)</h1>
+  <hr class="section-divider">
 
-<div id="lecture_20241027_112630" class="lecture-content" data-unit="unit1">
-  <h1>Lecture 1(6 8 25)</h1>
-  <h2>What is a differential equation?</h2>
-  <ul>
-    <li>An equation expressing a relation between functions, their derivatives, and the variables is called a differential equation.</li>
-    <li>Classification of differential equations:
-      <ul>
-        <li>Ordinary differential equations</li>
-        <li>Partial differential equations</li>
-      </ul>
-    </li>
-  </ul>
-  <p> \( \frac{d^ny}{dx^n}, \frac{d^2y}{dx^2} \)</p>
-  <p> \((x,y) \frac{dy}{dx} = 1 + \frac{y}{x}\) </p>
-  <h2>Ordinary differential equations</h2>
-  <ul>
-    <li>An ordinary differential equation is a differential equation in which the dependent variable (say <i>y</i>) depends only on one independent variable (say <i>x</i>).</li>
-    <li> \( F(x, y, y', y'', y''',.............)= 0 \) </li>
-    <li>Example:
-      <div class="example">\( \frac{dy}{dx}= sinx+cosx \)</div>
-    </li>
-  </ul>
-  <h2>Partial differential equations</h2>
-  <ul>
-    <li>A partial differential equation is a differential equation in which <i>y</i> depends on two or more independent variables <i>x, t...</i>
-      <div class="example">\( y = xt^2 \)</div>
-    </li>
-    <li> \( F(x,t,y,\frac{\partial y}{\partial x},\frac{\partial y}{\partial t},\frac{\partial^2y}{\partial x^2},\frac{\partial^2y}{\partial t^2},\frac{\partial^2y}{\partial x \partial t},.............)=0 \) </li>
-    <li>Example:
-      <div class="example">\( \frac{\partial y}{\partial x} + t\frac{\partial y}{\partial t} = 2y \)</div>
-    </li>
-  </ul>
-  <h3>Order and Degree of Differential Equations</h3>
-  <ul>
-    <li><b>Order:</b> The order of the highest derivative involved in a differential equation is called the order of the differential equation. \( F(x, y, y', \frac{d^2y}{dx^2}, \frac{d^ny}{dx^n}) \)</li>
-    <li><b>Degree:</b> The degree of a differential equation is the degree or power of the highest-ordered derivative present in the equation, after the equation is made free from radicals and fractions in respect of derivatives.
-      <div class="example">\( (\frac{d^3y}{dx^3})^2 (\frac{d^2y}{dx^2}) + xy = 0 \)</div>
-    </li>
-  </ul>
-  <h2>Examples: Find order and degree</h2>
-  <ol>
-    <li>\( \frac{d^2y}{dx^2} = 0 \) order = 2, degree = 1</li>
-    <li>\( y = x \frac{dy}{dx} + \frac{a}{\frac{dy}{dx}} \) O=1, d=2
-      <div class="solution">\( y \frac{dy}{dx} = x (\frac{dy}{dx})^2 + a \) (2,1)</div>
-    </li>
-    <li>\( \frac{d^2y}{dx^2} + m^2 y = 0 \) (2,1)</li>
-    <li>\( y \frac{d^2y}{dx^2} - (\frac{dy}{dx})^2 = xy^2 logy \) (2,1)</li>
-    <li>\( 1 + (\frac{dy}{dx})^2 = \frac{d^2y}{dx^2} \) (2,2)</li>
-    <li>\( y = x \frac{dy}{dx} + a \sqrt{1 + (\frac{dy}{dx})^2} \) (1,2)</li>
-  </ol>
-  <h2>Practical Approach to Differential Equations</h2>
-  <p>Differential equations arise in many engineering and physical problems. The approach of an engineer to the study of differential equations has to be practical, and so, it consists of (1) formation of a differential equation from the physical conditions, called modelling; (2) solution of a differential equation under the initial/boundary conditions; and (3) the physical interpretation of the results.</p>
-  <h2>Formation of a differential equation</h2>
-  <p>We form a DE in order to eliminate the constant.</p>
-  <p>Order of the equation formed = number of constants to be eliminated.</p>
-  <p>Example:</p>
-  <div class="example">
-    <p>\( y = ax^2 + bx \)</p>
-    <p>\( \frac{dy}{dx} = 2ax + b \)</p>
-    <p>\( \frac{d^2y}{dx^2} = 2a \)</p>
-    <p>\( a = \frac{1}{2}\frac{d^2y}{dx^2} \)</p>
-    <p>\( b = \frac{dy}{dx} - 2ax = \frac{dy}{dx} - x \frac{d^2y}{dx^2} \)</p>
-    <p>\( y = ax^2 + bx \)</p>
-    <p>\( y = (\frac{1}{2}\frac{d^2y}{dx^2})x^2 + (\frac{dy}{dx} - x \frac{d^2y}{dx^2})x \)</p>
-    <p>order = 2</p>
-    <p>degree = 1</p>
-  </div>
-  <div class="example">
-    <ul>
-      <li>\( 2y = Ae^{2x} + Be^{-2x} \)</li>
-      <li>\( Y' = 2Ae^{2x} - 2Be^{-2x} \)</li>
-      <li>\( Y'' = 4Ae^{2x} + 4Be^{-2x} = 4(Ae^{2x} + Be^{-2x}) = 4y \)</li>
-      <li>\( Y'' - 4y = 0 \)</li>
-    </ul>
-  </div>
-  <h2>Solution of a differential equation:</h2>
-  <ul>
-    <li>A solution of a differential equation is the relation between the variables which satisfies the given differential equation.</li>
-    <li>Example:</li>
-    <li>The solution of the differential equation \( \frac{dy}{dx} - 2y = 0 \) is given by \( y = ce^{2x} \)</li>
-  </ul>
-  <ul>
-    <li><b>General solution:</b> The general solution of the differential equation is that in which the number of arbitrary constants is equal to the order of the given differential equation. \( y = ce^{2x} \)</li>
-    <li><b>Particular solution:</b> A particular solution is that solution which can be obtained from the general solution by giving particular values to the arbitrary constants. Ex- \( y = 2e^{2x} \)</li>
-    <li><b>Singular solution:</b> A singular solution is the solution of the differential equation which is neither a general solution nor a particular solution. Only some equations have a singular solution.</li>
-  </ul>
-  <ul>
-    <li>Example: The solution of the DE \( (\frac{dy}{dx})^2 - 4y = 0 \) is</li>
-    <li>\( y = (x + a)^2 \) is the general solution</li>
-    <li>\( y = x^2 \) is the particular solution</li>
-    <li>singular solution ???</li>
-    <li>\( Y = 0 \) is a singular solution</li>
-  </ul>
-  <h2>First-order first-degree differential equations</h2>
-  <ul>
-    <li>The first-order first-degree differential equations are in the form of
-      <div class="example">\( F(x, y(x), \frac{dy}{dx}) = 0 \)</div>
-    </li>
-  </ul>
-  <ul>
-    <li>Classification of first-order first-degree differential equations:
-      <ol>
-        <li>Variable separable equations</li>
-        <li>Reducible to variable separable</li>
-        <li>Homogeneous equations</li>
-        <li>Non-homogeneous but reducible to homogeneous equations</li>
-        <li>Linear DE</li>
-        <li>Non-linear but reducible to linear DE</li>
-        <li>Exact equations</li>
-        <li>Inexact equations but reducible to exact equations</li>
-      </ol>
-    </li>
-  </ul>
-  <h2>I. Variable Separable Equations</h2>
-  <ul>
-    <li>If in an equation it is possible to separate all the functions of <i>x</i> and <i>dx</i> to one side and all the functions of <i>y</i> and <i>dy</i> to the other side, then the variables are said to be separable. The general form of such equations is</li>
-    <li>\( f(x)dx = g(y)dy \)</li>
-    <li>Solution of variable separable equations is obtainable by integrating on both sides of the equation
-      <div class="example">\( \int f(x)dx = \int g(y)dy + c \) is the solution</div>
-    </li>
-  </ul>
-  <ul>
-    <li>Example: solve \( (1 - x)dy + (1 - y)dx = 0 \)</li>
-    <li>\( (1 - x)dy = (y - 1)dx \)</li>
-    <li>\( \frac{1}{(1 - x)}dx = \frac{1}{(y - 1)}dy \) variable and separable equation</li>
-    <li>\( \int \frac{1}{(1 - x)}dx = \int \frac{1}{(y - 1)}dy \)</li>
-    <li>\( -log(1 - x) = log(y - 1) + c \)</li>
-    <li>\( log(y - 1) + log(1 - x) + c = 0 \)</li>
-    <li>\( log(1 - x)(y - 1) = -c \)</li>
-    <li>\( (1 - x)(y - 1) = e^{-c} \)</li>
-    <li>\( (1 - x)(1 - y) = A \) where \( A = e^{-c} \to \) general solution</li>
-  </ul>
-  <h2>II. Equations reducible to variable separable</h2>
-  <ul>
-    <li>By choosing a suitable substitution, some first-order first-degree differential equations are reducible to variable separable equations. Then we follow the same solution method of variable separable equations (i.e., by integrating the equation).</li>
-    <li>Example: Solve \( \frac{dy}{dx} = (4x + y + 1)^2 \)</li>
-  </ul>
-</div>
-```
-<div id="lecture_20241027_163601" class="lecture-content" data-unit="unit1">
-  <h1>Lecture 2</h1>
-  <h2>First Order First Degree DE</h2>
-  <p>Power of highest derivative</p>
-  <p> \(F(x, \frac{dy}{dx}) = 0\)</p>
-  <h2>① Variable Separable</h2>
-  <p>\(f(x)dx = f(y)dy\)</p>
-  <p>By integrating on both sides:</p>
-  <p>\(\int f(x)dx = \int f(y)dy\)</p>
-  <div class="example">
-    <p>\(\frac{dy}{dx} = x^2 + x + y\)</p>
-    <p>\(\frac{dy}{dx} - y = x^2 + x\)</p>
-    <p>This is not directly separable.</p>
-  </div>
-  <div class="solution">
-    <p>Consider a different example:</p>
-    <p>\(\frac{dy}{dx} = (x^2 + x) \implies dy = (x^2 + x)dx\)</p>
-    <p>\(\int dy = \int (x^2 + x)dx\)</p>
-    <p>Then we have \(y = \frac{x^3}{3} + \frac{x^2}{2} + C\)</p>
-  </div>
-  <div class="example">
-      <p>Let's solve \(\frac{dy}{dx} = e^y(x^2 + x)\)</p>
-  </div>
-  <div class="solution">
-    <p>\(\int \frac{dy}{e^y} = \int (x^2 + x)dx\)</p>
-    <p>\(e^{-y} = \frac{x^3}{3} + \frac{x^2}{2} + C\)</p>
-    <p>\(-y = \log(\frac{x^3}{3} + \frac{x^2}{2} + C)\)</p>
-    <p>\(-y = \log(\frac{2x^3 + 3x^2 + 6C}{6})\)</p>
-    <p>\(y = -\log(\frac{2x^3 + 3x^2 + C}{6})\)</p>
-    <p>This is the general solution.</p>
-    <p>If \(y(0) = 1\), then at \(x = 0\), \(y = 1\).</p>
-  </div>
-  <h2>Ⅱ Reducible to Variable Separable</h2>
-  <p>Using substitution:</p>
-  <p>Reduce to V.S \(\int f(x)dx = \int f(y)dy\)</p>
-  <div class="example">
-    <p>\(\frac{dy}{dx} = (4x + y + 1)^2\)</p>
-    <p>Substitute \(4x + y + 1 = t\)</p>
-    <p>Differentiating w.r.t \(x\): \(4 + \frac{dy}{dx} = \frac{dt}{dx}\)</p>
-    <p>\(\frac{dy}{dx} = \frac{dt}{dx} - 4\)</p>
-    <p>\(\frac{dt}{dx} - 4 = t^2\)</p>
-    <p>\(\frac{dt}{dx} = t^2 + 4\)</p>
-    <p>This is now variable separable.</p>
-    <p>\(\int \frac{dt}{t^2 + 4} = \int dx\)</p>
-    <p>\(\frac{1}{2} \tan^{-1}(\frac{t}{2}) = x + C\)</p>
-    <p>\(\frac{1}{2} \tan^{-1}(\frac{4x + y + 1}{2}) = x + C\)</p>
-    <p>This is the general solution.</p>
-    <p>If \(x = 0, y = 1\), then \(\frac{1}{2} \tan^{-1}(1) = C\)</p>
-    <p>\(C = \frac{\pi}{8}\)</p>
-    <p>\(\frac{1}{2} \tan^{-1}(\frac{4x + y + 1}{2}) = x + \frac{\pi}{8}\)</p>
-    <p>This is the particular solution.</p>
-  </div>
-  <h2>Ⅲ Homogenous DE</h2>
-  <p>\(\frac{dy}{dx} = f(x, y)\)</p>
-  <p>All homogeneous functions of the same degree:</p>
-  <p>\(f(tx, ty) = t^n f(x, y)\)</p>
-  <div class="example">
-    <p>\(f(tx, ty) = x + y + z\)</p>
-    <p>\(f(tx, ty) = tx + ty + z \ne t^n(x + y + z)\)</p>
-    <p>Not homogenous.</p>
-    <p>Substitution: \(y = vx\)</p>
-    <p>\(\frac{dy}{dx} = v + x\frac{dv}{dx}\)</p>
-    <p>Variable separable.</p>
-    <p>\((x^2 - y^2)dx = xydy\)</p>
-    <p>\(\frac{dy}{dx} = \frac{x^2 - y^2}{xy}\)</p>
-    <p>\(x^2 - y^2 = t^2(x^2 - y^2)\)</p>
-    <p>\(y = vx\)</p>
-    <p>\(\frac{dy}{dx} = v + x\frac{dv}{dx}\)</p>
-  </div>
-</div>
-```
-<div id="lecture_20241027_163000" class="lecture-content" data-unit="unit1">
-  <h1>Lecture 3: Reducible to Homogeneous Equation</h1>
+    <h2 style="border-bottom: 2px solid #ccc; padding-bottom: 10px;">What is a Differential Equation?</h2>
+    <p>An equation expressing a relation between functions, their derivatives, and the variables is called a differential equation.</p>
+    <hr class="section-divider">
 
-  <h2>Reducible to Homogeneous Equation</h2>
-  <p>&#8204;<span style="font-size:larger;">&#8204;<span style="text-decoration:overline;">dy</span></span><br>
-  &#8204;&#8204;&#8204;&#8204;<span style="font-size:larger;">dx</span> = <span style="font-size:larger;">ax+by+c</span><br>
-  &#8204;&#8204;&#8204;&#8204;<span style="font-size:larger;">a'x+b'y+c'</span></p>
+      <h2 style="border-bottom: 2px solid #ccc; padding-bottom: 10px;">Classification of Differential Equations</h2>
+      <h3 style="border-left: 5px solid #007bff; padding-left: 10px;">Ordinary Differential Equations</h3>
+      <p>An ordinary differential equation is a differential equation in which the dependent variable (say \(y\)) depends only on one independent variable (say \(x\)).</p>
 
-  <h3>Case (1)</h3>
-  <p><span style="font-size:larger;">x = X+h</span><br>
-  <span style="font-size:larger;">y = Y+k</span></p>
-  <p><span style="font-size:larger;"><span style="text-decoration:overline;">dy</span></span><br>
-  <span style="font-size:larger;">dx</span> = <span style="font-size:larger;">ax+by<br>
-  a'x+b'y</span></p>
-  <p><span style="font-size:larger;">Y = vx</span><br>
-  Variable separable</p>
-  <p><span style="font-size:larger;">h = <span style="text-decoration:overline;">ab'-a'b</span></span><br>
-  <span style="font-size:larger;">a'c-ac'</span></p>
-  <p>Homogeneous</p>
-  <p>Substitution<br>
-  t = ax+by</p>
+      <div class="formula">
+        <div class="formula-label">Key Formula</div>
+        \[\ F(x, y, y', y'', y'''.............) = 0\ \]
+      </div>
 
-  <h3>Case (2)</h3>
-  <p>(2x+3y+4)dx + (4x+6y+5)dy</p>
-  <p><span style="font-size:larger;"><span style="text-decoration:overline;">dy</span></span><br>
-  <span style="font-size:larger;">dx</span> = <span style="font-size:larger;">2x+3y+4</span><br>
-  <span style="font-size:larger;">4x+6y+5</span></p>
-  <p>a = 2<br>
-  b = 3<br>
-  c = 4<br>
-  a' = 4<br>
-  b' = 6<br>
-  c' = 5</p>
-  <p>2x+3y+4<br>
-  4x+6y+5</p>
-  <p><span style="font-size:larger;">a = <span style="text-decoration:overline;">2</span><br>
-  a' = <span style="text-decoration:overline;">4</span></span><span style="font-size:larger;"><span style="text-decoration:overline;">b=<span style="text-decoration:overline;">3</span></span><br>
-  b' = <span style="text-decoration:overline;">6</span></span><span style="font-size:larger;">c = <span style="text-decoration:overline;">4</span><br>
-  c' = <span style="text-decoration:overline;">5</span></span></p>
-  <p><span style="font-size:larger;"><span style="text-decoration:overline;">a</span></span> = <span style="font-size:larger;"><span style="text-decoration:overline;">4</span></span><br>
-  <span style="font-size:larger;"><span style="text-decoration:overline;">a'</span></span> = <span style="font-size:larger;"><span style="text-decoration:overline;">2</span></span></p>
-  <p>t = 2x+3y<br>
-  dt = 2dx+3dy<br>
-  <span style="font-size:larger;"><span style="text-decoration:overline;">dy</span></span><br>
-  <span style="font-size:larger;">dx</span> = (<span style="font-size:larger;">-2</span>/3)</p>
-  <p>22A+0=5<br>
-  <span style="font-size:larger;">7</span>+8=5<br>
-  5-44<br>
-  A=2/7<br>
-  B=-2</p>
-  <p>A = 2/7<br>
-  B = -2</p>
-  <p><span style="font-size:larger;">2</span>-<span style="font-size:larger;">9</span><br>
-  <span style="font-size:larger;">7</span></p>
-  <p><span style="font-size:larger;">2</span>+<span style="font-size:larger;">9</span>log(7(2x+3y)+22) = 7+c<br>
-  49</p>
+      <div class="example">
+        <div class="example-label">Example</div>
 
-  <h2>Linear Differential Equation</h2>
-  <p>dependent Variable<br>
-  all its derivative <span style="font-size:larger;"><span style="text-decoration:overline;">dy</span></span>, <span style="font-size:larger;"><span style="text-decoration:overline;">d<sup>2</sup>y</span></span>... appear in degree 1<br>
-  and also x &amp; y are not multiplied together.</p>
+        <div class="formula">
+          \[\ \frac{dy}{dx} = \sin x + \cos x\ \]
+        </div>
+      </div>
 
-  <h3>Linear Equation</h3>
-  <p>(i) <span style="font-size:larger;">dy</span>/<span style="font-size:larger;">dx</span> +Py = Q<br>
-  (ii) <span style="font-size:larger;">a<sup>2</sup>y</span>/<span style="font-size:larger;">dx<sup>2</sup></span> +P<span style="font-size:larger;">dy</span>/<span style="font-size:larger;">dx</span>+Qy=0</p>
-  <p><span style="font-size:larger;"><span style="text-decoration:overline;">dy</span></span><br>
-  <span style="font-size:larger;">dx</span> = <span style="font-size:larger;">2x+3y+9</span><br>
-  <span style="font-size:larger;">4y+y+5</span></p>
-  <p><span style="font-size:larger;"><span style="text-decoration:overline;">dt</span></span><br>
-  <span style="font-size:larger;">dx</span> = <span style="font-size:larger;">2</span>/<span style="font-size:larger;">3</span></p>
-  <p><span style="font-size:larger;"><span style="text-decoration:overline;">dt</span></span><br>
-  <span style="font-size:larger;">dx</span> = 3(t+4)+2<br>
-  2t+5</p>
-  <p><span style="font-size:larger;"><span style="text-decoration:overline;">dt</span></span><br>
-  <span style="font-size:larger;">dx</span> = 3t+12+4t+10<br>
-  2t+5 = <span style="font-size:larger;">7t+22</span><br>
-  <span style="font-size:larger;">2t+5</span></p>
-  <p><span style="font-size:larger;"><span style="text-decoration:overline;">dt</span></span><br>
-  <span style="font-size:larger;">dx</span> = <span style="font-size:larger;">7t+22</span><br>
-  <span style="font-size:larger;">2t+5</span></p>
-  <p><span style="font-size:larger;">2t+5</span> dt = <span style="font-size:larger;">7t+22</span> dx</p>
-  <p>Partial fraction</p>
-  <p><span style="font-size:larger;">2t+5</span><br>
-  <span style="font-size:larger;">7t+22</span> = <span style="font-size:larger;">A</span>+<span style="font-size:larger;">B</span><br>
-  <span style="font-size:larger;">7t+22</span></p>
-  <p><span style="font-size:larger;">2t+5</span> = <span style="font-size:larger;">A(7t+22)+B</span><br>
-  <span style="font-size:larger;">7t+22</span></p>
-  <p>let t=0<br>
-  22A+B = 5<br>
-  let t=-1<br>
-  29A+B = 7</p>
+      <h3 style="border-left: 5px solid #007bff; padding-left: 10px;">Partial Differential Equations</h3>
+      <p>A partial differential equation is a differential equation in which \(y\) depends on two or more independent variables \(x, t...\)</p>
 
-  <h2>First Order Linear DE (Leibnitz equation)</h2>
-  <p>In the form of</p>
-  <p><span style="font-size:larger;"><span style="text-decoration:overline;">dy</span></span><br>
-  <span style="font-size:larger;">dx</span> +P(x)y = Q(x)</p>
-  <p>P, Q are function of x.</p>
+      <div class="formula">
+        <div class="formula-label">Key Formula</div>
+        \[\ F\left(x, t, y, \frac{\partial y}{\partial x}, \frac{\partial y}{\partial t}, \frac{\partial^2 y}{\partial x^2}, \frac{\partial^2 y}{\partial t^2}, \frac{\partial^2 y}{\partial x \partial t}, ...\right) = 0\ \]
+      </div>
 
-  <h3>Method to solve Linear ODE</h3>
-  <p>Integrating factor → M(x)</p>
-  <p>M(x)[<span style="font-size:larger;"><span style="text-decoration:overline;">dy</span></span><br>
-  <span style="font-size:larger;">dx</span> +P(x)y = Q(x)]</p>
-  <p>Consider<br>
-  <span style="font-size:larger;"><span style="text-decoration:overline;">d</span></span>/<span style="font-size:larger;">dx</span>(M(x)y) = M(x)Q(x)</p>
-  <p>M'(x) = M(x)P(x)</p>
-  <p><span style="font-size:larger;">∫</span>M(x) dx = <span style="font-size:larger;">∫</span>P(x)dx</p>
-  <p>lnM(x) = <span style="font-size:larger;">∫</span>P(x)dx+c</p>
-  <p><span style="font-size:larger;"><span style="text-decoration:overline;">dy</span></span><br>
-  <span style="font-size:larger;">dx</span> +P(x)y = Q(x)</p>
-  <p>I.F = <span style="font-size:larger;">e<sup>∫P(x)dx</sup></span></p>
-  <p><span style="font-size:larger;">∫</span>e<sup>∫P(x)dx</sup><span style="font-size:larger;"><span style="text-decoration:overline;">dy</span></span><br>
-  <span style="font-size:larger;">dx</span> + <span style="font-size:larger;">∫</span>e<sup>∫P(x)dx</sup> P(x)y = <span style="font-size:larger;">∫</span>e<sup>∫P(x)dx</sup> Q(x)</p>
-  <p>Sol:-</p>
-  <p>If y = <span style="font-size:larger;">∫</span>If Q(x)dx+c</p>
+      <div class="example">
+        <div class="example-label">Example</div>
 
-  <h2>Non Linear equation but reducible to Linear (Bernoulli's equin)</h2>
-  <p><span style="font-size:larger;"><span style="text-decoration:overline;">dy</span></span><br>
-  <span style="font-size:larger;">dx</span> + P(x)y = Q(x)y<sup>n</sup></p>
-  <p>Substitute</p>
-  <p><span style="font-size:larger;">1</span><br>
-  <span style="font-size:larger;">y<sup>1-n</sup></span> <span style="font-size:larger;"><span style="text-decoration:overline;">dz</span></span><br>
-  <span style="font-size:larger;">dx</span> + P(x)z = Q(x)</p>
-  <p>I.F = <span style="font-size:larger;">e<sup>∫P(x)(-n)dx</sup></span></p>
-  <p>Sol:-</p>
-  <p>If z = <span style="font-size:larger;">∫</span>If Q(x)dx+c</p>
-  <p>xdy+y = x<sup>2</sup>y<sup>2</sup></p>
-  <p><span style="font-size:larger;"><span style="text-decoration:overline;">dy</span></span><br>
-  <span style="font-size:larger;">dx</span> + <span style="font-size:larger;">y</span><br>
-  <span style="font-size:larger;">x</span> = x<sup>2</sup>y<sup>2</sup></p>
-  <p><span style="font-size:larger;">1</span><br>
-  <span style="font-size:larger;">y<sup>2</sup></span> <span style="font-size:larger;"><span style="text-decoration:overline;">dy</span></span><br>
-  <span style="font-size:larger;">dx</span> + <span style="font-size:larger;">y</span><br>
-  <span style="font-size:larger;">xy<sup>2</sup></span> = x<sup>2</sup></p>
-  <p>xdy- (y-3x<sup>2</sup>)dx=0</p>
-  <p><span style="font-size:larger;"><span style="text-decoration:overline;">dy</span></span><br>
-  <span style="font-size:larger;">dx</span> = <span style="font-size:larger;">y-3x<sup>2</sup></span><br>
-  <span style="font-size:larger;">x</span></p>
-  <p>P(x) = -1/x<br>
-  Q(x) = -3x</p>
-  <p>I.F = e<sup>∫P(x)dx</sup> = e<sup>-logx</sup> = 1/x</p>
-  <p>If y = <span style="font-size:larger;">∫</span>If Q(x)dx+c</p>
-  <p>y/x = <span style="font-size:larger;">∫</span>(-3x)(1/x)dx+c</p>
-  <p>y = -3x<sup>2</sup>+c</p>
-</div>
-```
+        <div class="formula">
+          \[\ \frac{\partial y}{\partial x} + t \frac{\partial y}{\partial t} = 2y\ \]
+        </div>
+        <p>\(y = xt^2\)</p>
+      </div>
+      <hr class="section-divider">
+
+        <h2 style="border-bottom: 2px solid #ccc; padding-bottom: 10px;">Order and Degree of a Differential Equation</h2>
+        <h3 style="border-left: 5px solid #007bff; padding-left: 10px;">Order of the Differential Equation</h3>
+        <p>The order of the highest derivative involved in a differential equation is called the order of the differential equation.</p>
+        <h3 style="border-left: 5px solid #007bff; padding-left: 10px;">Degree of the Differential Equation</h3>
+        <p>The degree of a differential equation is the degree or power of the highest ordered derivative present in the equation, after the equation is made free from radicals and fractions in respect of derivatives.</p>
+
+        <div class="example">
+          <div class="example-label">Example</div>
+          <p>Find order and degree of the following differential equations:</p>
+          <ol>
+            <li>\[\frac{d^2y}{dx^2} = 0\]<p>Order = 2, Degree = 1</p></li>
+            <li>\[y = x \frac{dy}{dx} + a\left(\frac{dy}{dx}\right)^2\]<p>Order = 1, Degree = 2</p></li>
+            <li>\[\frac{d^2y}{dx^2} + m^2y = 0\]<p>Order = 2, Degree = 1</p></li>
+            <li>\[y \frac{d^2y}{dx^2} - \left(\frac{dy}{dx}\right)^2 = x y^2 \log y\]<p>Order = 2, Degree = 1</p></li>
+            <li>\[1 + \left(\frac{dy}{dx}\right)^2 = \frac{d^2y}{dx^2}\]<p>Order = 2, Degree = 1</p></li>
+            <li>\[y = x \frac{dy}{dx} + a\sqrt{1 + \left(\frac{dy}{dx}\right)^2}\]<p>Order = 1, Degree = 2</p></li>
+          </ol>
+        </div>
+        <hr class="section-divider">
+
+          <h2 style="border-bottom: 2px solid #ccc; padding-bottom: 10px;">Practical Approach to Differential Equations</h2>
+          <p>Differential equations arise in many engineering and physical problems. The approach of an engineer to the study of differential equations has to be practical, and so, it consists of:</p>
+          <ol>
+            <li>Formation of a differential equation from the physical conditions, called modeling;</li>
+            <li>Solution of a differential equation under the initial/boundary conditions; and</li>
+            <li>The physical interpretation of the results.</li>
+          </ol>
+          <hr class="section-divider">
+
+            <h2 style="border-bottom: 2px solid #ccc; padding-bottom: 10px;">Formation of a Differential Equation</h2>
+            <p>We form a DE in order to eliminate the constants.</p>
+            <p>Order of the equation formed = number of constants to be eliminated.</p>
+
+            <div class="example">
+              <div class="example-label">Example</div>
+              <p>\(y = ax^2 + bx\)</p>
+              <p>\(\frac{dy}{dx} = 2ax + b\)</p>
+              <p>\(\frac{d^2y}{dx^2} = 2a\)</p>
+              <p>\(a = \frac{1}{2} \frac{d^2y}{dx^2}\)</p>
+              <p>\(b = \frac{dy}{dx} - 2ax = \frac{dy}{dx} - x \frac{d^2y}{dx^2}\)</p>
+              <p>Substituting values of \(a\) and \(b\) in \(y = ax^2 + bx\), we get</p>
+              <p>\(y = \frac{x^2}{2} \frac{d^2y}{dx^2} + x\left(\frac{dy}{dx} - x \frac{d^2y}{dx^2}\right)\)</p>
+              <p>Order = 2, Degree = 1</p>
+            </div>
+
+            <div class="example">
+              <div class="example-label">Example</div>
+              <p>\(2y = Ae^{2x} + Be^{-2x}\)</p>
+              <p>\(y' = 2Ae^{2x} - 2Be^{-2x}\)</p>
+              <p>\(y'' = 4Ae^{2x} + 4Be^{-2x} = 4(Ae^{2x} + Be^{-2x}) = 4y\)</p>
+              <p>\(y'' - 4y = 0\)</p>
+            </div>
+            <hr class="section-divider">
+
+              <h2 style="border-bottom: 2px solid #ccc; padding-bottom: 10px;">Solution of a Differential Equation</h2>
+              <p>A solution of a differential equation is the relation between the variables which satisfies the given differential equation.</p>
+
+              <div class="example">
+                <div class="example-label">Example</div>
+                <p>The solution of the differential equation \(\frac{dy}{dx} - 2y = 0\) is given by \(y = ce^{2x}\).</p>
+              </div>
+              <h3 style="border-left: 5px solid #007bff; padding-left: 10px;">General Solution</h3>
+              <p>The general solution of the differential equation is that in which the number of arbitrary constants is equal to the order of the given differential equation. \(y = ce^{2x}\)</p>
+              <h3 style="border-left: 5px solid #007bff; padding-left: 10px;">Particular Solution</h3>
+              <p>A particular solution is that solution which can be obtained from the general solution by giving particular values to the arbitrary constants. Ex. \(y = 2e^{2x}\)</p>
+              <h3 style="border-left: 5px solid #007bff; padding-left: 10px;">Singular Solution</h3>
+              <p>A singular solution is the solution of the differential equation which is neither a general solution nor a particular solution. Only some equations have a singular solution.</p>
+
+              <div class="example">
+                <div class="example-label">Example</div>
+                <p>Example: The solution of the DE \(\left(\frac{dy}{dx}\right)^2 - 4y = 0\) is</p>
+                <p>\(y = (x + a)^2\) is the general solution</p>
+                <p>\(y = x^2\) is the particular solution</p>
+                <p>Singular solution ???</p>
+                <p>\(y = 0\) is a singular solution</p>
+              </div>
+              <hr class="section-divider">
+
+                <h2 style="border-bottom: 2px solid #ccc; padding-bottom: 10px;">First Order First Degree Differential Equations</h2>
+                <p>The first order first degree differential equations are in the form of</p>
+
+                <div class="formula">
+                  <div class="formula-label">Key Formula</div>
+                  \[F\left(x, y(x), \frac{dy}{dx}\right) = 0\]
+                </div>
+                <hr class="section-divider">
+
+                  <h2 style="border-bottom: 2px solid #ccc; padding-bottom: 10px;">Classification of First Order First Degree Differential Equations</h2>
+                  <ol>
+                    <li>Variable separable equations</li>
+                    <li>Reducible to variable separable</li>
+                    <li>Homogeneous equations</li>
+                    <li>Non homogeneous but reducible to homogeneous equations</li>
+                    <li>Linear DE</li>
+                    <li>Non Linear but reducible to linear DE</li>
+                    <li>Exact equations</li>
+                    <li>Inexact equations but reducible to exact equation</li>
+                  </ol>
+                  <hr class="section-divider">
+
+                    <h2 style="border-bottom: 2px solid #ccc; padding-bottom: 10px;">Variable Separable Equations</h2>
+                    <p>If in an equation it is possible to separate all the functions of \(x\) and \(dx\) to one side and all the functions of \(y\) and \(dy\) to the other side then the variables are said to be separable. The general form of such equations is</p>
+
+                    <div class="formula">
+                      <div class="formula-label">Key Formula</div>
+                      \[f(x)dx = g(y)dy\]
+                    </div>
+                    <p>Solution of variable separable equations is obtainable by integrating on both sides of the equation</p>
+
+                    <div class="formula">
+                      <div class="formula-label">Key Formula</div>
+                      \[\int f(x)dx = \int g(y)dy + c \text{ is the solution}\]
+                    </div>
+
+                    <div class="example">
+                      <div class="example-label">Example</div>
+                      <p>Example: solve \((1 - x)dy + (1 - y)dx = 0\)</p>
+                      <p>\((1 - x)dy = (y - 1)dx\)</p>
+                      <p>\(\frac{1}{(y - 1)}dy = \frac{1}{(1 - x)}dx\)</p>
+                      <p>\(\int \frac{1}{(1 - x)}dx = \int \frac{1}{(y - 1)}dy\)</p>
+                      <p>\(-\log(1 - x) = \log(y - 1) + c\)</p>
+                      <p>\(\log(y - 1) + \log(1 - x) + c = 0\)</p>
+                      <p>\(\log[(1 - x)(y - 1)] = -c\)</p>
+                      <p>\((1 - x)(y - 1) = e^{-c}\)</p>
+                      <p>\((1 - x)(1 - y) = A\) where \(A = e^{-c}\) → general solution</p>
+                    </div>
+                    <hr class="section-divider">
+
+                      <h2 style="border-bottom: 2px solid #ccc; padding-bottom: 10px;">Equations Reducible to Variable Separable</h2>
+                      <p>By choosing a suitable substitution some first order first degree differential equations are reducible to variable separable equations. Then we follow the same solution method of variable separable equations (i.e by integrating the equation).</p>
+
+                      <div class="example">
+                        <div class="example-label">Example</div>
+                        <p>Example: Solve \(\frac{dy}{dx} = (4x + y + 1)^2\)</p>
+                      </div>
+
+                    </div>
+
+<!-- =============== NEW LECTURE =============== -->
+
+<div id="lecture_20250905_185523" class="lecture-content" data-unit="unit1">
+  <h1 style="text-align: center; font-size: 2em; color: #336699;">Lecture 2: Solving First Order Differential Equations</h1>
+  <hr class="section-divider">
+
+    <h2 style="border-bottom: 2px solid #ccc;">First Order First Degree DE: Variable Separable</h2>
+    <h3>Variable Separable Method</h3>
+
+    <div class="method">
+      <p><strong>Method:</strong> Separate variables such that the equation takes the form \(f(x)dx = f(y)dy\)</p>
+    </div>
+
+    <div class="example">
+      <p><strong>Example:</strong> Solve \(\frac{dy}{dx} = \frac{x^2 + y^2}{x^2}\)</p>
+
+      <div class="solution">
+        <ol>
+          <li class="step">Rewrite the equation as: \(\frac{dy}{dx} = 1 + \left(\frac{y}{x}\right)^2\)</li>
+          <li class="step">Let \(y = vx\), then \(\frac{dy}{dx} = v + x\frac{dv}{dx}\)</li>
+          <li class="step">Substitute into the equation: \(v + x\frac{dv}{dx} = 1 + v^2\)</li>
+          <li class="step">Separate variables: \(x\frac{dv}{dx} = 1 + v^2 - v\)</li>
+          <li class="step">Integrate both sides: \(\int \frac{dv}{1 + v^2 - v} = \int \frac{dx}{x}\)</li>
+          <li class="step">Solve the integral (result may be complex): \(\frac{2}{3} \log \left| \frac{(2v - 1)^2 + 3}{1}\right| + c_1 = \log|x| + c_2\)</li>
+          <li class="step">Substitute back \(v = y/x\) and simplify: \(\frac{2}{3} \log\left|\frac{(2y/x - 1)^2 + 3}{1}\right| = \log|x| + c\)</li>
+        </ol>
+      </div>
+    </div>
+    <hr class="section-divider">
+
+      <h2 style="border-bottom: 2px solid #ccc;">First Order First Degree DE: Reducible to Variable Separable</h2>
+
+      <div class="example">
+        <p><strong>Example:</strong> Solve \(\frac{dy}{dx} = (4x + y + 1)^2\)</p>
+
+        <div class="solution">
+          <ol>
+            <li class="step">Let \(4x + y + 1 = t\), then \(4 + \frac{dy}{dx} = \frac{dt}{dx}\)</li>
+            <li class="step">\(\frac{dy}{dx} = \frac{dt}{dx} - 4\)</li>
+            <li class="step">Substitute: \(\frac{dt}{dx} - 4 = t^2\)</li>
+            <li class="step">Separate variables: \(\frac{dt}{t^2 + 4} = dx\)</li>
+            <li class="step">Integrate: \(\int \frac{dt}{t^2 + 4} = \int dx\)</li>
+            <li class="step">\(\frac{1}{2} \tan^{-1}\left(\frac{t}{2}\right) = x + c\)</li>
+            <li class="step">Substitute back \(t = 4x + y + 1\): \(\frac{1}{2} \tan^{-1}\left(\frac{4x + y + 1}{2}\right) = x + c\)</li>
+          </ol>
+        </div>
+      </div>
+      <hr class="section-divider">
+
+        <h2 style="border-bottom: 2px solid #ccc;">First Order First Degree DE: Homogeneous</h2>
+        <h3>Homogeneous DE Method</h3>
+
+        <div class="method">
+          <p><strong>Method:</strong> A differential equation is homogeneous if it can be written in the form \(\frac{dy}{dx} = f\left(\frac{y}{x}\right)\)</p>
+        </div>
+
+        <div class="example">
+          <p><strong>Example:</strong> Solve \(x^2 - y^2 = xy\frac{dy}{dx}\)</p>
+
+          <div class="solution">
+            <ol>
+              <li class="step">Let \(y = vx\), then \(\frac{dy}{dx} = v + x\frac{dv}{dx}\)</li>
+              <li class="step">Substitute: \(x^2 - v^2x^2 = vx^2 \left(v + x\frac{dv}{dx}\right)\)</li>
+              <li class="step">Simplify and separate variables: \(\frac{1 - 2v^2}{v(1 + v^2)} dv = \frac{dx}{x}\)</li>
+              <li class="step">Integrate: \(\int \frac{1 - 2v^2}{v(1 + v^2)} dv = \int \frac{dx}{x}\)</li>
+              <li class="step">\(\frac{1}{2} \log |1 - v^2| = \log |x| + c\)</li>
+              <li class="step">Substitute back \(v = y/x\): \(\frac{1}{2} \log \left| 1 - \frac{y^2}{x^2}\right| = \log |x| + c\)</li>
+            </ol>
+          </div>
+        </div>
+        <hr class="section-divider">
+
+          <h2 style="border-bottom: 2px solid #ccc;">First Order First Degree DE: Non-Homogeneous Reducible to Homogeneous</h2>
+          <h3>Non-Homogeneous Method</h3>
+
+          <div class="method">
+            <p><strong>Method:</strong> A differential equation is of this type if it can be written in the form \(\frac{dy}{dx} = \frac{ax + by + c}{a'x + b'y + c'}\)</p>
+          </div>
+        </div>
+
+<!-- =============== NEW LECTURE =============== -->
+
+<div id="lecture_20250905_185658" class="lecture-content" data-unit="unit1">
+  <h1 style="text-align: center; font-size: 2em; color: #336699;">Lecture 3 (2): Differential Equations</h1>
+  <hr class="section-divider">
+
+    <h2 style="border-bottom: 2px solid #ccc; padding-bottom: 10px;">Reducible to Homogeneous Equations</h2>
+    <h3>Case 1: \(a_1/a_2 = b_1/b_2 = k\)</h3>
+
+    <div class="method">
+      <p>Let \( \frac{dy}{dx} = \frac{a_1x + b_1y + c_1}{a_2x + b_2y + c_2} \)</p>
+      <p>If \(a_1/a_2 = b_1/b_2 = k\), then \( a_1 = ka_2 \) and \( b_1 = kb_2 \).</p>
+      <p>Let \( x = X + h \) and \( y = Y + k \).</p>
+      <p>Then,</p>
+      <p>\( \frac{dy}{dx} = \frac{a_1(X+h) + b_1(Y+k) + c_1}{a_2(X+h) + b_2(Y+k) + c_2} \)</p>
+      <p>Choose \(h\) and \(k\) such that:</p>
+      <p>\( a_1h + b_1k + c_1 = 0 \)</p>
+      <p>\( a_2h + b_2k + c_2 = 0 \)</p>
+      <p>Then, \( \frac{dy}{dx} = \frac{a_1X + b_1Y}{a_2X + b_2Y} = \frac{a_1X + kb_2Y}{a_2X + b_2Y} = \frac{ka_2X + kb_2Y}{a_2X + b_2Y} = k \frac{a_2X + b_2Y}{a_2X + b_2Y} = k \)</p>
+      <p>This is a homogeneous equation. Let \( Y = VX \), then \( \frac{dY}{dX} = V + X\frac{dV}{dX} \).</p>
+    </div>
+    <hr class="section-divider">
+
+      <h3>Case 2: \(a_1/a_2 = b_1/b_2 \neq c_1/c_2\)</h3>
+
+      <div class="method">
+        <p>Let \( \frac{dy}{dx} = \frac{2x+3y+4}{4x+6y+5} \)</p>
+        <p>Here \( \frac{2}{4} = \frac{3}{6} = \frac{1}{2} \neq \frac{4}{5} \)</p>
+        <p>Let \( 2x+3y = t \)</p>
+        <p>Then \( 2 + 3\frac{dy}{dx} = \frac{dt}{dx} \)</p>
+        <p>Substituting:</p>
+        <p>\( \frac{dt}{dx} - 2 = \frac{t+4}{2t+5/2} \)</p>
+        <p>\( \frac{dt}{dx} = \frac{3t+13}{2t+5} \)</p>
+        <p>Separating variables:</p>
+        <p>\( \int \frac{2t+5}{3t+13} dt = \int dx \)</p>
+        <p>Using partial fractions:</p>
+        <p>\( \frac{2t+5}{3t+13} = \frac{A}{3t+13} + B \)</p>
+        <p>\( 2t+5 = A + B(3t+13) \)</p>
+        <p>When \( t = -\frac{13}{3} \), \( -\frac{26}{3} + 5 = A \implies A = -\frac{11}{3} \)</p>
+        <p>When \( t = 0 \), \( 5 = A + 13B \implies 5 = -\frac{11}{3} + 13B \implies B = \frac{26}{39} = \frac{2}{3} \)</p>
+        <p>Then, \( \frac{2t+5}{3t+13} = \frac{2}{3} - \frac{11/3}{3t+13} \)</p>
+        <p>\( \int \left( \frac{2}{3} - \frac{11}{9t+39} \right) dt = x + c \)</p>
+        <p>\( \frac{2}{3}t - \frac{11}{9} \ln(3t+13) = x + c \)</p>
+        <p>\( \frac{2}{3}(2x+3y) - \frac{11}{9} \ln(6x+9y+13) = x + c \)</p>
+      </div>
+      <hr class="section-divider">
+
+        <h2 style="border-bottom: 2px solid #ccc; padding-bottom: 10px;">First Order Linear Differential Equation</h2>
+        <div class="definition" style="border-left: 5px solid blue; padding-left: 10px;">
+          <p><strong>Definition:</strong> A first order linear differential equation is of the form \( \frac{dy}{dx} + P(x)y = Q(x) \), where \( P(x) \) and \( Q(x) \) are functions of \( x \).</p>
+        </div>
+        <div class="method" style="border-left: 5px solid green; padding-left: 10px;">
+          <p>Multiply both sides by the integrating factor \( I.F. = e^{\int P(x) dx} \)</p>
+          <p>\( e^{\int P(x)dx} \left( \frac{dy}{dx} + P(x)y \right) = e^{\int P(x)dx} Q(x) \)</p>
+          <p>\( \frac{d}{dx} \left( ye^{\int P(x)dx} \right) = e^{\int P(x)dx} Q(x) \)</p>
+          <p>\( \int d \left( ye^{\int P(x)dx} \right) = \int e^{\int P(x)dx} Q(x) dx + c \)</p>
+          <p>\( ye^{\int P(x)dx} = \int e^{\int P(x)dx} Q(x) dx + c \)</p>
+          <p><strong>Solution:</strong></p>
+          <p>\( y e^{\int P(x)dx} = \int Q(x)e^{\int P(x)dx} dx + c \)</p>
+        </div>
+        <hr class="section-divider">
+
+          <h2 style="border-bottom: 2px solid #ccc; padding-bottom: 10px;">Example</h2>
+          <div class="example" style="border-left: 5px solid orange; padding-left: 10px;">
+            <p>Solve \( x\frac{dy}{dx} - y = x^2 e^x \)</p>
+          </div>
+
+          <div class="solution">
+            <ol>
+              <li><p>Dividing by \(x\):</p>
+              <p>\( \frac{dy}{dx} - \frac{1}{x}y = xe^x \)</p>
+            </li>
+            <li><p>Here \( P(x) = -\frac{1}{x} \) and \( Q(x) = xe^x \)</p></li>
+            <li><p>Integrating factor \( = e^{\int -\frac{1}{x} dx} = e^{-\ln x} = \frac{1}{x} \)</p></li>
+            <li><p>\( \frac{1}{x} \frac{dy}{dx} - \frac{1}{x^2} y = e^x \)</p></li>
+            <li><p>\( \frac{d}{dx} \left( \frac{y}{x} \right) = e^x \)</p></li>
+            <li><p>\( \int d \left( \frac{y}{x} \right) = \int e^x dx + c \)</p></li>
+            <li><p>\( \frac{y}{x} = e^x + c \)</p></li>
+            <li><p>\( y = xe^x + cx \)</p></li>
+          </ol>
+        </div>
+        <hr class="section-divider">
+
+          <h2 style="border-bottom: 2px solid #ccc; padding-bottom: 10px;">Non Linear Equation But Reducible to Linear (Bernoulli's Equation)</h2>
+          <div class="definition" style="border-left: 5px solid blue; padding-left: 10px;">
+            <p><strong>Definition:</strong> Bernoulli's equation is of the form \( \frac{dy}{dx} + P(x)y = Q(x)y^n \), where \( n \neq 0, 1 \).</p>
+          </div>
+          <div class="method" style="border-left: 5px solid green; padding-left: 10px;">
+            <p>Divide by \( y^n \):</p>
+            <p>\( y^{-n}\frac{dy}{dx} + P(x)y^{1-n} = Q(x) \)</p>
+            <p>Let \( z = y^{1-n} \). Then \( \frac{dz}{dx} = (1-n)y^{-n}\frac{dy}{dx} \)</p>
+            <p>\( \frac{1}{1-n} \frac{dz}{dx} + P(x)z = Q(x) \)</p>
+            <p>\( \frac{dz}{dx} + (1-n)P(x)z = (1-n)Q(x) \)</p>
+            <p>This is a linear equation. The integrating factor is \( e^{\int (1-n)P(x) dx} \).</p>
+            <p><strong>Solution:</strong></p>
+            <p>\( z e^{\int (1-n)P(x)dx} = \int (1-n)Q(x)e^{\int (1-n)P(x)dx} dx + c \)</p>
+            <p>\( y^{1-n} e^{\int (1-n)P(x)dx} = \int (1-n)Q(x)e^{\int (1-n)P(x)dx} dx + c \)</p>
+          </div>
+          <hr class="section-divider">
+
+            <h2 style="border-bottom: 2px solid #ccc; padding-bottom: 10px;">Example</h2>
+            <div class="example" style="border-left: 5px solid orange; padding-left: 10px;">
+              <p>Solve \( x\frac{dy}{dx} + y = xy^2 \)</p>
+            </div>
+
+            <div class="solution">
+              <ol>
+                <li><p>Dividing by \( x \):</p>
+                <p>\( \frac{dy}{dx} + \frac{1}{x}y = y^2 \)</p>
+              </li>
+              <li><p>Dividing by \( y^2 \):</p>
+              <p>\( y^{-2} \frac{dy}{dx} + \frac{1}{x}y^{-1} = 1 \)</p>
+            </li>
+            <li><p>Let \( z = y^{-1} \). Then \( \frac{dz}{dx} = -y^{-2} \frac{dy}{dx} \)</p></li>
+            <li><p>\( -\frac{dz}{dx} + \frac{1}{x}z = 1 \)</p></li>
+            <li><p>\( \frac{dz}{dx} - \frac{1}{x}z = -1 \)</p></li>
+            <li><p>I.F. \( = e^{\int -\frac{1}{x} dx} = \frac{1}{x} \)</p></li>
+            <li><p>\( \frac{1}{x}\frac{dz}{dx} - \frac{1}{x^2} z = -\frac{1}{x} \)</p></li>
+            <li><p>\( \frac{d}{dx} \left( \frac{z}{x} \right) = -\frac{1}{x} \)</p></li>
+            <li><p>\( \frac{z}{x} = -\ln x + c \)</p></li>
+            <li><p>\( z = -x \ln x + cx \)</p></li>
+            <li><p>\( \frac{1}{y} = -x \ln x + cx \)</p></li>
+            <li><p>\( y = \frac{1}{-x \ln x + cx} \)</p></li>
+          </ol>
+        </div>
+      </div>
